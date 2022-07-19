@@ -1,0 +1,264 @@
+#pragma implicitwith disable
+page 90252 "Transportation SubForm"
+{
+    AutoSplitKey = true;
+    DelayedInsert = true;
+    DeleteAllowed = false;
+    PageType = ListPart;
+    RefreshOnActivate = true;
+    SourceTable = "Gate Entry Line";
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("Route Sequence No."; Rec."Route Sequence No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Booking Reference No."; Rec."Booking Reference No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Entry Type"; Rec."Entry Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Source Type"; Rec."Source Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Source No."; Rec."Source No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Source Name"; Rec."Source Name")
+                {
+                    ApplicationArea = All;
+                }
+                field("Document Type"; Rec."Document Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Document no"; Rec."Document no")
+                {
+                    ApplicationArea = All;
+                }
+                field(Address; Rec.Address)
+                {
+                    ApplicationArea = All;
+                }
+                field("Address 2"; Rec."Address 2")
+                {
+                    ApplicationArea = All;
+                }
+                field(City; Rec.City)
+                {
+                    ApplicationArea = All;
+                }
+                field(County; Rec.County)
+                {
+                    ApplicationArea = All;
+                }
+                field("Post Code"; Rec."Post Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Country/Region Code"; Rec."Country/Region Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
+                {
+                    Caption = 'Expected Delivery/Receipt Date';
+                    ApplicationArea = All;
+                }
+                field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
+                {
+                    Visible = false;
+                }
+                field("Goods Checked"; Rec."Goods Checked")
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        IF Rec."Goods Checked" THEN
+                            Rec."Goods Checked By" := USERID;
+                    end;
+                }
+                field("Goods Checked By"; Rec."Goods Checked By")
+                {
+                    ApplicationArea = All;
+                }
+                field("Sticker on Box"; Rec."Sticker on Box")
+                {
+                    ApplicationArea = All;
+                }
+                field("Carrier Quantity"; Rec."Carrier Quantity")
+                {
+                    Visible = false;
+                }
+                field("Carrier UOM"; Rec."Carrier UOM")
+                {
+                    Visible = false;
+                }
+                field("Activity Code"; Rec."Activity Code")
+                {
+                    Visible = false;
+                }
+                field("Amount to Collect"; Rec."Amount to Collect")
+                {
+                    Editable = false;
+                    ApplicationArea = All;
+                }
+                field("Amount Collected"; Rec."Amount Collected")
+                {
+                    ApplicationArea = All;
+                }
+                field("Amount Confirmed"; Rec."Amount Confirmed")
+                {
+                    ApplicationArea = All;
+                }
+                field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
+                {
+                    Caption = 'Total pallet';
+                    ApplicationArea = All;
+                }
+                field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
+                {
+                    Caption = 'Total Weight';
+                    ApplicationArea = All;
+                }
+                field("Total Parcels (Fridge)"; Rec."Total Parcels (Fridge)")
+                {
+                    Visible = false;
+                }
+                field("Total Weight (Fridge)"; Rec."Total Weight (Fridge)")
+                {
+                    Visible = false;
+                }
+                field("Total Parcels(Booked)"; Rec."Total Parcels(Booked)")
+                {
+                    Visible = false;
+                }
+                field("Total Weight(KG)(Booked)"; Rec."Total Weight(KG)(Booked)")
+                {
+                    Visible = false;
+                }
+                field("Total Pallet"; Rec."Total Pallet")
+                {
+                    ApplicationArea = All;
+                }
+                field("Opening Time"; Rec."Opening Time")
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+
+    actions
+    {
+        area(processing)
+        {
+            group("&Line")
+            {
+                Caption = '&Line';
+                Image = Line;
+                action("Parcel Details")
+                {
+                    RunObject = Page "Parcel Details";
+                    RunPageLink = "Transportaion No." = FIELD("No."),
+                                  "Transportaion Line No." = FIELD("Line No.");
+                    ApplicationArea = All;
+
+                    trigger OnAction()
+                    begin
+                        CurrPage.UPDATE(TRUE);
+                    end;
+                }
+                action("Get planning Lines")
+                {
+                    Visible = false;
+
+                    trigger OnAction()
+                    begin
+                        CLEAR(PagePlanningLines);
+                        PlanningLines.RESET;
+                        PagePlanningLines.FindTransportationLineNo(Rec);
+                        PagePlanningLines.LOOKUPMODE := TRUE;
+                        PlanningLines.SETCURRENTKEY("Entry Type", "Source Type");
+                        GetHeader;
+                        IF recGateEntryHeader."Location Code" <> '' THEN
+                            PlanningLines.SETRANGE("Our Location Code", recGateEntryHeader."Location Code");
+                        PagePlanningLines.SETTABLEVIEW(PlanningLines);
+                        PagePlanningLines.EDITABLE(FALSE);
+                        PagePlanningLines.RUNMODAL;
+                    end;
+                }
+                action("Delete Lines")
+                {
+                    Image = Delete;
+                    Promoted = true;
+                    Visible = false;
+
+                    trigger OnAction()
+                    begin
+                        TranportationLine.COPY(Rec);
+                        CurrPage.SETSELECTIONFILTER(TranportationLine);
+                        //MoveLinesInPlanningSheet(TranportationLine);
+                        IF CONFIRM('Do you want to Move selected Lines in Planning Sheet?', FALSE) THEN BEGIN
+                            IF TranportationLine.FINDFIRST THEN
+                                REPEAT
+                                    Rec.MoveLinesInPlanningSheet(TranportationLine);
+                                UNTIL TranportationLine.NEXT = 0;
+                        END
+                        ELSE
+                            IF CONFIRM('Do you want to delete all selected lines Permanently?', FALSE) THEN;
+
+                        //MESSAGE(FORMAT(Rec.CO
+                        //TransportationLine.DELETE(TRUE);
+                    end;
+                }
+            }
+        }
+    }
+
+    trigger OnAfterGetRecord()
+    begin
+        /*
+        IF CompanyType = CompanyType::Customer  THEN
+        BEGIN
+          MESSAGE(FORMAT(CompanyType));
+        
+            IF "Source Type" = "Source Type"::"Sales Shipment" THEN
+              ERROR('You have select wrong selection')
+        END;
+        */
+
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        recGateEntryHeader.RESET;
+        recGateEntryHeader.SETRANGE(recGateEntryHeader."No.", Rec."No.");
+        IF recGateEntryHeader.FINDFIRST THEN
+            Rec."Entry Type" := recGateEntryHeader.Type;
+    end;
+
+    var
+        recGateEntryHeader: Record "Gate Entry Header";
+        PlanningLines: Record "Planning Transportation Sheet";
+        PagePlanningLines: Page "Transportation planning";
+        TranportationLine: Record "Gate Entry Line";
+
+    local procedure GetHeader()
+    begin
+        recGateEntryHeader.GET(Rec."No.");
+    end;
+}
+
+#pragma implicitwith restore
+

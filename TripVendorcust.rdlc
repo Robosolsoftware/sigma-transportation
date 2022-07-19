@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>470bf5f8-e6c4-412a-819a-39a69c84f661</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto">=Fields!SourceName_GateEntryLine.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!LineNo_GateEntryLine.Value</GroupExpression>
+                    </GroupExpressions>
+                    <PageBreak>
+                      <BreakLocation>Between</BreakLocation>
+                    </PageBreak>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <PageBreak>
+              <BreakLocation>End</BreakLocation>
+            </PageBreak>
+            <Top>0.19319in</Top>
+            <Left>0.155in</Left>
+            <Height>0.5in</Height>
+            <Width>3in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Auto" />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Visibility>
+                            <Hidden>=Code.SetData(Cstr(Fields!SourceName_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!Address_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!City_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!PostCode_GateEntryLine.Value), 1)</Hidden>
+                          </Visibility>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>0.38069in</Top>
+            <Left>3.9675in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>1</ZIndex>
+            <Visibility>
+              <Hidden>=Code.SetData(Cstr(Fields!SourceName_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!Address_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!City_GateEntryLine.Value)+ Chr(177) +
+Cstr(Fields!PostCode_GateEntryLine.Value), 1)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>2.40067in</Height>
+        <Style />
+      </Body>
+      <Width>7.30544in</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.51389in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox13">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value EvaluationMode="Auto">=code.getdata(1,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox13</rd:DefaultName>
+              <Top>1.68625in</Top>
+              <Left>0.9675in</Left>
+              <Height>0.25in</Height>
+              <Width>1in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Shared Data1 as Object
+Shared Data2 as Object
+Shared Data3 as Object
+Shared Data4 as Object
+
+Public Function GetData(Num as Integer, Group as integer) as Object
+if Group = 1 then
+   Return Cstr(Choose(Num, Split(Cstr(Data1),Chr(177))))
+End If
+
+if Group = 2 then
+   Return Cstr(Choose(Num, Split(Cstr(Data2),Chr(177))))
+End If
+
+if Group = 3 then
+   Return Cstr(Choose(Num, Split(Cstr(Data3),Chr(177))))
+End If
+
+if Group = 4 then
+   Return Cstr(Choose(Num, Split(Cstr(Data4),Chr(177))))
+End If
+End Function
+
+Public Function SetData(NewData as Object,Group as integer)
+  If Group = 1 and NewData &gt; "" Then
+      Data1 = NewData
+  End If
+
+  If Group = 2 and NewData &gt; "" Then
+      Data2 = NewData
+  End If
+
+  If Group = 3 and NewData &gt; "" Then
+      Data3 = NewData
+  End If
+
+  If Group = 4 and NewData &gt; "" Then
+      Data4 = NewData
+  End If
+
+  Return True
+End Function
+
+
+Shared NoOfCopies as integer
+
+Public Function SetNoOfCopies(Value as integer)
+NoOfCopies = Value
+End Function
+
+Public Function GetNoOfCopies() As integer
+   Return  NoOfCopies 
+End Function
+
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyinfoPicture">
+          <DataField>CompanyinfoPicture</DataField>
+        </Field>
+        <Field Name="CompyName">
+          <DataField>CompyName</DataField>
+        </Field>
+        <Field Name="ComapnyPostCode">
+          <DataField>ComapnyPostCode</DataField>
+        </Field>
+        <Field Name="ComapnyTown">
+          <DataField>ComapnyTown</DataField>
+        </Field>
+        <Field Name="CompyAddr">
+          <DataField>CompyAddr</DataField>
+        </Field>
+        <Field Name="No_GateEntryLine">
+          <DataField>No_GateEntryLine</DataField>
+        </Field>
+        <Field Name="InvoiceNumber">
+          <DataField>InvoiceNumber</DataField>
+        </Field>
+        <Field Name="Parcel_UOM">
+          <DataField>Parcel_UOM</DataField>
+        </Field>
+        <Field Name="Parcel_docType">
+          <DataField>Parcel_docType</DataField>
+        </Field>
+        <Field Name="ExtrnalDocNo">
+          <DataField>ExtrnalDocNo</DataField>
+        </Field>
+        <Field Name="EntryType_GateEntryLine">
+          <DataField>EntryType_GateEntryLine</DataField>
+        </Field>
+        <Field Name="LineNo_GateEntryLine">
+          <DataField>LineNo_GateEntryLine</DataField>
+        </Field>
+        <Field Name="SourceNo_GateEntryLine">
+          <DataField>SourceNo_GateEntryLine</DataField>
+        </Field>
+        <Field Name="SourceName_GateEntryLine">
+          <DataField>SourceName_GateEntryLine</DataField>
+        </Field>
+        <Field Name="OrderAddresscode_GateEntryLine">
+          <DataField>OrderAddresscode_GateEntryLine</DataField>
+        </Field>
+        <Field Name="Address_GateEntryLine">
+          <DataField>Address_GateEntryLine</DataField>
+        </Field>
+        <Field Name="Address2_GateEntryLine">
+          <DataField>Address2_GateEntryLine</DataField>
+        </Field>
+        <Field Name="GoodsChecked_GateEntryLine">
+          <DataField>GoodsChecked_GateEntryLine</DataField>
+        </Field>
+        <Field Name="GoodsCheckedBy_GateEntryLine">
+          <DataField>GoodsCheckedBy_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalFridgeParcels_GateEntryLine">
+          <DataField>TotalFridgeParcels_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalFridgeParcels_GateEntryLineFormat">
+          <DataField>TotalFridgeParcels_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="StickeronBox_GateEntryLine">
+          <DataField>StickeronBox_GateEntryLine</DataField>
+        </Field>
+        <Field Name="Scan_GateEntryLine">
+          <DataField>Scan_GateEntryLine</DataField>
+        </Field>
+        <Field Name="SupplierinvoiceNo_GateEntryLine">
+          <DataField>SupplierinvoiceNo_GateEntryLine</DataField>
+        </Field>
+        <Field Name="ExpectedDeliveryReceiptDate_GateEntryLine">
+          <DataField>ExpectedDeliveryReceiptDate_GateEntryLine</DataField>
+        </Field>
+        <Field Name="ActualDeliveryReceiptDate_GateEntryLine">
+          <DataField>ActualDeliveryReceiptDate_GateEntryLine</DataField>
+        </Field>
+        <Field Name="CarrierQuantity_GateEntryLine">
+          <DataField>CarrierQuantity_GateEntryLine</DataField>
+        </Field>
+        <Field Name="CarrierQuantity_GateEntryLineFormat">
+          <DataField>CarrierQuantity_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="CarrierUOM_GateEntryLine">
+          <DataField>CarrierUOM_GateEntryLine</DataField>
+        </Field>
+        <Field Name="City_GateEntryLine">
+          <DataField>City_GateEntryLine</DataField>
+        </Field>
+        <Field Name="County_GateEntryLine">
+          <DataField>County_GateEntryLine</DataField>
+        </Field>
+        <Field Name="PostCode_GateEntryLine">
+          <DataField>PostCode_GateEntryLine</DataField>
+        </Field>
+        <Field Name="CountryRegionCode_GateEntryLine">
+          <DataField>CountryRegionCode_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalParcelsAmbient_GateEntryLine">
+          <DataField>TotalParcelsAmbient_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalParcelsAmbient_GateEntryLineFormat">
+          <DataField>TotalParcelsAmbient_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="TotalWeightAmbient_GateEntryLine">
+          <DataField>TotalWeightAmbient_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalWeightAmbient_GateEntryLineFormat">
+          <DataField>TotalWeightAmbient_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="RouteSequenceNo_GateEntryLine">
+          <DataField>RouteSequenceNo_GateEntryLine</DataField>
+        </Field>
+        <Field Name="BookingReferenceNo_GateEntryLine">
+          <DataField>BookingReferenceNo_GateEntryLine</DataField>
+        </Field>
+        <Field Name="SourceType_GateEntryLine">
+          <DataField>SourceType_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalParcelsFridge_GateEntryLine">
+          <DataField>TotalParcelsFridge_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalParcelsFridge_GateEntryLineFormat">
+          <DataField>TotalParcelsFridge_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="TotalWeightFridge_GateEntryLine">
+          <DataField>TotalWeightFridge_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalWeightFridge_GateEntryLineFormat">
+          <DataField>TotalWeightFridge_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="TotalParcels_GateEntryLine">
+          <DataField>TotalParcels_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalParcels_GateEntryLineFormat">
+          <DataField>TotalParcels_GateEntryLineFormat</DataField>
+        </Field>
+        <Field Name="TotalWeight_GateEntryLine">
+          <DataField>TotalWeight_GateEntryLine</DataField>
+        </Field>
+        <Field Name="TotalWeight_GateEntryLineFormat">
+          <DataField>TotalWeight_GateEntryLineFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
