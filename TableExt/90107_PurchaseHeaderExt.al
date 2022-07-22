@@ -14,6 +14,17 @@ tableextension 90257 PurchaseHeaderExtTrans extends "Purchase Header"
             OptionCaption = ' ,Open,Released,In-Progress';
             Editable = false;
         }
+        field(50205; "Booking In Date"; Date)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Gate Entry Line"."Expected Delivery/Receipt Date" WHERE("Document no" = FIELD("No."), "Document Type" = CONST("Purchase Order"), Status = CONST(Released)));
+
+        }
+        field(50206; "Booking In Time"; Time)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Gate Entry Line"."Expected Delivery/Receipt Time" WHERE("Document no" = FIELD("No."), "Document Type" = CONST("Purchase Order"), Status = CONST(Released)));
+        }
     }
 
     var
