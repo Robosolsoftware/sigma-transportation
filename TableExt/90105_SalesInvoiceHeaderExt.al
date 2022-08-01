@@ -31,6 +31,10 @@ tableextension 90255 SalesInvoiceHeaderExt extends "Sales Invoice Header"
             DataClassification = ToBeClassified;
             TableRelation = "Area";
         }
+        field(50206; "Loading Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

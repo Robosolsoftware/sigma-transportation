@@ -31,6 +31,10 @@ tableextension 90254 SalesSHipmentExt extends "Sales Shipment Header"
             DataClassification = ToBeClassified;
             TableRelation = "Area";
         }
+        field(50206; "Loading Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

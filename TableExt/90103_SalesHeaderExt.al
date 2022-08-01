@@ -31,6 +31,10 @@ tableextension 90253 SalesHeaderExtTrans extends "Sales Header"
             DataClassification = ToBeClassified;
             TableRelation = "Area";
         }
+        field(50206; "Loading Date"; Date)//Pranali08012022_US7084
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var
