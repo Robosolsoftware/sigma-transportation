@@ -3,15 +3,15 @@ tableextension 90253 SalesHeaderExtTrans extends "Sales Header"
     fields
     {
         // Add changes to table fields here
-        field(50000; "Booking Ref No."; Code[20])
+        field(50207; "Booking Ref No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; Date; Date)
+        field(50208; Date; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(50002; Time; Time)
+        field(50209; Time; Time)
         {
             DataClassification = ToBeClassified;
         }
