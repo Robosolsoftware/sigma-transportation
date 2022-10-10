@@ -188,7 +188,7 @@ table 90251 "Gate Entry Header"
 
     keys
     {
-        key(Key1; "Document Date", "No.")
+        key(Key1; "No.")
         {
             Clustered = true;
         }
@@ -439,10 +439,10 @@ table 90251 "Gate Entry Header"
             GateEntryLine.VALIDATE("Document no", SalesHeader."No.");
             GateEntryLine.VALIDATE("Purchaser /Sales Person", SalesHeader."Salesperson Code");
             SalesHeader.CALCFIELDS("Amount Including VAT");
-            IF SalesHeader."Payment Terms Code" = SalesSetup."Default Payment Term Code" THEN
-                GateEntryLine.VALIDATE("Amount to Collect", SalesHeader."Amount Including VAT");
+            // IF SalesHeader."Payment Terms Code" = SalesSetup."Default Payment Term Code" THEN
+            GateEntryLine.VALIDATE("Amount to Collect", SalesHeader."Amount Including VAT");
             GateEntryLine.INSERT(TRUE);
-            SalesHeader.VALIDATE("Transport Status", GateEntryLine.Status);
+            SalesHeader.VALIDATE("Transport Status", SalesHeader."Transport Status"::Open);
             SalesHeader.VALIDATE("Transport Job No.", GateEntryLine."No.");
             SalesHeader.MODIFY(TRUE);
             //TotalAvaiWeight:=CalculateAvailableCapacity(GateEntryHeader);
@@ -481,7 +481,7 @@ table 90251 "Gate Entry Header"
             GateEntryLine.VALIDATE("Purchaser /Sales Person", PurchaseHeader."Purchaser Code");
             GateEntryLine."Your Reference" := PurchaseHeader."Your Reference";
             GateEntryLine.INSERT(TRUE);
-            PurchaseHeader.VALIDATE("Transport Job Status", GateEntryLine.Status);
+            PurchaseHeader.VALIDATE("Transport Job Status", PurchaseHeader."Transport Job Status"::Open);
             PurchaseHeader.VALIDATE("Transport Job No.", GateEntryLine."No.");
             PurchaseHeader.MODIFY(TRUE);
         END;
@@ -1117,6 +1117,7 @@ table 90251 "Gate Entry Header"
         recTransportationList1: Page "Transportation List";
         recSalesHeader2: Record 36;
         recPurchaseHeader2: Record 38;
+        SalesHeader1: Record "Sales Header";
     begin
         IF RecDocType = RecDocType::"Purchase Order" THEN BEGIN
             IF CONFIRM('Do you want to cancel transport job?', TRUE) THEN BEGIN
@@ -1143,6 +1144,33 @@ table 90251 "Gate Entry Header"
                 END;
             END;
         END;
+
+        If RecDocType = RecDocType::"Sales Order" then begin
+            IF CONFIRM('Do you want to cancel Transport job ?', TRUE) THEN BEGIN
+                SalesHeader1.RESET;
+                SalesHeader1.SETRANGE("Document Type", RecSalesHeader."Document Type");
+                SalesHeader1.SETRANGE("No.", RecSalesHeader."No.");
+                IF SalesHeader1.FINDFIRST THEN BEGIN
+                    IF SalesHeader1."Transport Job No." <> '' THEN BEGIN
+                        IF SalesHeader1."Transport Status" = SalesHeader1."Transport Status"::Open THEN BEGIN
+                            CancelTransportJob('', SalesHeader1."Transport Job No.", SalesHeader1."No.", RecDocType::"Sales Order");
+                            deleteTransportHeader('', SalesHeader1."Transport Job No.", SalesHeader1."No.", RecDocType::"Sales Order");
+                            //CancelTransportJob(SalesHeader1."No.", SalesHeader1."Transport Job No.");
+                            //deleteTransportHeader(SalesHeader1."No.", SalesHeader1."Transport Job No.");
+                            SalesHeader1."Transport Job No." := '';
+                            SalesHeader1."Transport Status" := SalesHeader1."Transport Status"::Open;
+                            SalesHeader1.MODIFY;
+                        END
+                        ELSE BEGIN
+                            ERROR('Transport job status must be open for order no %1', SalesHeader1."No.");
+                        END;
+                    END
+                    ELSE BEGIN
+                        ERROR('Transport job is not created for order no %1', SalesHeader1."No.");
+                    END;
+                END;
+            END;
+        end;
     end;
 
     // //[Scope('Internal')]
@@ -1192,6 +1220,18 @@ table 90251 "Gate Entry Header"
             recGateEntryLine1.SETRANGE("Document no", PurchaseOrderNo);
             IF recGateEntryLine1.FINDFIRST THEN BEGIN
                 deleteParcelDetail('', recGateEntryLine1."No.", recGateEntryLine1."Line No.", recGateEntryLine1."Document no", RecDocType::"Purchase Order");
+                recGateEntryLine1.DELETE;
+            END;
+        END;
+
+        IF RecDocType = RecDocType::"Sales Order" THEN BEGIN
+            //MESSAGE('deleteTransportLine');
+            recGateEntryLine1.RESET;
+            recGateEntryLine1.SETRANGE("No.", TransportJobNo);
+            recGateEntryLine1.SETRANGE("Document Type", recGateEntryLine1."Document Type"::"Sales Order");
+            recGateEntryLine1.SETRANGE("Document no", PurchaseOrderNo);
+            IF recGateEntryLine1.FINDFIRST THEN BEGIN
+                deleteParcelDetail('', recGateEntryLine1."No.", recGateEntryLine1."Line No.", recGateEntryLine1."Document no", RecDocType::"Sales Order");
                 recGateEntryLine1.DELETE;
             END;
         END;

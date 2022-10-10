@@ -18,12 +18,6 @@
       "version": "19.0.0.0"
     },
     {
-      "id": "a2040408-5110-4edc-b864-64fc691bcf2c",
-      "name": "Retro Discount",
-      "publisher": "Robosol",
-      "version": "19.0.0.9"
-    },
-    {
       "id": "10d4257b-d2e8-4953-be23-325f97767406",
       "name": "SalesAreaChanges",
       "publisher": "Robosol",
@@ -36,17 +30,18 @@
       "version": "19.0.0.0"
     },
     {
+      "id": "a2040408-5110-4edc-b864-64fc691bcf2c",
+      "name": "Retro Discount",
+      "publisher": "Robosol",
+      "version": "19.0.0.9"
+    },
+    {
       "id": "acb7706d-6d85-427f-a35c-4d63378fe5f2",
       "name": "Millenium",
       "publisher": "Default publisher",
       "version": "1.0.0.0"
-    },
-    {
-      "id": "a11017f3-7e5f-4a91-8c3d-3b0fecf0fe01",
-      "name": "EPOS_Project",
-      "publisher": "Robosol",
-      "version": "19.0.0.0"
     }
+  
   ],
   "screenshots": [],
   "platform": "1.0.0.0",

@@ -181,6 +181,7 @@ page 90251 "Transportation Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
+                    ApplicationArea = All;
                     RunObject = Codeunit "Transportation - Post";
                     ShortCutKey = 'F9';
                 }
@@ -190,6 +191,7 @@ page 90251 "Transportation Card"
                     Image = Status;
                     Promoted = true;
                     PromotedCategory = Process;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin
@@ -225,6 +227,7 @@ page 90251 "Transportation Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     Visible = false;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     var
@@ -285,6 +288,7 @@ page 90251 "Transportation Card"
                 {
                     Caption = '&Consignment';
                     Image = Print;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin
@@ -299,6 +303,7 @@ page 90251 "Transportation Card"
                 {
                     Caption = '&Route Details';
                     Image = Print;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin
@@ -315,6 +320,7 @@ page 90251 "Transportation Card"
                 {
                     Caption = '&Email';
                     Image = Email;
+                    ApplicationArea = All;
                     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedCategory = Process;
 
@@ -337,6 +343,7 @@ page 90251 "Transportation Card"
                 {
                     Caption = '&Track Package';
                     Image = ItemTracking;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin
@@ -350,6 +357,7 @@ page 90251 "Transportation Card"
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     PromotedOnly = true;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     var
@@ -367,13 +375,9 @@ page 90251 "Transportation Card"
                             MESSAGE('Slots not created for Location %1, Please create slots', Rec."Location Code")
                         ELSE BEGIN
                             CLEAR(PageSlotlist);
-                            //PageSlotlist.Hidefields(FALSE);
                             PageSlotlist.LOOKUPMODE(TRUE);
                             PageSlotlist.SETTABLEVIEW(Slots);
-                            IF PAGE.RUNMODAL(60003, Slots) = ACTION::LookupOK THEN
-                            //IF PAGE.RUNMODAL(PageSlotlist.OBJECTID(FALSE),Slots)=ACTION::LookupOK THEN
-                            ///IF PageSlotlist.RUNMODAL()=ACTION::LookupOK THEN
-                            BEGIN
+                            IF PAGE.RUNMODAL(Page::"Slot List", Slots) = ACTION::LookupOK THEN BEGIN
                                 IF Slots.Booked THEN
                                     ERROR('Slot already booked, please select another slot')
                                 ELSE BEGIN
@@ -393,6 +397,7 @@ page 90251 "Transportation Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin
