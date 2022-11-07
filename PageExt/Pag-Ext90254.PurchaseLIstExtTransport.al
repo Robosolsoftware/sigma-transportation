@@ -2,6 +2,7 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
 {
     layout
     {
+        //ShubhamM07112022_US_9281++
         addafter("Amount Including VAT")
         {
             field(Receive; Rec.Receive)
@@ -24,8 +25,8 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
             {
                 ApplicationArea = All;
             }
-
         }
+        //ShubhamM07112022_US_9281--
     }
     actions
     {
