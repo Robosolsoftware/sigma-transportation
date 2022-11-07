@@ -2,7 +2,30 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
 {
     layout
     {
+        addafter("Amount Including VAT")
+        {
+            field(Receive; Rec.Receive)
+            {
+                ApplicationArea = All;
+            }
+            field("Completely Received"; Rec."Completely Received")
+            {
+                ApplicationArea = All;
+            }
+            field("Your Reference"; Rec."Your Reference")
+            {
+                ApplicationArea = All;
+            }
+            field("Booking In Date"; Rec."Booking In Date")
+            {
+                ApplicationArea = All;
+            }
+            field("Booking In Time"; Rec."Booking In Time")
+            {
+                ApplicationArea = All;
+            }
 
+        }
     }
     actions
     {
