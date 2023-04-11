@@ -14,6 +14,19 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
                 ApplicationArea = All;
             }
         }
+        //ShubhamM_11042023 _US_6827++
+        addlast("Shipping and Payment")
+        {
+            field("Transport Job No."; Rec."Transport Job No.")
+            {
+                ApplicationArea = all;
+            }
+            field("Transport Job Status"; Rec."Transport Job Status")
+            {
+                ApplicationArea = all;
+            }
+        }
+        //ShubhamM_11042023 _US_6827--
     }
 
     actions
