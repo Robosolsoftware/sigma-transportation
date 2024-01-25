@@ -197,7 +197,7 @@ page 90259 "Transportation Line List"
     trigger OnOpenPage()
     begin
         //Chandan+++
-        txtLocFilter := GetLocationFilter;
+        //txtLocFilter := GetLocationFilter;
         IF txtLocFilter <> '' THEN
             Rec.SETFILTER("Location code", txtLocFilter);
         //Chandan---
@@ -268,19 +268,19 @@ page 90259 "Transportation Line List"
         END;
     end;
 
-    local procedure GetLocationFilter(): Text
-    var
-        UserLocations: Record 50108;
-        LocFilter: Text;
-    begin
-        UserLocations.RESET;
-        UserLocations.SETRANGE("User ID", USERID);
-        IF UserLocations.FINDSET THEN
-            REPEAT
-                AddToFilterText2(LocFilter, '|', '', UserLocations.Location);
-            UNTIL UserLocations.NEXT = 0;
-        EXIT(LocFilter);
-    end;
+    // local procedure GetLocationFilter(): Text
+    // var
+    //     //UserLocations: Record 50108;
+    //     LocFilter: Text;
+    // begin
+    //     UserLocations.RESET;
+    //     UserLocations.SETRANGE("User ID", USERID);
+    //     IF UserLocations.FINDSET THEN
+    //         REPEAT
+    //             AddToFilterText2(LocFilter, '|', '', UserLocations.Location);
+    //         UNTIL UserLocations.NEXT = 0;
+    //     EXIT(LocFilter);
+    // end;
 
     local procedure AddToFilterText2(var TextVar: Text; Separator: Code[10]; Comparator: Code[10]; Addendum: Code[20])
     begin

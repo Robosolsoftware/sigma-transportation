@@ -14,71 +14,71 @@ page 90252 "Transportation SubForm"
         {
             repeater(Group)
             {
-                field("Route Sequence No."; Rec."Route Sequence No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Booking Reference No."; Rec."Booking Reference No.")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Route Sequence No."; Rec."Route Sequence No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Booking Reference No."; Rec."Booking Reference No.")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Entry Type"; Rec."Entry Type")
                 {
                     ApplicationArea = All;
                 }
-                field("Source Type"; Rec."Source Type")
-                {
-                    ApplicationArea = All;
-                }
-                field("Source No."; Rec."Source No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Source Name"; Rec."Source Name")
-                {
-                    ApplicationArea = All;
-                }
-                field("Document Type"; Rec."Document Type")
-                {
-                    ApplicationArea = All;
-                }
-                field("Document no"; Rec."Document no")
-                {
-                    ApplicationArea = All;
-                }
-                field(Address; Rec.Address)
-                {
-                    ApplicationArea = All;
-                }
-                field("Address 2"; Rec."Address 2")
-                {
-                    ApplicationArea = All;
-                }
-                field(City; Rec.City)
-                {
-                    ApplicationArea = All;
-                }
-                field(County; Rec.County)
-                {
-                    ApplicationArea = All;
-                }
-                field("Post Code"; Rec."Post Code")
-                {
-                    ApplicationArea = All;
-                }
-                field("Country/Region Code"; Rec."Country/Region Code")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Source Type"; Rec."Source Type")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Source No."; Rec."Source No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Source Name"; Rec."Source Name")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Document Type"; Rec."Document Type")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Document no"; Rec."Document no")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(Address; Rec.Address)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Address 2"; Rec."Address 2")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(City; Rec.City)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(County; Rec.County)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Post Code"; Rec."Post Code")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Country/Region Code"; Rec."Country/Region Code")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     Caption = 'Expected Delivery/Receipt Date';
                     ApplicationArea = All;
                 }
-                field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
-                {
-                    Visible = false;
-                }
+                // field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
+                // {
+                //     Visible = false;
+                // }
                 field("Goods Checked"; Rec."Goods Checked")
                 {
                     ApplicationArea = All;
@@ -92,69 +92,70 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                 }
-                field("Sticker on Box"; Rec."Sticker on Box")
-                {
-                    ApplicationArea = All;
-                }
-                field("Carrier Quantity"; Rec."Carrier Quantity")
-                {
-                    Visible = false;
-                }
-                field("Carrier UOM"; Rec."Carrier UOM")
-                {
-                    Visible = false;
-                }
-                field("Activity Code"; Rec."Activity Code")
-                {
-                    Visible = false;
-                }
-                field("Amount to Collect"; Rec."Amount to Collect")
-                {
-                    Editable = false;
-                    ApplicationArea = All;
-                }
-                field("Amount Collected"; Rec."Amount Collected")
-                {
-                    ApplicationArea = All;
-                }
-                field("Amount Confirmed"; Rec."Amount Confirmed")
-                {
-                    ApplicationArea = All;
-                }
-                field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
-                {
-                    Caption = 'Total pallet';
-                    ApplicationArea = All;
-                }
-                field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
-                {
-                    Caption = 'Total Weight';
-                    ApplicationArea = All;
-                }
-                field("Total Parcels (Fridge)"; Rec."Total Parcels (Fridge)")
-                {
-                    Visible = false;
-                }
-                field("Total Weight (Fridge)"; Rec."Total Weight (Fridge)")
-                {
-                    Visible = false;
-                }
-                field("Total Parcels(Booked)"; Rec."Total Parcels(Booked)")
-                {
-                    Visible = false;
-                }
-                field("Total Weight(KG)(Booked)"; Rec."Total Weight(KG)(Booked)")
-                {
-                    Visible = false;
-                }
-                field("Total Pallet"; Rec."Total Pallet")
-                {
-                    ApplicationArea = All;
-                }
-                field("Opening Time"; Rec."Opening Time")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Sticker on Box"; Rec."Sticker on Box")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Carrier Quantity"; Rec."Carrier Quantity")
+                // {
+                //     Visible = false;
+                // }
+                // field("Carrier UOM"; Rec."Carrier UOM")
+                // {
+                //     Visible = false;
+                // }
+                // field("Activity Code"; Rec."Activity Code")
+                // {
+                //     Visible = false;
+                // }
+                // field("Amount to Collect"; Rec."Amount to Collect")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = All;
+                // }
+                // field("Amount Collected"; Rec."Amount Collected")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Amount Confirmed"; Rec."Amount Confirmed")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
+                // {
+                //     Caption = 'Total pallet';
+                //     ApplicationArea = All;
+                // }
+                // field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
+                // {
+                //     Caption = 'Total Weight';
+                //     ApplicationArea = All;
+                // }
+                // field("Total Parcels (Fridge)"; Rec."Total Parcels (Fridge)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Weight (Fridge)"; Rec."Total Weight (Fridge)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Parcels(Booked)"; Rec."Total Parcels(Booked)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Weight(KG)(Booked)"; Rec."Total Weight(KG)(Booked)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Pallet"; Rec."Total Pallet")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Opening Time"; Rec."Opening Time")
+                // {
+                //     ApplicationArea = All;
+                // }
+
             }
         }
     }
@@ -222,6 +223,36 @@ page 90252 "Transportation SubForm"
                         //TransportationLine.DELETE(TRUE);
                     end;
                 }
+
+
+
+
+                action("Select Warehouse Receipts")
+                {
+                    ApplicationArea = All;
+
+                    trigger OnAction()
+                    var
+                        WarehouseReceiptListPage: Page "Warehouse Receipts";
+                        warehousereceiptheader: Record "Warehouse Receipt Header";
+                        gateentryheader: Record "Gate Entry Header";
+                    begin
+                        Clear(warehousereceiptheader);
+                        Clear(gateentryheader);
+                        gateentryheader.Reset();
+                        gateentryheader.SetRange("No.", Rec."No.");
+                        if gateentryheader.FindFirst() then begin
+                            warehousereceiptheader.Reset();
+                            warehousereceiptheader.SetFilter("Transportation No.", gateentryheader."No.");
+                            warehousereceiptheader.SetFilter("Location Code", gateentryheader."Location Code");
+                            Page.Run(7332, warehousereceiptheader);
+                        end;
+
+
+                    end;
+                }
+
+
             }
         }
     }

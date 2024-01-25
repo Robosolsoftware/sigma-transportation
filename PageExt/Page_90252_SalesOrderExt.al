@@ -5,7 +5,7 @@ pageextension 90252 "SalesOrderExt" extends "Sales Order"
         // Add changes to page layout here
 
         //Pranali08012022_US7084++
-        addfirst(Export)
+        addfirst("Work Description")
         {
             field("Loading Date"; Rec."Loading Date")
             {

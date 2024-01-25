@@ -73,7 +73,7 @@ table 90252 "Gate Entry Line"
                             County := G_Cust.County;
                             "Post Code" := G_Cust."Post Code";
                             "Country/Region Code" := G_Cust."Country/Region Code";
-                            "Opening Time" := G_Cust."Opening Time";
+                            // "Opening Time" := G_Cust."Opening Time";
 
                         END;
                     "Source Type"::Supplier:

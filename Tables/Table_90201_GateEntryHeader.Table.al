@@ -72,8 +72,8 @@ table 90251 "Gate Entry Header"
         field(12; Status; Option)
         {
             Editable = false;
-            OptionCaption = 'Open,Released';
-            OptionMembers = Open,Released;
+            OptionCaption = 'Open,Released,Closed';
+            OptionMembers = Open,Released,Closed;
         }
         field(13; "Shipment Method Code"; Code[10])
         {
@@ -183,6 +183,10 @@ table 90251 "Gate Entry Header"
         {
             Description = 'CAS-08255-R1L9M0\';
             TableRelation = Area;
+        }
+        field(33; MyField; Blob)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 
@@ -388,7 +392,7 @@ table 90251 "Gate Entry Header"
 
         IF Type = 1 THEN BEGIN
             GateEntryHeader.VALIDATE(GateEntryHeader.Type, GateEntryHeader.Type::Receipt);
-            GateEntryHeader.VALIDATE("Booking Reference No.", PurchaseHeader."Booking Ref No.");
+            // GateEntryHeader.VALIDATE("Booking Reference No.", PurchaseHeader."Booking Ref No.");
             //GateEntryHeader.VALIDATE("Document Date",PurchaseHeader."Booking In Date");
             //GateEntryHeader.VALIDATE("Document Time",PurchaseHeader."Booking In Time");
             GateEntryHeader.VALIDATE("Location Code", PurchaseHeader."Location Code");
@@ -457,10 +461,10 @@ table 90251 "Gate Entry Header"
             PurchaseLine.SETRANGE("Document Type", PurchaseHeader."Document Type");
             IF PurchaseLine.FINDFIRST THEN
                 REPEAT
-                    //TotPallet := TotPallet + PurchaseLine.Pallet;
-                    TotPallet := TotPallet + PurchaseLine."Pallet Qty."; //Prathamesh++
-                    //TotCase := TotCase + PurchaseLine."Case Qty";
-                    TotCase := TotCase + PurchaseLine.Cases; //Prathamesh++
+                //TotPallet := TotPallet + PurchaseLine.Pallet;
+                // TotPallet := TotPallet + PurchaseLine."Pallet Qty."; //Prathamesh++
+                //TotCase := TotCase + PurchaseLine."Case Qty";
+                // TotCase := TotCase + PurchaseLine.Cases; //Prathamesh++
                 UNTIL PurchaseLine.NEXT = 0;
             GateEntryLine.VALIDATE("No.", GateEntryHeader."No.");
             GateEntryLine.VALIDATE("Line No.", LineNo);
@@ -530,10 +534,10 @@ table 90251 "Gate Entry Header"
             IF PurchaseLine.FINDFIRST THEN
                 REPEAT
                     TotalPurchaseWieght := TotalPurchaseWieght + (PurchaseLine."Net Weight") * (PurchaseLine.Quantity);
-                    // TotalPurchaseQty := TotalPurchaseQty + PurchaseLine.Pallet;
-                    TotalPurchaseQty := TotalPurchaseQty + PurchaseLine."Pallet Qty."; //Prathamesh++
-                    // TotCase := TotCase + PurchaseLine."Case Qty";
-                    TotCase := TotCase + PurchaseLine.Cases; //Prathamesh++
+                // TotalPurchaseQty := TotalPurchaseQty + PurchaseLine.Pallet;
+                // TotalPurchaseQty := TotalPurchaseQty + PurchaseLine."Pallet Qty."; //Prathamesh++
+                // TotCase := TotCase + PurchaseLine."Case Qty";
+                // TotCase := TotCase + PurchaseLine.Cases; //Prathamesh++
                 UNTIL PurchaseLine.NEXT = 0;
 
             ParcelDetails.VALIDATE("Net Weight", TotalPurchaseWieght);
@@ -559,8 +563,8 @@ table 90251 "Gate Entry Header"
             IF salesLine.FINDFIRST THEN
                 REPEAT
                     TotalSalesWieght := TotalSalesWieght + (salesLine."Net Weight") * (salesLine.Quantity);
-                    // TotalSalesQty := TotalSalesQty + salesLine.Pallet;
-                    TotalSalesQty := TotalSalesQty + salesLine.Pallets; //Prathamesh++
+                // TotalSalesQty := TotalSalesQty + salesLine.Pallet;
+                // TotalSalesQty := TotalSalesQty + salesLine.Pallets; //Prathamesh++
                 UNTIL salesLine.NEXT = 0;
 
             ParcelDetails.VALIDATE("Net Weight", TotalSalesWieght);
@@ -765,8 +769,8 @@ table 90251 "Gate Entry Header"
             IF PurchaseLine.FINDFIRST THEN
                 REPEAT
                     TotalWieght := TotalWieght + (PurchaseLine.Quantity * PurchaseLine."Net Weight");
-                    // TotalPallet := TotalPallet + PurchaseLine.Pallet;
-                    TotalPallet := TotalPallet + PurchaseLine."Pallet Qty."; //Prathamesh++
+                // TotalPallet := TotalPallet + PurchaseLine.Pallet;
+                // TotalPallet := TotalPallet + PurchaseLine."Pallet Qty."; //Prathamesh++
                 UNTIL SalesLine.NEXT = 0;
         END;
 
@@ -777,8 +781,8 @@ table 90251 "Gate Entry Header"
             IF SalesLine.FINDFIRST THEN
                 REPEAT
                     TotalWieght := TotalWieght + (SalesLine.Quantity * SalesLine."Net Weight");
-                    //TotalPallet := TotalPallet + SalesLine.Pallet;
-                    TotalPallet := TotalPallet + SalesLine.Pallets; //Prathamesh ++
+                //TotalPallet := TotalPallet + SalesLine.Pallet;
+                // TotalPallet := TotalPallet + SalesLine.Pallets; //Prathamesh ++
                 UNTIL SalesLine.NEXT = 0;
         END;
         IF ShippingAgentService.GET("Shipping Agent Code", "Shipping Agent Services Code") THEN;

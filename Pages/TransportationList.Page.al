@@ -42,6 +42,7 @@ page 90253 "Transportation List"
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Booking Reference No."; Rec."Booking Reference No.")
                 {
@@ -171,21 +172,21 @@ page 90253 "Transportation List"
         Rec.Caption(CapacityText, AvlCapacityText);
     end;
 
-    trigger OnOpenPage()
-    begin
-        CLEAR(Locations);
-        UsersLocations.RESET;
-        UsersLocations.SETRANGE("User ID", USERID);
-        IF UsersLocations.FINDSET THEN
-            REPEAT
-                IF Locations = '' THEN
-                    Locations := UsersLocations.Location
-                ELSE
-                    Locations := Locations + '|' + UsersLocations.Location;
-            UNTIL UsersLocations.NEXT = 0;
-        Rec.FILTERGROUP(8);
-        Rec.SETFILTER("Location Code", Locations);
-    end;
+    // trigger OnOpenPage()
+    // begin
+    //     CLEAR(Locations);
+    //     UsersLocations.RESET;
+    //     UsersLocations.SETRANGE("User ID", USERID);
+    //     IF UsersLocations.FINDSET THEN
+    //         REPEAT
+    //             IF Locations = '' THEN
+    //                 Locations := UsersLocations.Location
+    //             ELSE
+    //                 Locations := Locations + '|' + UsersLocations.Location;
+    //         UNTIL UsersLocations.NEXT = 0;
+    //     Rec.FILTERGROUP(8);
+    //     Rec.SETFILTER("Location Code", Locations);
+    // end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     begin
@@ -197,7 +198,7 @@ page 90253 "Transportation List"
         GateEntryHeader: Record "Gate Entry Header";
         TripDetails: Report "Consignment Card";
         TransportationRouteDetails: Report "Transportation Route Detail";
-        UsersLocations: Record 50108;
+        //UsersLocations: Record 50108;
         Locations: Text;
         CapacityText: Text;
         AvlCapacityText: Text;

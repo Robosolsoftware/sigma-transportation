@@ -17,4 +17,6 @@ tableextension 90260 TransferHeaderExt extends "Transfer Header"
 
     var
         myInt: Integer;
+        test: record 7317;
+        test1: Page 5769;
 }
