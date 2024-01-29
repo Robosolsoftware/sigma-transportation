@@ -328,9 +328,9 @@ table 90252 "Gate Entry Line"
         }
         field(46; Status; Option)
         {
-            Editable = false;
-            OptionCaption = 'Open,Released';
-            OptionMembers = Open,Released;
+            Editable = true;
+            OptionCaption = 'Open,Released,Closed';
+            OptionMembers = Open,Released,Closed;
         }
         field(47; "Amount Confirmed"; Decimal)
         {
@@ -360,6 +360,22 @@ table 90252 "Gate Entry Line"
         {
             Caption = 'Your Reference';
         }
+        field(53; "Transportation Status"; Option)
+        {
+            Editable = false;
+            OptionCaption = 'Open,Released,Closed';
+            OptionMembers = Open,Released,Closed;
+        }
+        field(54; "Source Document"; Enum "Warehouse Activity Source Document")
+        {
+            Caption = 'Source Document';
+
+        }
+        field(55; "Warehouse Receipt No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
@@ -378,6 +394,8 @@ table 90252 "Gate Entry Line"
     }
 
     trigger OnDelete()
+    var
+        t: Record "Warehouse Receipt Line";
     begin
         OnDeleteTransportLine;
     end;

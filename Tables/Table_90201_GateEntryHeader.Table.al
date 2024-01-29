@@ -71,9 +71,21 @@ table 90251 "Gate Entry Header"
         }
         field(12; Status; Option)
         {
-            Editable = false;
+            Editable = true;
             OptionCaption = 'Open,Released,Closed';
             OptionMembers = Open,Released,Closed;
+            trigger OnValidate()
+            var
+                gateEntryLine: Record "Gate Entry Line";
+            begin
+                gateEntryLine.Reset();
+                gateEntryLine.setrange("No.", Rec."No.");
+                if gateEntryLine.FindSet() then begin
+                    repeat
+                        gateEntryLine.Status := Rec.Status;
+                    until gateEntryLine.Next() = 0;
+                end;
+            end;
         }
         field(13; "Shipment Method Code"; Code[10])
         {

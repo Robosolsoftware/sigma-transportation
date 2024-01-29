@@ -197,9 +197,10 @@ page 90251 "Transportation Card"
                     begin
 
                         IF Rec.Status = Rec.Status::Open THEN
-                            Selection := DIALOG.STRMENU('Open,Released', 2)
+                            Selection := DIALOG.STRMENU('Open,Released,Closed', 2)
                         ELSE
-                            Selection := DIALOG.STRMENU('Open,Released', 1);
+                            Selection := DIALOG.STRMENU('Open,Released,Closed', 1);
+
 
                         IF Selection = 0 THEN
                             EXIT;

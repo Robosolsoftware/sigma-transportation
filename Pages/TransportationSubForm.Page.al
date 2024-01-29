@@ -26,50 +26,62 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                 }
-                // field("Source Type"; Rec."Source Type")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Source No."; Rec."Source No.")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Source Name"; Rec."Source Name")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Document Type"; Rec."Document Type")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Document no"; Rec."Document no")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field(Address; Rec.Address)
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Address 2"; Rec."Address 2")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field(City; Rec.City)
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field(County; Rec.County)
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Post Code"; Rec."Post Code")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Country/Region Code"; Rec."Country/Region Code")
-                // {
-                //     ApplicationArea = All;
-                // }
+                field("Transportation No."; rec."No.")
+                {
+                    ApplicationArea = all;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = all;
+                }
+                field("Warehouse Receipt No."; Rec."Warehouse Receipt No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Source Type"; Rec."Source Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Source No."; Rec."Source No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Source Name"; Rec."Source Name")
+                {
+                    ApplicationArea = All;
+                }
+                field("Document Type"; Rec."Document Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Document no"; Rec."Document no")
+                {
+                    ApplicationArea = All;
+                }
+                field(Address; Rec.Address)
+                {
+                    ApplicationArea = All;
+                }
+                field("Address 2"; Rec."Address 2")
+                {
+                    ApplicationArea = All;
+                }
+                field(City; Rec.City)
+                {
+                    ApplicationArea = All;
+                }
+                field(County; Rec.County)
+                {
+                    ApplicationArea = All;
+                }
+                field("Post Code"; Rec."Post Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Country/Region Code"; Rec."Country/Region Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     Caption = 'Expected Delivery/Receipt Date';
@@ -147,14 +159,16 @@ page 90252 "Transportation SubForm"
                 // {
                 //     Visible = false;
                 // }
-                // field("Total Pallet"; Rec."Total Pallet")
-                // {
-                //     ApplicationArea = All;
-                // }
+                field("Total Pallet"; Rec."Total Pallet")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Booked Pallets';
+                }
                 // field("Opening Time"; Rec."Opening Time")
                 // {
                 //     ApplicationArea = All;
                 // }
+
 
             }
         }
@@ -236,16 +250,40 @@ page 90252 "Transportation SubForm"
                         WarehouseReceiptListPage: Page "Warehouse Receipts";
                         warehousereceiptheader: Record "Warehouse Receipt Header";
                         gateentryheader: Record "Gate Entry Header";
+                        gateEntryLine: Record "Gate Entry Line";
+                        test: page "Sales Order Subform";
+                        ItemListPage: Page "Item List";
+                        warehouseReceiptLine: Record "Warehouse Receipt Line";
                     begin
                         Clear(warehousereceiptheader);
                         Clear(gateentryheader);
                         gateentryheader.Reset();
                         gateentryheader.SetRange("No.", Rec."No.");
+
                         if gateentryheader.FindFirst() then begin
                             warehousereceiptheader.Reset();
-                            warehousereceiptheader.SetFilter("Transportation No.", gateentryheader."No.");
-                            warehousereceiptheader.SetFilter("Location Code", gateentryheader."Location Code");
-                            Page.Run(7332, warehousereceiptheader);
+                            warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
+                            //warehousereceiptheader.SetFilter("Location Code", '%1', '');
+                            //Page.Run(7332, warehousereceiptheader);
+                            WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
+                            WarehouseReceiptListPage.LookupMode(true);
+                            if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
+                                Clear(warehousereceiptheader);
+                                warehousereceiptheader.Reset();
+                                WarehouseReceiptListPage.SetSelectionFilter(warehousereceiptheader);
+                                if warehousereceiptheader.FindSet() then begin
+                                    repeat
+                                        warehouseReceiptLine.Reset();
+                                        warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
+                                        if warehouseReceiptLine.FindSet() then begin
+                                            repeat
+                                                InsetGateEntryLine(gateentryheader, warehouseReceiptLine);
+                                            until warehouseReceiptLine.Next() = 0;
+                                        end;
+                                    until warehousereceiptheader.Next() = 0;
+                                end;
+                            end
+
                         end;
 
 
@@ -256,6 +294,12 @@ page 90252 "Transportation SubForm"
             }
         }
     }
+    local procedure InsetGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line")
+    var
+
+    begin
+
+    end;
 
     trigger OnAfterGetRecord()
     begin
