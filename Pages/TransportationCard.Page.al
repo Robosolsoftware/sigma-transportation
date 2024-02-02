@@ -185,42 +185,42 @@ page 90251 "Transportation Card"
                     RunObject = Codeunit "Transportation - Post";
                     ShortCutKey = 'F9';
                 }
-                action("<Action1000000027>")
-                {
-                    Caption = 'Change Status';
-                    Image = Status;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    ApplicationArea = All;
+                // action("<Action1000000027>")
+                // {
+                //     Caption = 'Change Status';
+                //     Image = Status;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     ApplicationArea = All;
 
-                    trigger OnAction()
-                    begin
+                //     trigger OnAction()
+                //     begin
 
-                        IF Rec.Status = Rec.Status::Open THEN
-                            Selection := DIALOG.STRMENU('Open,Released,Closed', 2)
-                        ELSE
-                            Selection := DIALOG.STRMENU('Open,Released,Closed', 1);
+                //         IF Rec.Status = Rec.Status::Open THEN
+                //             Selection := DIALOG.STRMENU('Open,Released,Closed', 2)
+                //         ELSE
+                //             Selection := DIALOG.STRMENU('Open,Released,Closed', 1);
 
 
-                        IF Selection = 0 THEN
-                            EXIT;
-                        IF Selection = 1 THEN BEGIN
-                            Rec.Status := Rec.Status::Open;
-                            // CLEAR("Expected Delivery/Receipt Date");
-                            CLEAR(Rec."Total parcel Weight");
-                            UpdateDeliveryDateTimeOnOpen(Rec);
-                        END;
-                        IF Selection = 2 THEN BEGIN
-                            Rec.CALCFIELDS("Total parcel Weight");
-                            IF Rec."Vehicle Capacity(KG)" < Rec."Total parcel Weight" THEN
-                                IF NOT CONFIRM('Total parcel weight is more than vehicle capacity.\\Do you want to continue?', FALSE) THEN
-                                    EXIT;
+                //         IF Selection = 0 THEN
+                //             EXIT;
+                //         IF Selection = 1 THEN BEGIN
+                //             Rec.Status := Rec.Status::Open;
+                //             // CLEAR("Expected Delivery/Receipt Date");
+                //             CLEAR(Rec."Total parcel Weight");
+                //             UpdateDeliveryDateTimeOnOpen(Rec);
+                //         END;
+                //         IF Selection = 2 THEN BEGIN
+                //             Rec.CALCFIELDS("Total parcel Weight");
+                //             IF Rec."Vehicle Capacity(KG)" < Rec."Total parcel Weight" THEN
+                //                 IF NOT CONFIRM('Total parcel weight is more than vehicle capacity.\\Do you want to continue?', FALSE) THEN
+                //                     EXIT;
 
-                            Rec.Status := Rec.Status::Released;
-                            UpdateDeliveryDateTime(Rec);
-                        END;
-                    end;
-                }
+                //             Rec.Status := Rec.Status::Released;
+                //             UpdateDeliveryDateTime(Rec);
+                //         END;
+                //     end;
+                // }
                 action("<Action1000000015>")
                 {
                     Caption = 'Calculate Total Parcel Weight';

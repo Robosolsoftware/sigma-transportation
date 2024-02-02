@@ -255,21 +255,16 @@ page 90252 "Transportation SubForm"
                         ItemListPage: Page "Item List";
                         warehouseReceiptLine: Record "Warehouse Receipt Line";
                     begin
-                        Clear(warehousereceiptheader);
-                        Clear(gateentryheader);
-                        gateentryheader.Reset();
-                        gateentryheader.SetRange("No.", Rec."No.");
-
-                        if gateentryheader.FindFirst() then begin
-                            warehousereceiptheader.Reset();
-                            warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
-                            //warehousereceiptheader.SetFilter("Location Code", '%1', '');
-                            //Page.Run(7332, warehousereceiptheader);
-                            WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
-                            WarehouseReceiptListPage.LookupMode(true);
-                            if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
-                                Clear(warehousereceiptheader);
-                                warehousereceiptheader.Reset();
+                        Clear(WarehouseReceiptListPage);
+                        warehousereceiptheader.Reset();
+                        warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
+                        WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
+                        WarehouseReceiptListPage.LookupMode(true);
+                        if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
+                            //warehousereceiptheader.Reset();
+                            gateentryheader.Reset();
+                            gateentryheader.SetRange("No.", Rec."No.");
+                            if gateentryheader.FindFirst() then begin
                                 WarehouseReceiptListPage.SetSelectionFilter(warehousereceiptheader);
                                 if warehousereceiptheader.FindSet() then begin
                                     repeat
@@ -277,16 +272,17 @@ page 90252 "Transportation SubForm"
                                         warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
                                         if warehouseReceiptLine.FindSet() then begin
                                             repeat
-                                                InsetGateEntryLine(gateentryheader, warehouseReceiptLine);
+                                                gateEntryLine.Reset();
+                                                gateEntryLine.SetRange("No.", gateentryheader."No.");
+                                                gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
+                                                if not gateEntryLine.FindFirst() then
+                                                    InsetGateEntryLine(gateentryheader, warehouseReceiptLine);
                                             until warehouseReceiptLine.Next() = 0;
                                         end;
                                     until warehousereceiptheader.Next() = 0;
                                 end;
-                            end
-
+                            end;
                         end;
-
-
                     end;
                 }
 
@@ -296,9 +292,40 @@ page 90252 "Transportation SubForm"
     }
     local procedure InsetGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line")
     var
+        gateEntryLine: Record "Gate Entry Line";
+        purchHeader: Record "Purchase Header";
 
     begin
 
+        gateEntryLine.Init();
+        gateEntryLine."No." := gateentryheader."No.";
+        gateEntryLine."Line No." := FindLastLineNo(gateentryheader);
+        gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
+        gateEntryLine."Document Type" := gateEntryLine."Document Type"::"Purchase Order";
+        gateEntryLine."Document no" := warehousereceiptline."Source No.";
+        if (warehousereceiptline."Source Document" = warehousereceiptline."Source Document"::"Purchase Order") then begin
+            gateEntryLine."Source Type" := gateEntryLine."Source Type"::Supplier;
+        end;
+        purchHeader.Reset();
+
+        gateEntryLine.Insert();
+        Commit();
+    end;
+
+
+
+    local procedure FindLastLineNo(P_gateEntryHeader: Record "Gate Entry Header"): Integer
+    //Code to find a last line no in web order
+    var
+        L_gateEntryLine: Record "Gate Entry Line";
+    begin
+        L_gateEntryLine.RESET;
+        //L_gateEntryLine.SETRANGE("Document Type", L_gateEntryLine."Document Type"::);
+        L_gateEntryLine.SETRANGE("No.", P_gateEntryHeader."No.");
+        IF L_gateEntryLine.FINDLAST THEN
+            EXIT(L_gateEntryLine."Line No." + 10000)
+        ELSE
+            EXIT(10000);
     end;
 
     trigger OnAfterGetRecord()
