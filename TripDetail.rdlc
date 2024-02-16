@@ -4453,8 +4453,8 @@ End Function
         <Field Name="ExpectedDeliveryReceiptDate_GateEntryHeader">
           <DataField>ExpectedDeliveryReceiptDate_GateEntryHeader</DataField>
         </Field>
-        <Field Name="Status_GateEntryHeader">
-          <DataField>Status_GateEntryHeader</DataField>
+        <Field Name="Status">
+          <DataField>Status</DataField>
         </Field>
         <Field Name="ShipmentMethodCode_GateEntryHeader">
           <DataField>ShipmentMethodCode_GateEntryHeader</DataField>

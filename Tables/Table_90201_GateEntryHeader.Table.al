@@ -30,10 +30,19 @@ table 90251 "Gate Entry Header"
             TableRelation = Location;
 
             trigger OnValidate()
+            var
+                gateEntryLine: Record "Gate Entry Line";
+
             begin
                 IF "Location Code" <> xRec."Location Code" THEN
                     IF "Slot No." <> 0 THEN
                         ERROR('You cannot change location if slot booked,cancel slot to change location');
+
+                // gateEntryLine.Reset();
+                // gateEntryLine.SetRange("No.", Rec."No.");
+                // if gateEntryLine.FindFirst() then begin
+                //     gateEntryLine."Location code" := Rec."Location Code";
+                // end;
             end;
         }
         field(5; "Shipping Agent Code"; Code[10])
@@ -69,27 +78,17 @@ table 90251 "Gate Entry Header"
                 END;
             end;
         }
-        field(12; Status; Option)
-        {
-            Editable = true;
-            OptionCaption = 'Open,Released,Closed';
-            OptionMembers = Open,Released,Closed;
-            trigger OnValidate()
-            var
-                gateEntryLine: Record "Gate Entry Line";
-            begin
-                gateEntryLine.Reset();
-                gateEntryLine.setrange("No.", Rec."No.");
-                if gateEntryLine.FindSet() then begin
-                    repeat
-                        gateEntryLine.Status := Rec.Status;
-                    until gateEntryLine.Next() = 0;
-                end;
-            end;
-        }
+        // field(12; Status; Option)
+        // {
+        //     Editable = true;
+        //     OptionCaption = 'Open,Released';
+        //     OptionMembers = Open,Released;
+
+        // }
         field(13; "Shipment Method Code"; Code[10])
         {
             TableRelation = "Shipment Method".Code;
+
         }
         field(14; "No. Series"; Code[10])
         {
@@ -112,19 +111,19 @@ table 90251 "Gate Entry Header"
         field(16; "Booking Reference No."; Code[20])
         {
 
-            trigger OnValidate()
-            begin
-                TransportLine.RESET;
-                TransportLine.SETRANGE(TransportLine."No.", "No.");
-                IF TransportLine.FINDFIRST THEN BEGIN
-                    //IF NOT CONFIRM(STRSUBSTNO(Text001,FIELDCAPTION("Expected Delivery/Receipt Date")),TRUE) THEN  //NIK (CAS-06144-N0M6X7)
-                    //EXIT;
-                    TransportLine."Expected Delivery/Receipt Date" := "Expected Delivery/Receipt Date";
-                    TransportLine."Booking Reference No." := "Booking Reference No.";
-                    TransportLine.MODIFY;
-                    //TransportLine.MODIFYALL(TransportLine."Expected Delivery/Receipt Date","Expected Delivery/Receipt Date");
-                END;
-            end;
+            // trigger OnValidate()
+            // begin
+            //     TransportLine.RESET;
+            //     TransportLine.SETRANGE(TransportLine."No.", "No.");
+            //     IF TransportLine.FINDFIRST THEN BEGIN
+            //         //IF NOT CONFIRM(STRSUBSTNO(Text001,FIELDCAPTION("Expected Delivery/Receipt Date")),TRUE) THEN  //NIK (CAS-06144-N0M6X7)
+            //         //EXIT;
+            //         TransportLine."Expected Delivery/Receipt Date" := "Expected Delivery/Receipt Date";
+            //         TransportLine."Booking Reference No." := "Booking Reference No.";
+            //         TransportLine.MODIFY;
+            //         //TransportLine.MODIFYALL(TransportLine."Expected Delivery/Receipt Date","Expected Delivery/Receipt Date");
+            //     END;
+            // end;
         }
         field(17; "Vehicle Capacity(KG)"; Decimal)
         {
@@ -153,8 +152,23 @@ table 90251 "Gate Entry Header"
         }
         field(24; Type; Option)
         {
+            Caption = 'Entry Type';
             OptionCaption = ' ,Receipt,Delivery,CollectionFrom,ForCollection,Export';
             OptionMembers = " ",Receipt,Delivery,CollectionFrom,ForCollection,Export;
+            trigger OnValidate()
+            var
+                gateEntryLine: Record "Gate Entry Line";
+            begin
+                gateEntryLine.Reset();
+                gateEntryLine.setrange("No.", Rec."No.");
+                if gateEntryLine.FindSet() then begin
+                    repeat
+                        gateEntryLine."Entry Type" := Rec.Type;
+                        gateEntryLine.Modify(true);
+                    until gateEntryLine.Next() = 0;
+
+                end;
+            end;
         }
         field(25; "Expected Delivery/Receipt Time"; Time)
         {
@@ -196,10 +210,74 @@ table 90251 "Gate Entry Header"
             Description = 'CAS-08255-R1L9M0\';
             TableRelation = Area;
         }
-        field(33; MyField; Blob)
+
+        field(34; "Carrier"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
+        field(35; "Requested Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(36; "Expected Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(37; "Expected Delivery Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(38; "Booked Pallets"; Decimal)
+        {
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = sum("Gate Entry Line"."Total Pallet" where("No." = field("No.")));
+        }
+        field(39; "Lifts"; Decimal)
+        {
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = sum("Gate Entry Line".Lifts where("No." = field("No.")));
+        }
+        field(40; "Loose Boxes"; Decimal)
+        {
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = sum("Gate Entry Line"."Loose Boxes" where("No." = field("No.")));
+        }
+        field(41; "Curtain Side"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(42; "Actual Receipt Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(43; "Actual Receipt Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(44; "Receipt Status"; Option)
+        {
+            Caption = 'Transportation Receipt Status';
+            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+            trigger OnValidate()
+            var
+                gateEntryLine: Record "Gate Entry Line";
+            begin
+                gateEntryLine.Reset();
+                gateEntryLine.setrange("No.", Rec."No.");
+                if gateEntryLine.FindSet() then begin
+                    repeat
+                        gateEntryLine."Transportation Receipt Status" := Rec."Receipt Status";
+                        gateEntryLine.Modify(true);
+                    until gateEntryLine.Next() = 0;
+
+                end;
+            end;
+        }
+
     }
 
     keys
@@ -217,8 +295,8 @@ table 90251 "Gate Entry Header"
     trigger OnDelete()
     begin
         //Chandan------------Start--------140817
-        IF Status = Status::Released THEN
-            ERROR('You cant delete realesed job');
+        // IF Status = Status::Released THEN
+        //     ERROR('You cant delete realesed job');
 
         GateEntryLine.RESET;
         GateEntryLine.SETRANGE("No.", "No.");
@@ -961,30 +1039,30 @@ table 90251 "Gate Entry Header"
         GateEntryHeader1.RESET;
         GateEntryHeader1.SETRANGE("No.", TransportJobNo);
         IF GateEntryHeader1.FINDFIRST THEN BEGIN
-            IF GateEntryHeader1.Status = GateEntryHeader1.Status::Open THEN BEGIN
-                IF GateEntryHeader1."Slot No." = 0 THEN BEGIN
-                    // deleteTransportLine(SalesOrderNo,GateEntryHeader1."No.");
+            //IF GateEntryHeader1.Status = GateEntryHeader1.Status::Open THEN BEGIN
+            IF GateEntryHeader1."Slot No." = 0 THEN BEGIN
+                // deleteTransportLine(SalesOrderNo,GateEntryHeader1."No.");
+                DeleteTransportLineFromTransferOrder(TransferOrderNo, GateEntryHeader1."No.");
+                GateEntryHeader1."Avalaible Vehicle Capacity(KG)" := GateEntryHeader1.CalculateAvailableCapacity(GateEntryHeader1);
+                GateEntryHeader1.MODIFY;
+            END
+            ELSE BEGIN
+                IF FindTransportLine(TransferOrderNo, GateEntryHeader1."No.") = 1 THEN BEGIN
+                    ERROR('Slot is booked for transport no %1', TransportJobNo);
+                END
+                ELSE BEGIN
+                    //deleteTransportLineFromTransferOrder(SalesOrderNo,GateEntryHeader1."No.");
                     DeleteTransportLineFromTransferOrder(TransferOrderNo, GateEntryHeader1."No.");
                     GateEntryHeader1."Avalaible Vehicle Capacity(KG)" := GateEntryHeader1.CalculateAvailableCapacity(GateEntryHeader1);
                     GateEntryHeader1.MODIFY;
-                END
-                ELSE BEGIN
-                    IF FindTransportLine(TransferOrderNo, GateEntryHeader1."No.") = 1 THEN BEGIN
-                        ERROR('Slot is booked for transport no %1', TransportJobNo);
-                    END
-                    ELSE BEGIN
-                        //deleteTransportLineFromTransferOrder(SalesOrderNo,GateEntryHeader1."No.");
-                        DeleteTransportLineFromTransferOrder(TransferOrderNo, GateEntryHeader1."No.");
-                        GateEntryHeader1."Avalaible Vehicle Capacity(KG)" := GateEntryHeader1.CalculateAvailableCapacity(GateEntryHeader1);
-                        GateEntryHeader1.MODIFY;
-                    END;
                 END;
-            END
-            ELSE BEGIN
-                MESSAGE('Transport job status must be open for order no %1', TransferOrderNo);
             END;
+        END
+        ELSE BEGIN
+            MESSAGE('Transport job status must be open for order no %1', TransferOrderNo);
         END;
-    end;
+    END;
+    //end;
 
     local procedure DeleteTransportLineFromTransferOrder(TransferOrderNo: Code[20]; TransportJobNo: Code[20])
     var
@@ -1200,28 +1278,28 @@ table 90251 "Gate Entry Header"
             recGateEntryHeader1.RESET;
             recGateEntryHeader1.SETRANGE("No.", TransportJobNo);
             IF recGateEntryHeader1.FINDFIRST THEN BEGIN
-                IF recGateEntryHeader1.Status = recGateEntryHeader1.Status::Open THEN BEGIN
-                    IF recGateEntryHeader1."Slot No." = 0 THEN BEGIN
+                // IF recGateEntryHeader1.Status = recGateEntryHeader1.Status::Open THEN BEGIN
+                IF recGateEntryHeader1."Slot No." = 0 THEN BEGIN
+                    deleteTransportLine('', recGateEntryHeader1."No.", PurchaseOrderNo, RecDocType::"Purchase Order");
+                    recGateEntryHeader1."Avalaible Vehicle Capacity(KG)" := recGateEntryHeader1.CalculateAvailableCapacity(recGateEntryHeader1);
+                    recGateEntryHeader1.MODIFY;
+                END
+                ELSE BEGIN
+                    IF FindTransportLine(PurchaseOrderNo, recGateEntryHeader1."No.") = 1 THEN BEGIN
+                        ERROR('Slot is booked for transport no %1', TransportJobNo);
+                    END
+                    ELSE BEGIN
                         deleteTransportLine('', recGateEntryHeader1."No.", PurchaseOrderNo, RecDocType::"Purchase Order");
                         recGateEntryHeader1."Avalaible Vehicle Capacity(KG)" := recGateEntryHeader1.CalculateAvailableCapacity(recGateEntryHeader1);
                         recGateEntryHeader1.MODIFY;
-                    END
-                    ELSE BEGIN
-                        IF FindTransportLine(PurchaseOrderNo, recGateEntryHeader1."No.") = 1 THEN BEGIN
-                            ERROR('Slot is booked for transport no %1', TransportJobNo);
-                        END
-                        ELSE BEGIN
-                            deleteTransportLine('', recGateEntryHeader1."No.", PurchaseOrderNo, RecDocType::"Purchase Order");
-                            recGateEntryHeader1."Avalaible Vehicle Capacity(KG)" := recGateEntryHeader1.CalculateAvailableCapacity(recGateEntryHeader1);
-                            recGateEntryHeader1.MODIFY;
-                        END;
                     END;
-                END
-                ELSE
-                    MESSAGE('Transport job status must be open for order no %1', PurchaseOrderNo);
-            END;
+                END;
+            END
+            ELSE
+                MESSAGE('Transport job status must be open for order no %1', PurchaseOrderNo);
         END;
-    end;
+    END;
+    // end;
 
     // //[Scope('Internal')]
     procedure deleteTransportLine(SalesOrderNo: Code[20]; TransportJobNo: Code[20]; PurchaseOrderNo: Code[20]; RecDocType: Option "Sales Order","Purchase Order")

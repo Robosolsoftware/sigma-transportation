@@ -4,10 +4,10 @@ pageextension 90257 WarehouseReceiptListPageExt extends "Warehouse Receipts"
     {
         addafter("No.")
         {
-            field("Transportation No."; rec."Transportation No.")
-            {
-                ApplicationArea = all;
-            }
+            //     field("Transportation No."; rec."Transportation No.")
+            //     {
+            //         ApplicationArea = all;
+            //     }
         }
 
     }

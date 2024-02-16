@@ -14,17 +14,48 @@ page 90257 "Posted Transportation SubForm"
                 {
                     ApplicationArea = All;
                 }
+                field("Transportation No."; rec."No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Transportation Receipt Status"; Rec."Transportation Receipt Status")
+                {
+                    ApplicationArea = all;
+                }
+
+                field("Warehouse Receipt No."; Rec."Warehouse Receipt No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Source Document"; Rec."Source Document")
+                {
+                    ApplicationArea = all;
+                }
                 field("Source Type"; Rec."Source Type")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Source No."; Rec."Source No.")
                 {
                     ApplicationArea = All;
+                    //Visible = false;
+                }
+
+                field("Document Type"; Rec."Document Type")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Document no"; Rec."Document no")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Source Name"; Rec."Source Name")
                 {
                     ApplicationArea = All;
+                    //Visible = false;
                 }
                 field(Address; Rec.Address)
                 {
@@ -52,12 +83,13 @@ page 90257 "Posted Transportation SubForm"
                 }
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
+                    Caption = 'Expected Delivery/Receipt Date';
                     ApplicationArea = All;
                 }
-                field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
+                // {
+                //     Visible = false;
+                // }
                 field("Goods Checked"; Rec."Goods Checked")
                 {
                     ApplicationArea = All;
@@ -71,30 +103,75 @@ page 90257 "Posted Transportation SubForm"
                 {
                     ApplicationArea = All;
                 }
-                field("Total Fridge Parcels"; Rec."Total Fridge Parcels")
+                // field("Sticker on Box"; Rec."Sticker on Box")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Carrier Quantity"; Rec."Carrier Quantity")
+                // {
+                //     Visible = false;
+                // }
+                // field("Carrier UOM"; Rec."Carrier UOM")
+                // {
+                //     Visible = false;
+                // }
+                // field("Activity Code"; Rec."Activity Code")
+                // {
+                //     Visible = false;
+                // }
+                // field("Amount to Collect"; Rec."Amount to Collect")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = All;
+                // }
+                // field("Amount Collected"; Rec."Amount Collected")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Amount Confirmed"; Rec."Amount Confirmed")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
+                // {
+                //     Caption = 'Total pallet';
+                //     ApplicationArea = All;
+                // }
+                // field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
+                // {
+                //     Caption = 'Total Weight';
+                //     ApplicationArea = All;
+                // }
+                // field("Total Parcels (Fridge)"; Rec."Total Parcels (Fridge)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Weight (Fridge)"; Rec."Total Weight (Fridge)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Parcels(Booked)"; Rec."Total Parcels(Booked)")
+                // {
+                //     Visible = false;
+                // }
+                // field("Total Weight(KG)(Booked)"; Rec."Total Weight(KG)(Booked)")
+                // {
+                //     Visible = false;
+                // }
+                field("Total Pallet"; Rec."Total Pallet")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Booked Pallets';
+                }
+                field(Lifts; Rec.Lifts)
                 {
                     ApplicationArea = All;
                 }
-                field("Sticker on Box"; Rec."Sticker on Box")
+                field("Loose Boxes"; Rec."Loose Boxes")
                 {
                     ApplicationArea = All;
                 }
-                field("Carrier Quantity"; Rec."Carrier Quantity")
-                {
-                    ApplicationArea = All;
-                }
-                field("Carrier UOM"; Rec."Carrier UOM")
-                {
-                    ApplicationArea = All;
-                }
-                field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
-                {
-                    ApplicationArea = All;
-                }
-                field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
-                {
-                    ApplicationArea = All;
-                }
+
             }
         }
     }

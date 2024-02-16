@@ -141,6 +141,47 @@ table 90254 "Posted Gate Entry Line"
         {
             Description = 'CAS-02164-V7H2Q5';
         }
+        field(42; "Document Type"; Option)
+        {
+            Description = 'CAS-06713-Z3X6T4';
+            OptionCaption = ' ,Sales Order,Purchase Order,Transfer Order';
+            OptionMembers = " ","Sales Order","Purchase Order","Transfer Order";
+        }
+        field(43; "Document no"; Code[20])
+        {
+            //Description = 'CAS-06713-Z3X6T4';
+            Caption = 'PO No.';
+        }
+        field(44; "Total Pallet"; Decimal)
+        {
+
+        }
+        field(53; "Transportation Receipt Status"; Option)
+        {
+            Caption = 'Transportation Receipt Status';
+            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+        }
+        field(54; "Source Document"; Option)
+        {
+            Caption = 'Source Document';
+            OptionCaption = ' ,Sales Order,Purchase Order,Transfer Order';
+            OptionMembers = " ","Sales Order","Purchase Order","Transfer Order";
+
+        }
+        field(55; "Warehouse Receipt No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(56; "Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(57; "Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

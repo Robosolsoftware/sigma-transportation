@@ -1,4 +1,4 @@
-tableextension 90260 TransferHeaderExt extends "Transfer Header"
+tableextension 90260 TransferHeaderExt1 extends "Transfer Header"
 {
     fields
     {

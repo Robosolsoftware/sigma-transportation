@@ -30,33 +30,48 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = all;
                 }
-                field(Status; Rec.Status)
+                field("Transportation Receipt Status"; Rec."Transportation Receipt Status")
                 {
                     ApplicationArea = all;
                 }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = all;
+                    Visible = false;
+                }
                 field("Warehouse Receipt No."; Rec."Warehouse Receipt No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Source Document"; Rec."Source Document")
                 {
                     ApplicationArea = all;
                 }
                 field("Source Type"; Rec."Source Type")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Source No."; Rec."Source No.")
                 {
                     ApplicationArea = All;
+                    //Visible = false;
                 }
-                field("Source Name"; Rec."Source Name")
-                {
-                    ApplicationArea = All;
-                }
+
                 field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Document no"; Rec."Document no")
                 {
                     ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Source Name"; Rec."Source Name")
+                {
+                    ApplicationArea = All;
+                    //Visible = false;
                 }
                 field(Address; Rec.Address)
                 {
@@ -86,6 +101,8 @@ page 90252 "Transportation SubForm"
                 {
                     Caption = 'Expected Delivery/Receipt Date';
                     ApplicationArea = All;
+                    Visible = false;
+
                 }
                 // field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
                 // {
@@ -163,6 +180,14 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Caption = 'Booked Pallets';
+                }
+                field(Lifts; Rec.Lifts)
+                {
+                    ApplicationArea = All;
+                }
+                field("Loose Boxes"; Rec."Loose Boxes")
+                {
+                    ApplicationArea = All;
                 }
                 // field("Opening Time"; Rec."Opening Time")
                 // {
@@ -255,16 +280,18 @@ page 90252 "Transportation SubForm"
                         ItemListPage: Page "Item List";
                         warehouseReceiptLine: Record "Warehouse Receipt Line";
                     begin
-                        Clear(WarehouseReceiptListPage);
-                        warehousereceiptheader.Reset();
-                        warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
-                        WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
-                        WarehouseReceiptListPage.LookupMode(true);
-                        if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
-                            //warehousereceiptheader.Reset();
-                            gateentryheader.Reset();
-                            gateentryheader.SetRange("No.", Rec."No.");
-                            if gateentryheader.FindFirst() then begin
+                        gateentryheader.Reset();
+                        gateentryheader.SetRange("No.", Rec."No.");
+                        if gateentryheader.FindFirst() then begin
+                            Clear(WarehouseReceiptListPage);
+                            warehousereceiptheader.Reset();
+                            warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
+                            warehousereceiptheader.SetFilter("Location Code", gateentryheader."Location Code");
+                            WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
+                            WarehouseReceiptListPage.LookupMode(true);
+                            if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
+                                //warehousereceiptheader.Reset();
+
                                 WarehouseReceiptListPage.SetSelectionFilter(warehousereceiptheader);
                                 if warehousereceiptheader.FindSet() then begin
                                     repeat
@@ -283,7 +310,10 @@ page 90252 "Transportation SubForm"
                                 end;
                             end;
                         end;
+
                     end;
+
+
                 }
 
 
@@ -294,6 +324,8 @@ page 90252 "Transportation SubForm"
     var
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
+        warehouseReceiptHeader: Record "Warehouse Receipt Header";
+
 
     begin
 
@@ -301,18 +333,35 @@ page 90252 "Transportation SubForm"
         gateEntryLine."No." := gateentryheader."No.";
         gateEntryLine."Line No." := FindLastLineNo(gateentryheader);
         gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
-        gateEntryLine."Document Type" := gateEntryLine."Document Type"::"Purchase Order";
+        gateEntryLine."Source Document" := gateEntryLine."Document Type"::"Purchase Order";
         gateEntryLine."Document no" := warehousereceiptline."Source No.";
+        //gateEntryLine."Expected Delivery/Receipt Date" := warehouseReceiptHeader."Expected Delivery Date";
         if (warehousereceiptline."Source Document" = warehousereceiptline."Source Document"::"Purchase Order") then begin
             gateEntryLine."Source Type" := gateEntryLine."Source Type"::Supplier;
         end;
         purchHeader.Reset();
+        purchHeader.SetRange("No.", gateEntryLine."Document no");
+        if purchHeader.FindFirst() then begin
+            gateEntryLine.Validate("Source Name", purchHeader."Buy-from Vendor Name");
+            gateEntryLine.Validate("Source No.", purchHeader."Buy-from Vendor No.");
+        end;
 
+
+        gateentryheader.Reset();
+        gateentryheader.SetRange("No.", Rec."No.");
+        if gateentryheader.FindFirst() then begin
+            warehouseReceiptHeader.Reset();
+            warehouseReceiptHeader.SetRange("No.", gateEntryLine."Warehouse Receipt No.");
+            if warehouseReceiptHeader.FindFirst() then begin
+                warehouseReceiptHeader."Transportation No." := gateentryheader."No.";
+                warehouseReceiptHeader."Receipt Status" := gateentryheader."Receipt Status";
+                //warehouseReceiptHeader."Expected Delivery Date" := gateEntryLine."Expected Delivery/Receipt Date";
+                warehouseReceiptHeader.Modify(true);
+            end;
+        end;
         gateEntryLine.Insert();
         Commit();
     end;
-
-
 
     local procedure FindLastLineNo(P_gateEntryHeader: Record "Gate Entry Header"): Integer
     //Code to find a last line no in web order
@@ -346,8 +395,10 @@ page 90252 "Transportation SubForm"
     begin
         recGateEntryHeader.RESET;
         recGateEntryHeader.SETRANGE(recGateEntryHeader."No.", Rec."No.");
-        IF recGateEntryHeader.FINDFIRST THEN
+        IF recGateEntryHeader.FINDFIRST THEN begin
             Rec."Entry Type" := recGateEntryHeader.Type;
+            // rec."Location code" := recGateEntryHeader."Location Code";
+        end;
     end;
 
     var

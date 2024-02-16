@@ -136,6 +136,59 @@ table 90253 "Posted Gate Entry Header"
         field(31; "Transport Booking Amount"; Decimal)
         {
         }
+        field(34; "Carrier"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(35; "Requested Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(36; "Expected Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(37; "Expected Delivery Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(38; "Booked Pallets"; Decimal)
+        {
+
+            Editable = false;
+
+        }
+        field(39; "Lifts"; Decimal)
+        {
+
+            Editable = false;
+
+        }
+        field(40; "Loose Boxes"; Decimal)
+        {
+
+            Editable = false;
+
+        }
+        field(41; "Curtain Side"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(42; "Actual Receipt Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(43; "Actual Receipt Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(44; "Receipt Status"; Option)
+        {
+            Caption = 'Transportation Receipt Status';
+            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+
+        }
     }
 
     keys

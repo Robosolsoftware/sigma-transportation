@@ -9,10 +9,10 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
             {
                 ApplicationArea = All;
             }
-            field("Completely Received"; Rec."Completely Received")
-            {
-                ApplicationArea = All;
-            }
+            // field("Completely Received"; Rec."Completely Received")
+            // {
+            //     ApplicationArea = All;
+            // }
             // field("Your Reference"; Rec."Your Reference")
             // {
             //     ApplicationArea = All;

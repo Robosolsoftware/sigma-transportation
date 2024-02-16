@@ -6,7 +6,7 @@ codeunit 90251 "Transportation - Post"
     begin
 
         TransHeader := Rec;
-        rec.TESTFIELD(Status, Rec.Status::Released);
+        //rec.TESTFIELD(Status, Rec.Status::Released);
         ValidatePosting(TransHeader);
         IF NOT HideConfirmationDialog THEN
             IF NOT CONFIRM(STRSUBSTNO(Text16500, TransHeader."No."), FALSE) THEN
@@ -57,6 +57,7 @@ codeunit 90251 "Transportation - Post"
         TransHeader.SETRANGE("No.", PostedTransHeader."Transportation No.");
         IF TransHeader.FINDSET THEN
             TransHeader.DELETEALL;
+        Commit();
     end;
 
     var

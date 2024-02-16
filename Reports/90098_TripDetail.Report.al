@@ -57,7 +57,7 @@ report 90298 "Trip Detail"
             column(ExpectedDeliveryReceiptDate_GateEntryHeader; "Gate Entry Header"."Expected Delivery/Receipt Date")
             {
             }
-            column(Status_GateEntryHeader; "Gate Entry Header".Status)
+            column(Status; Status)
             {
             }
             column(ShipmentMethodCode_GateEntryHeader; "Gate Entry Header"."Shipment Method Code")
@@ -285,5 +285,6 @@ report 90298 "Trip Detail"
         OutputNo: Integer;
         ParcelDetails: Record "Parcel Details";
         SH: Record 36;
+        Status: Text;
 }
 

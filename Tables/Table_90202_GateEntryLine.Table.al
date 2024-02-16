@@ -15,17 +15,17 @@ table 90252 "Gate Entry Line"
             OptionCaption = ' ,Receipt,Delivery,CollectionFrom,ForCollection,Export';
             OptionMembers = " ",Receipt,Delivery,CollectionFrom,ForCollection,Export;
 
-            trigger OnValidate()
-            begin
-                IF "Expected Delivery/Receipt Date" = 0D THEN BEGIN
-                    GetHeader;
-                    "Expected Delivery/Receipt Date" := TransH."Expected Delivery/Receipt Date";
-                END;
-                IF "Booking Reference No." = '' THEN BEGIN
-                    GetHeader;
-                    "Booking Reference No." := TransH."Booking Reference No.";
-                END;
-            end;
+            // trigger OnValidate()
+            // begin
+            //     IF "Expected Delivery/Receipt Date" = 0D THEN BEGIN
+            //         GetHeader;
+            //         "Expected Delivery/Receipt Date" := TransH."Expected Delivery/Receipt Date";
+            //     END;
+            //     IF "Booking Reference No." = '' THEN BEGIN
+            //         GetHeader;
+            //         "Booking Reference No." := TransH."Booking Reference No.";
+            //     END;
+            // end;
         }
         field(3; "Line No."; Integer)
         {
@@ -38,7 +38,7 @@ table 90252 "Gate Entry Line"
         }
         field(5; "Source No."; Code[20])
         {
-            Caption = 'Source No.';
+            Caption = 'Vendor No.';
             TableRelation = IF ("Source Type" = FILTER(Customer)) Customer."No."
             ELSE
             IF ("Source Type" = FILTER(Supplier)) Vendor."No."
@@ -92,7 +92,7 @@ table 90252 "Gate Entry Line"
         }
         field(6; "Source Name"; Text[50])
         {
-            Caption = 'Source Name';
+            Caption = 'Vendor  Name';
         }
         field(7; "Order Address code"; Code[10])
         {
@@ -194,17 +194,17 @@ table 90252 "Gate Entry Line"
         {
             BlankZero = true;
 
-            trigger OnValidate()
-            begin
-                IF "Expected Delivery/Receipt Date" = 0D THEN BEGIN
-                    GetHeader;
-                    "Expected Delivery/Receipt Date" := TransH."Expected Delivery/Receipt Date";
-                END;
-                IF "Booking Reference No." = '' THEN BEGIN
-                    GetHeader;
-                    "Booking Reference No." := TransH."Booking Reference No.";
-                END;
-            end;
+            // trigger OnValidate()
+            // begin
+            //     IF "Expected Delivery/Receipt Date" = 0D THEN BEGIN
+            //         GetHeader;
+            //         "Expected Delivery/Receipt Date" := TransH."Expected Delivery/Receipt Date";
+            //     END;
+            //     IF "Booking Reference No." = '' THEN BEGIN
+            //         GetHeader;
+            //         "Booking Reference No." := TransH."Booking Reference No.";
+            //     END;
+            // end;
         }
         field(27; "Booking Reference No."; Code[20])
         {
@@ -317,10 +317,12 @@ table 90252 "Gate Entry Line"
         }
         field(43; "Document no"; Code[20])
         {
-            Description = 'CAS-06713-Z3X6T4';
+            //Description = 'CAS-06713-Z3X6T4';
+            Caption = 'PO No.';
         }
         field(44; "Total Pallet"; Decimal)
         {
+
         }
         field(45; "Expected Delivery/Receipt Time"; Time)
         {
@@ -360,21 +362,33 @@ table 90252 "Gate Entry Line"
         {
             Caption = 'Your Reference';
         }
-        field(53; "Transportation Status"; Option)
+        field(53; "Transportation Receipt Status"; Option)
         {
-            Editable = false;
-            OptionCaption = 'Open,Released,Closed';
-            OptionMembers = Open,Released,Closed;
+            Caption = 'Transportation Receipt Status';
+            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
         }
-        field(54; "Source Document"; Enum "Warehouse Activity Source Document")
+        field(54; "Source Document"; Option)
         {
             Caption = 'Source Document';
+            OptionCaption = ' ,Sales Order,Purchase Order,Transfer Order';
+            OptionMembers = " ","Sales Order","Purchase Order","Transfer Order";
 
         }
         field(55; "Warehouse Receipt No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
+        field(56; "Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(57; "Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
 
     }
 

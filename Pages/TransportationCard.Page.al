@@ -14,7 +14,7 @@ page 90251 "Transportation Card"
         {
             group(General)
             {
-                Editable = EditFalse;
+                Editable = true;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -28,6 +28,7 @@ page 90251 "Transportation Card"
                 field("Transport Area Code"; Rec."Transport Area Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Shipping Agent Code"; Rec."Shipping Agent Code")
                 {
@@ -40,6 +41,7 @@ page 90251 "Transportation Card"
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
@@ -77,6 +79,7 @@ page 90251 "Transportation Card"
                 field("Vehicle No."; Rec."Vehicle No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
                 {
@@ -84,6 +87,7 @@ page 90251 "Transportation Card"
                     Caption = 'Vehicle Capacity';
                     DecimalPlaces = 0 : 2;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Avalaible Vehicle Capacity(KG)"; Rec."Avalaible Vehicle Capacity(KG)")
                 {
@@ -91,11 +95,13 @@ page 90251 "Transportation Card"
                     Caption = 'Avalaible Vehicle Capacity';
                     DecimalPlaces = 0 : 2;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Driver Name"; Rec."Driver Name")
                 {
                     Visible = IsDelivery;
                     ApplicationArea = All;
+
                 }
                 field("Driver Phone No."; Rec."Driver Phone No.")
                 {
@@ -105,10 +111,12 @@ page 90251 "Transportation Card"
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Expected Delivery/Receipt Time"; Rec."Expected Delivery/Receipt Time")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Total parcel Weight"; Rec."Total parcel Weight")
                 {
@@ -117,43 +125,112 @@ page 90251 "Transportation Card"
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
+                    Editable = true;
                 }
-                field(Status; Rec.Status)
-                {
-                    ApplicationArea = All;
-                }
-                field(Comments; Rec.Comments)
-                {
-                    MultiLine = true;
-                    ApplicationArea = All;
-                }
+                // field(Status; Rec.Status)
+                // {
+                //     ApplicationArea = All;
+
+                // }
+                // field(Comments; rec.Comments)
+                // {
+                //     MultiLine = true;
+                //     ApplicationArea = All;
+                // }
                 field("Transport Booking Cost"; Rec."Transport Booking Cost")
                 {
                     Importance = Additional;
                     ApplicationArea = All;
                 }
-                group(Collection)
+                // group(Collection)
+                // {
+                //     Caption = 'Collection';
+                //     field("Collection Date"; Rec."Collection Date")
+                //     {
+                //         Importance = Additional;
+                //         ApplicationArea = All;
+                //     }
+                //     field("Collection Time"; Rec."Collection Time")
+                //     {
+                //         Importance = Additional;
+                //         ApplicationArea = All;
+                //     }
+                // }
+            }
+
+
+            group("Booking Details")
+            {
+                field(Carrier; Rec.Carrier)
                 {
-                    Caption = 'Collection';
-                    field("Collection Date"; Rec."Collection Date")
+                    ApplicationArea = all;
+                }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Expected Delivery Date"; Rec."Expected Delivery Date")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Booked Delivery Date';
+                }
+                field("Expected Delivery Time"; Rec."Expected Delivery Time")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Booked Delivery Time';
+                }
+                field("Booked Pallets"; Rec."Booked Pallets")
+                {
+                    ApplicationArea = all;
+                }
+                field(Lifts; Rec.Lifts)
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Loose Boxes"; Rec."Loose Boxes")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Curtain Side"; Rec."Curtain Side")
+                {
+                    ApplicationArea = all;
+                }
+                field(Comments; Rec.Comments)
+                {
+                    ApplicationArea = all;
+                }
+                group(Status1)
+                {
+                    Caption = 'Status';
+                    field("Receipt Status"; Rec."Receipt Status")
                     {
-                        Importance = Additional;
-                        ApplicationArea = All;
+                        ApplicationArea = all;
                     }
-                    field("Collection Time"; Rec."Collection Time")
+                    field("Actual Receipt Date"; Rec."Actual Receipt Date")
                     {
-                        Importance = Additional;
-                        ApplicationArea = All;
+                        ApplicationArea = all;
                     }
+                    field("Actual Receipt Time"; Rec."Actual Receipt Time")
+                    {
+                        ApplicationArea = all;
+                    }
+
                 }
             }
+
+
+
+
             part(subpage; "Transportation SubForm")
             {
-                Editable = EditFalse;
+                //Editable = EditFalse;
                 SubPageLink = "No." = FIELD("No.");
                 ApplicationArea = All;
             }
         }
+
         area(factboxes)
         {
             // systempart(; Links)
@@ -220,67 +297,67 @@ page 90251 "Transportation Card"
                 //             UpdateDeliveryDateTime(Rec);
                 //         END;
                 //     end;
-                // }
-                action("<Action1000000015>")
-                {
-                    Caption = 'Calculate Total Parcel Weight';
-                    Image = Calculate;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    Visible = false;
-                    ApplicationArea = All;
-
-                    trigger OnAction()
-                    var
-                        L_Totqty: Decimal;
-                    begin
-                        GateEntryLine.RESET;
-                        GateEntryLine.SETRANGE(GateEntryLine."No.", Rec."No.");
-                        IF GateEntryLine.FINDSET THEN
-                            REPEAT
-
-                                CLEAR(L_Totqty);
-                                CLEAR(L_TotalWeight_Ambient);
-
-                                PackageDetail.RESET;
-                                PackageDetail.SETRANGE("Transportaion No.", GateEntryLine."No.");
-                                PackageDetail.SETRANGE("Transportaion Line No.", GateEntryLine."Line No.");
-                                PackageDetail.SETRANGE("Parcel Type", PackageDetail."Parcel Type"::Ambient);
-                                IF PackageDetail.FINDSET THEN
-                                    REPEAT
-                                        L_Totqty += PackageDetail."Parcel Quantity";
-                                        L_TotalWeight_Ambient += PackageDetail."Net Weight";
-                                    UNTIL PackageDetail.NEXT = 0;
-
-
-                                GateEntryLine."Total Weight (Ambient)" := L_Totqty * L_TotalWeight_Ambient;
-                                //GateEntryLine."Total Parcels (Ambient)":= L_Totqty;
-
-                                CLEAR(L_Qty_Fridge);
-                                CLEAR(L_TotalWeight_Fridge);
-
-                                PackageDetailFridge.RESET;
-                                PackageDetailFridge.SETRANGE("Transportaion No.", GateEntryLine."No.");
-                                PackageDetailFridge.SETRANGE("Transportaion Line No.", GateEntryLine."Line No.");
-                                PackageDetailFridge.SETRANGE("Parcel Type", PackageDetailFridge."Parcel Type"::Fridge);
-                                IF PackageDetailFridge.FINDSET THEN
-                                    REPEAT
-                                        L_Qty_Fridge += PackageDetailFridge."Parcel Quantity";
-                                        L_TotalWeight_Fridge += PackageDetailFridge."Net Weight";
-                                    UNTIL PackageDetailFridge.NEXT = 0;
-
-                                GateEntryLine."Total Weight (Fridge)" := L_Qty_Fridge * L_TotalWeight_Fridge;
-                                //GateEntryLine."Total Parcels (Fridge)":=L_Qty_Fridge;
-
-                                GateEntryLine."Total Weight(KG)(Booked)" := GateEntryLine."Total Weight (Ambient)" + GateEntryLine."Total Weight (Fridge)";
-                                GateEntryLine."Total Parcels(Booked)" := L_Qty_Fridge + L_Totqty;
-
-                                GateEntryLine.MODIFY;
-
-                            UNTIL GateEntryLine.NEXT = 0;
-                    end;
-                }
             }
+            //     action("<Action1000000015>")
+            //     {
+            //         Caption = 'Calculate Total Parcel Weight';
+            //         Image = Calculate;
+            //         Promoted = true;
+            //         PromotedCategory = Process;
+            //         Visible = false;
+            //         ApplicationArea = All;
+
+            //         trigger OnAction()
+            //         var
+            //             L_Totqty: Decimal;
+            //         begin
+            //             GateEntryLine.RESET;
+            //             GateEntryLine.SETRANGE(GateEntryLine."No.", Rec."No.");
+            //             IF GateEntryLine.FINDSET THEN
+            //                 REPEAT
+
+            //                     CLEAR(L_Totqty);
+            //                     CLEAR(L_TotalWeight_Ambient);
+
+            //                     PackageDetail.RESET;
+            //                     PackageDetail.SETRANGE("Transportaion No.", GateEntryLine."No.");
+            //                     PackageDetail.SETRANGE("Transportaion Line No.", GateEntryLine."Line No.");
+            //                     PackageDetail.SETRANGE("Parcel Type", PackageDetail."Parcel Type"::Ambient);
+            //                     IF PackageDetail.FINDSET THEN
+            //                         REPEAT
+            //                             L_Totqty += PackageDetail."Parcel Quantity";
+            //                             L_TotalWeight_Ambient += PackageDetail."Net Weight";
+            //                         UNTIL PackageDetail.NEXT = 0;
+
+
+            //                     GateEntryLine."Total Weight (Ambient)" := L_Totqty * L_TotalWeight_Ambient;
+            //                     //GateEntryLine."Total Parcels (Ambient)":= L_Totqty;
+
+            //                     CLEAR(L_Qty_Fridge);
+            //                     CLEAR(L_TotalWeight_Fridge);
+
+            //                     PackageDetailFridge.RESET;
+            //                     PackageDetailFridge.SETRANGE("Transportaion No.", GateEntryLine."No.");
+            //                     PackageDetailFridge.SETRANGE("Transportaion Line No.", GateEntryLine."Line No.");
+            //                     PackageDetailFridge.SETRANGE("Parcel Type", PackageDetailFridge."Parcel Type"::Fridge);
+            //                     IF PackageDetailFridge.FINDSET THEN
+            //                         REPEAT
+            //                             L_Qty_Fridge += PackageDetailFridge."Parcel Quantity";
+            //                             L_TotalWeight_Fridge += PackageDetailFridge."Net Weight";
+            //                         UNTIL PackageDetailFridge.NEXT = 0;
+
+            //                     GateEntryLine."Total Weight (Fridge)" := L_Qty_Fridge * L_TotalWeight_Fridge;
+            //                     //GateEntryLine."Total Parcels (Fridge)":=L_Qty_Fridge;
+
+            //                     GateEntryLine."Total Weight(KG)(Booked)" := GateEntryLine."Total Weight (Ambient)" + GateEntryLine."Total Weight (Fridge)";
+            //                     GateEntryLine."Total Parcels(Booked)" := L_Qty_Fridge + L_Totqty;
+
+            //                     GateEntryLine.MODIFY;
+
+            //                 UNTIL GateEntryLine.NEXT = 0;
+            //         end;
+            //     }
+
             group("<Action1000000029>")
             {
                 Caption = 'Print';
@@ -317,25 +394,25 @@ page 90251 "Transportation Card"
                         //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----End------
                     end;
                 }
-                action("&Email")
-                {
-                    Caption = '&Email';
-                    Image = Email;
-                    ApplicationArea = All;
-                    //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
-                    //PromotedCategory = Process;
+                // action("&Email")
+                // {
+                //     Caption = '&Email';
+                //     Image = Email;
+                //     ApplicationArea = All;
+                //     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
+                //     //PromotedCategory = Process;
 
-                    trigger OnAction()
-                    var
-                        SalesInvHeader: Record 112;
-                    begin
-                        //--CAS-02345-N3M7X5----Pravin.D.--------------facility to send a email to customer/supplier for booking and collection.
-                        IF Rec.Status = Rec.Status::Released THEN
-                            GateEntryHeader.SendMail(Rec)
-                        ELSE
-                            ERROR('Status must be released.')
-                    end;
-                }
+                //     // trigger OnAction()
+                //     // var
+                //     //     SalesInvHeader: Record 112;
+                //     // begin
+                //     //     //--CAS-02345-N3M7X5----Pravin.D.--------------facility to send a email to customer/supplier for booking and collection.
+                //     //     IF Rec.Status = Rec.Status::Released THEN
+                //     //         GateEntryHeader.SendMail(Rec)
+                //     //     ELSE
+                //     //         ERROR('Status must be released.')
+                //     // end;
+                // }
             }
             group("<Action1000000032>")
             {
@@ -351,67 +428,67 @@ page 90251 "Transportation Card"
                         HYPERLINK(Rec.GetTrackingInternetAddr);
                     end;
                 }
-                action("Select Slot")
-                {
-                    Image = Allocate;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
-                    ApplicationArea = All;
+                // action("Select Slot")
+                // {
+                //     Image = Allocate;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     PromotedIsBig = true;
+                //     PromotedOnly = true;
+                //     ApplicationArea = All;
 
-                    trigger OnAction()
-                    var
-                        Slots: Record "Slot Master";
-                        PageSlotlist: Page "Slot List";
-                    begin
-                        Rec.TESTFIELD(Status, Rec.Status::Open);
-                        Rec.TESTFIELD("Location Code");
-                        IF Rec."Slot No." <> 0 THEN
-                            ERROR(SlotRegisteredError);
-                        Slots.RESET;
-                        Slots.SETRANGE("Location Code", Rec."Location Code");
-                        Slots.SETFILTER(Date, '>=%1', WORKDATE);
-                        IF NOT Slots.FINDSET THEN
-                            MESSAGE('Slots not created for Location %1, Please create slots', Rec."Location Code")
-                        ELSE BEGIN
-                            CLEAR(PageSlotlist);
-                            PageSlotlist.LOOKUPMODE(TRUE);
-                            PageSlotlist.SETTABLEVIEW(Slots);
-                            IF PAGE.RUNMODAL(Page::"Slot List", Slots) = ACTION::LookupOK THEN BEGIN
-                                IF Slots.Booked THEN
-                                    ERROR('Slot already booked, please select another slot')
-                                ELSE BEGIN
-                                    //CheckDeliveryDate(Rec."No.",Slots.Date);blocked by alok on 16052018
-                                    Rec.VALIDATE("Expected Delivery/Receipt Date", Slots.Date);
-                                    Rec.VALIDATE("Expected Delivery/Receipt Time", Slots."Start Time");
-                                    Rec.VALIDATE("Slot No.", Slots."Entry No");
-                                    CurrPage.UPDATE;
-                                END;
-                            END;
-                        END;
-                    end;
-                }
-                action("Cancel Slot")
-                {
-                    Image = Cancel;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    ApplicationArea = All;
+                //     trigger OnAction()
+                //     var
+                //         Slots: Record "Slot Master";
+                //         PageSlotlist: Page "Slot List";
+                //     begin
+                //         //Rec.TESTFIELD(Status, Rec.Status::Open);
+                //         Rec.TESTFIELD("Location Code");
+                //         IF Rec."Slot No." <> 0 THEN
+                //             ERROR(SlotRegisteredError);
+                //         Slots.RESET;
+                //         Slots.SETRANGE("Location Code", Rec."Location Code");
+                //         Slots.SETFILTER(Date, '>=%1', WORKDATE);
+                //         IF NOT Slots.FINDSET THEN
+                //             MESSAGE('Slots not created for Location %1, Please create slots', Rec."Location Code")
+                //         ELSE BEGIN
+                //             CLEAR(PageSlotlist);
+                //             PageSlotlist.LOOKUPMODE(TRUE);
+                //             PageSlotlist.SETTABLEVIEW(Slots);
+                //             IF PAGE.RUNMODAL(Page::"Slot List", Slots) = ACTION::LookupOK THEN BEGIN
+                //                 IF Slots.Booked THEN
+                //                     ERROR('Slot already booked, please select another slot')
+                //                 ELSE BEGIN
+                //                     //CheckDeliveryDate(Rec."No.",Slots.Date);blocked by alok on 16052018
+                //                     Rec.VALIDATE("Expected Delivery/Receipt Date", Slots.Date);
+                //                     Rec.VALIDATE("Expected Delivery/Receipt Time", Slots."Start Time");
+                //                     Rec.VALIDATE("Slot No.", Slots."Entry No");
+                //                     CurrPage.UPDATE;
+                //                 END;
+                //             END;
+                //         END;
+                //     end;
+                // }
+                // action("Cancel Slot")
+                // {
+                //     Image = Cancel;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     PromotedIsBig = true;
+                //     ApplicationArea = All;
 
-                    trigger OnAction()
-                    begin
-                        IF Rec."Slot No." <> 0 THEN
-                            IF CONFIRM('Are you sure you want to cancel slot for this Job?') THEN BEGIN
-                                CLEAR(Rec."Slot No.");
-                                CLEAR(Rec."Expected Delivery/Receipt Date");
-                                CLEAR(Rec."Expected Delivery/Receipt Time");
-                                CurrPage.UPDATE;
-                                MESSAGE('Slot Cancelled');
-                            END;
-                    end;
-                }
+                //     trigger OnAction()
+                //     begin
+                //         IF Rec."Slot No." <> 0 THEN
+                //             IF CONFIRM('Are you sure you want to cancel slot for this Job?') THEN BEGIN
+                //                 CLEAR(Rec."Slot No.");
+                //                 CLEAR(Rec."Expected Delivery/Receipt Date");
+                //                 CLEAR(Rec."Expected Delivery/Receipt Time");
+                //                 CurrPage.UPDATE;
+                //                 MESSAGE('Slot Cancelled');
+                //             END;
+                //     end;
+                // }
             }
         }
     }
@@ -427,10 +504,10 @@ page 90251 "Transportation Card"
 
     trigger OnAfterGetRecord()
     begin
-        IF Rec.Status = Rec.Status::Open THEN
-            EditFalse := TRUE
-        ELSE
-            EditFalse := FALSE;
+        // IF Rec.Status = Rec.Status::Open THEN
+        //     EditFalse := TRUE
+        // ELSE
+        //     EditFalse := FALSE;
 
         IF (Rec.Type = Rec.Type::Delivery) OR (Rec.Type = Rec.Type::ForCollection) THEN
             IsDelivery := TRUE
@@ -439,10 +516,10 @@ page 90251 "Transportation Card"
         Rec.Caption(CapacityText, AvlCapacityText);
     end;
 
-    trigger OnNewRecord(BelowxRec: Boolean)
-    begin
-        EditFalse := TRUE
-    end;
+    // trigger OnNewRecord(BelowxRec: Boolean)
+    // begin
+    //     EditFalse := tru;
+    // end;
 
     trigger OnOpenPage()
     begin
@@ -481,6 +558,7 @@ page 90251 "Transportation Card"
         EditFalse: Boolean;
         [InDataSet]
 
+
         IsDelivery: Boolean;
         DeliveryVisible: Boolean;
         SlotRegisteredError: Label 'Slot already booked for this job.\\ To select new slot please cancel slot and Try again.. ';
@@ -489,36 +567,36 @@ page 90251 "Transportation Card"
         AvlCapacityText: Text;
         InvalidDateError: Label 'There are line with Expected Delivery/Reciept date less then selected slot.';
 
-    local procedure UpdateDeliveryDateTime(GateEntryHeader: Record "Gate Entry Header")
-    var
-        RecGateEntryLine: Record "Gate Entry Line";
-    begin
-        RecGateEntryLine.RESET;
-        RecGateEntryLine.SETRANGE("No.", GateEntryHeader."No.");
-        IF RecGateEntryLine.FINDFIRST THEN
-            REPEAT
-                RecGateEntryLine."Expected Delivery/Receipt Date" := GateEntryHeader."Expected Delivery/Receipt Date";
-                RecGateEntryLine."Expected Delivery/Receipt Time" := GateEntryHeader."Expected Delivery/Receipt Time";
-                RecGateEntryLine.VALIDATE(Status, GateEntryHeader.Status);
-                RecGateEntryLine.MODIFY;
-                Rec.UpdateStatus(RecGateEntryLine);
-            UNTIL RecGateEntryLine.NEXT = 0;
-    end;
+    // local procedure UpdateDeliveryDateTime(GateEntryHeader: Record "Gate Entry Header")
+    // var
+    //     RecGateEntryLine: Record "Gate Entry Line";
+    // begin
+    //     RecGateEntryLine.RESET;
+    //     RecGateEntryLine.SETRANGE("No.", GateEntryHeader."No.");
+    //     IF RecGateEntryLine.FINDFIRST THEN
+    //         REPEAT
+    //             RecGateEntryLine."Expected Delivery/Receipt Date" := GateEntryHeader."Expected Delivery/Receipt Date";
+    //             RecGateEntryLine."Expected Delivery/Receipt Time" := GateEntryHeader."Expected Delivery/Receipt Time";
+    //             //RecGateEntryLine.VALIDATE(Status, GateEntryHeader.Status);
+    //             RecGateEntryLine.MODIFY;
+    //             Rec.UpdateStatus(RecGateEntryLine);
+    //         UNTIL RecGateEntryLine.NEXT = 0;
+    // end;
 
-    local procedure UpdateDeliveryDateTimeOnOpen(GateEntryHeader: Record "Gate Entry Header")
-    var
-        RecGateEntryLine: Record "Gate Entry Line";
-    begin
-        RecGateEntryLine.RESET;
-        RecGateEntryLine.SETRANGE("No.", GateEntryHeader."No.");
-        IF RecGateEntryLine.FINDFIRST THEN
-            REPEAT
-                RecGateEntryLine."Expected Delivery/Receipt Date" := 0D;//GateEntryHeader."Expected Delivery/Receipt Date";
-                RecGateEntryLine."Expected Delivery/Receipt Time" := 0T;//GateEntryHeader."Expected Delivery/Receipt Time";
-                RecGateEntryLine.VALIDATE(Status, GateEntryHeader.Status);
-                RecGateEntryLine.MODIFY;
-            UNTIL RecGateEntryLine.NEXT = 0;
-    end;
+    // local procedure UpdateDeliveryDateTimeOnOpen(GateEntryHeader: Record "Gate Entry Header")
+    // var
+    //     RecGateEntryLine: Record "Gate Entry Line";
+    // begin
+    //     RecGateEntryLine.RESET;
+    //     RecGateEntryLine.SETRANGE("No.", GateEntryHeader."No.");
+    //     IF RecGateEntryLine.FINDFIRST THEN
+    //         REPEAT
+    //             RecGateEntryLine."Expected Delivery/Receipt Date" := 0D;//GateEntryHeader."Expected Delivery/Receipt Date";
+    //             RecGateEntryLine."Expected Delivery/Receipt Time" := 0T;//GateEntryHeader."Expected Delivery/Receipt Time";
+    //                                                                     //ecGateEntryLine.VALIDATE(Status, GateEntryHeader.Status);
+    //             RecGateEntryLine.MODIFY;
+    //         UNTIL RecGateEntryLine.NEXT = 0;
+    // end;
 
     //[Scope('Internal')]
     procedure SetGlobalVariable(bool: Boolean)

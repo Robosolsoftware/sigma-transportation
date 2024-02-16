@@ -80,10 +80,10 @@ page 90262 "Update Transp. List"
                 {
                     Visible = IsDelivery;
                 }
-                field(Status; Rec.Status)
-                {
-                    ApplicationArea = All;
-                }
+                // field(Status; Rec.Status)
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
                     ApplicationArea = All;

@@ -51,37 +51,98 @@ page 90256 "Posted Transportation Card"
                 {
                     ApplicationArea = All;
                 }
-                field("LR/RR No."; Rec."LR/RR No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("LR/RR Date"; Rec."LR/RR Date")
-                {
-                    ApplicationArea = All;
-                }
-                field("Vehicle No."; Rec."Vehicle No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
-                {
-                    ApplicationArea = All;
-                }
-                field("Driver Name"; Rec."Driver Name")
-                {
-                    ApplicationArea = All;
-                }
-                field("Driver Phone No."; Rec."Driver Phone No.")
-                {
-                    ApplicationArea = All;
-                }
+                // field("LR/RR No."; Rec."LR/RR No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("LR/RR Date"; Rec."LR/RR Date")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Vehicle No."; Rec."Vehicle No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Driver Name"; Rec."Driver Name")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Driver Phone No."; Rec."Driver Phone No.")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     ApplicationArea = All;
                 }
-                field(Status; Rec.Status)
+                // field(Status; Rec.Status)
+                // {
+                //     ApplicationArea = All;
+                // }
+
+            }
+            group("Booking Details")
+            {
+                field(Carrier; Rec.Carrier)
                 {
-                    ApplicationArea = All;
+                    ApplicationArea = all;
+                }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = all;
+                }
+                field("Expected Delivery Date"; Rec."Expected Delivery Date")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Booked Delivery Date';
+                }
+                field("Expected Delivery Time"; Rec."Expected Delivery Time")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Booked Delivery Time';
+                }
+                field("Booked Pallets"; Rec."Booked Pallets")
+                {
+                    ApplicationArea = all;
+                }
+                field(Lifts; Rec.Lifts)
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Loose Boxes"; Rec."Loose Boxes")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Curtain Side"; Rec."Curtain Side")
+                {
+                    ApplicationArea = all;
+                }
+                field(Comments; Rec.Comments)
+                {
+                    ApplicationArea = all;
+                }
+                group(Status1)
+                {
+                    Caption = 'Status';
+                    field("Receipt Status"; Rec."Receipt Status")
+                    {
+                        ApplicationArea = all;
+                    }
+                    field("Actual Receipt Date"; Rec."Actual Receipt Date")
+                    {
+                        ApplicationArea = all;
+                    }
+                    field("Actual Receipt Time"; Rec."Actual Receipt Time")
+                    {
+                        ApplicationArea = all;
+                    }
+
                 }
             }
             part(subpage; "Posted Transportation SubForm")

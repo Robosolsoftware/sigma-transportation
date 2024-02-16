@@ -1,4 +1,4 @@
-tableextension 90262 TransferLineExt extends "Transfer Line"
+tableextension 90262 TransferLineExt1 extends "Transfer Line"
 {
     fields
     {

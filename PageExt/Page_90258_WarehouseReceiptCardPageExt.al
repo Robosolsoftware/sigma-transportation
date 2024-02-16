@@ -8,6 +8,10 @@ pageextension 90258 WarehouseReceiptCardPageExt extends "Warehouse Receipt"
             {
                 ApplicationArea = all;
             }
+            field("Receipt Status"; rec."Receipt Status")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 
