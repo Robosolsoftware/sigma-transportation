@@ -34,40 +34,40 @@ page 90255 "Posted Transportation List"
                 {
                     ApplicationArea = All;
                 }
-                field("Shipment Method Code"; Rec."Shipment Method Code")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Shipment Method Code"; Rec."Shipment Method Code")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Booking Reference No."; Rec."Booking Reference No.")
                 {
                     ApplicationArea = All;
                 }
-                field("LR/RR No."; Rec."LR/RR No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("LR/RR Date"; Rec."LR/RR Date")
-                {
-                    ApplicationArea = All;
-                }
-                field("Vehicle No."; Rec."Vehicle No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
-                {
-                    ApplicationArea = All;
-                }
+                // field("LR/RR No."; Rec."LR/RR No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("LR/RR Date"; Rec."LR/RR Date")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Vehicle No."; Rec."Vehicle No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
+                // {
+                //     ApplicationArea = All;
+                // }
 
 
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
                     ApplicationArea = All;
                 }
-                field("Gate Entry No."; Rec."Gate Entry No.")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Gate Entry No."; Rec."Gate Entry No.")
+                // {
+                //     ApplicationArea = All;
+                // }
             }
         }
     }

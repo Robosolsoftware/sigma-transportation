@@ -229,21 +229,24 @@ table 90251 "Gate Entry Header"
         }
         field(38; "Booked Pallets"; Decimal)
         {
-            FieldClass = FlowField;
+            DataClassification = ToBeClassified;
+            //FieldClass = FlowField;
             Editable = false;
-            CalcFormula = sum("Gate Entry Line"."Total Pallet" where("No." = field("No.")));
+            //CalcFormula = sum("Gate Entry Line"."Total Pallet" where("No." = field("No.")));
         }
         field(39; "Lifts"; Decimal)
         {
-            FieldClass = FlowField;
+            DataClassification = ToBeClassified;
+            //FieldClass = FlowField;
             Editable = false;
-            CalcFormula = sum("Gate Entry Line".Lifts where("No." = field("No.")));
+            //CalcFormula = sum("Gate Entry Line".Lifts where("No." = field("No.")));
         }
         field(40; "Loose Boxes"; Decimal)
         {
-            FieldClass = FlowField;
+            DataClassification = ToBeClassified;
+            //FieldClass = FlowField;
             Editable = false;
-            CalcFormula = sum("Gate Entry Line"."Loose Boxes" where("No." = field("No.")));
+            //CalcFormula = sum("Gate Entry Line"."Loose Boxes" where("No." = field("No.")));
         }
         field(41; "Curtain Side"; Code[20])
         {
@@ -276,6 +279,10 @@ table 90251 "Gate Entry Header"
 
                 end;
             end;
+        }
+        field(45; "Requested Receipt Date"; Date)
+        {
+            DataClassification = ToBeClassified;
         }
 
     }

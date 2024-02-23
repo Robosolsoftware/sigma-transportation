@@ -25,6 +25,16 @@ tableextension 90257 PurchaseHeaderExtTrans extends "Purchase Header"
             FieldClass = FlowField;
             CalcFormula = Lookup("Gate Entry Line"."Expected Delivery/Receipt Time" WHERE("Document no" = FIELD("No."), "Document Type" = CONST("Purchase Order"), Status = CONST(Released)));
         }
+        field(50207; "Transportation No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50208; "Receipt Status"; Option)
+        {
+            Caption = 'Transportation Receipt Status';
+            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+        }
     }
 
     var

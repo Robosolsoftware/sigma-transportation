@@ -25,14 +25,17 @@ page 90252 "Transportation SubForm"
                 field("Entry Type"; Rec."Entry Type")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Transportation No."; rec."No.")
                 {
                     ApplicationArea = all;
+                    Editable = false;
                 }
                 field("Transportation Receipt Status"; Rec."Transportation Receipt Status")
                 {
                     ApplicationArea = all;
+
                 }
                 field(Status; Rec.Status)
                 {
@@ -42,10 +45,12 @@ page 90252 "Transportation SubForm"
                 field("Warehouse Receipt No."; Rec."Warehouse Receipt No.")
                 {
                     ApplicationArea = all;
+                    Editable = false;
                 }
                 field("Source Document"; Rec."Source Document")
                 {
                     ApplicationArea = all;
+                    Editable = false;
                 }
                 field("Source Type"; Rec."Source Type")
                 {
@@ -55,6 +60,7 @@ page 90252 "Transportation SubForm"
                 field("Source No."; Rec."Source No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     //Visible = false;
                 }
 
@@ -71,31 +77,38 @@ page 90252 "Transportation SubForm"
                 field("Source Name"; Rec."Source Name")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     //Visible = false;
                 }
                 field(Address; Rec.Address)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Address 2"; Rec."Address 2")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(City; Rec.City)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(County; Rec.County)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Country/Region Code"; Rec."Country/Region Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
@@ -180,14 +193,100 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Caption = 'Booked Pallets';
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalBookedPallets: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalBookedPallets);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalBookedPallets += rec."Total Pallet";
+                                    end
+                                    else begin
+                                        TotalBookedPallets += L_TransportLine."Total Pallet";
+                                    end;
+                                until L_TransportLine.Next() = 0;
+
+                            end;
+                            L_TransportHeader."Booked Pallets" := TotalBookedPallets;
+                            L_TransportHeader.Modify()
+
+                        end;
+                        CurrPage.Update();
+                    end;
                 }
                 field(Lifts; Rec.Lifts)
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalLifts: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalLifts);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalLifts += rec."Total Pallet";
+                                    end
+                                    else begin
+                                        TotalLifts += L_TransportLine."Total Pallet";
+                                    end;
+                                until L_TransportLine.Next() = 0;
+
+                            end;
+                            L_TransportHeader."Booked Pallets" := TotalLifts;
+                            L_TransportHeader.Modify()
+                        end;
+                        CurrPage.Update();
+                    end;
                 }
                 field("Loose Boxes"; Rec."Loose Boxes")
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalLooseBoxes: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalLooseBoxes);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalLooseBoxes += rec."Total Pallet";
+                                    end
+                                    else begin
+                                        TotalLooseBoxes += L_TransportLine."Total Pallet";
+                                    end;
+                                until L_TransportLine.Next() = 0;
+
+                            end;
+                            L_TransportHeader."Booked Pallets" := TotalLooseBoxes;
+                            L_TransportHeader.Modify()
+                        end;
+                        CurrPage.Update();
+                    end;
+
                 }
                 // field("Opening Time"; Rec."Opening Time")
                 // {
@@ -213,6 +312,7 @@ page 90252 "Transportation SubForm"
                     RunPageLink = "Transportaion No." = FIELD("No."),
                                   "Transportaion Line No." = FIELD("Line No.");
                     ApplicationArea = All;
+                    Visible = false;
 
                     trigger OnAction()
                     begin
@@ -325,6 +425,7 @@ page 90252 "Transportation SubForm"
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
         warehouseReceiptHeader: Record "Warehouse Receipt Header";
+        purchaseCard: Record "Purchase Header";
 
 
     begin
@@ -355,9 +456,16 @@ page 90252 "Transportation SubForm"
             if warehouseReceiptHeader.FindFirst() then begin
                 warehouseReceiptHeader."Transportation No." := gateentryheader."No.";
                 warehouseReceiptHeader."Receipt Status" := gateentryheader."Receipt Status";
-                //warehouseReceiptHeader."Expected Delivery Date" := gateEntryLine."Expected Delivery/Receipt Date";
+                warehouseReceiptHeader."Requested Receipt Date" := gateEntryHeader."Requested Receipt Date";
                 warehouseReceiptHeader.Modify(true);
             end;
+        end;
+
+        purchaseCard.Reset();
+        purchaseCard.SetRange("No.", Rec."Document no");
+        if Purchasecard.Findfirst() then begin
+            purchaseCard."Transportation No." := Rec."No.";
+            purchaseCard."Receipt Status" := rec."Transportation Receipt Status";
         end;
         gateEntryLine.Insert();
         Commit();

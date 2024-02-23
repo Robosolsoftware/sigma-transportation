@@ -8,6 +8,7 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
             field(Receive; Rec.Receive)
             {
                 ApplicationArea = All;
+                Visible = false;
             }
             // field("Completely Received"; Rec."Completely Received")
             // {
@@ -20,12 +21,16 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
             field("Booking In Date"; Rec."Booking In Date")
             {
                 ApplicationArea = All;
+                Visible = false;
             }
             field("Booking In Time"; Rec."Booking In Time")
             {
                 ApplicationArea = All;
+                Visible = false;
             }
+
         }
+
         //ShubhamM07112022_US_9281--
     }
     actions

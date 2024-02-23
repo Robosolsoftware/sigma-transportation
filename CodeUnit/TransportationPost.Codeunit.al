@@ -27,6 +27,9 @@ codeunit 90251 "Transportation - Post"
                 PostedTransLine.INIT;
                 PostedTransLine.TRANSFERFIELDS(TransLine);
                 PostedTransLine."No." := PostedTransHeader."No.";
+                // PostedTransLine."Loose Boxes" := TransLine."Loose Boxes";
+                // PostedTransLine."Total Pallet" := TransLine."Total Pallet";
+                // PostedTransLine.Lifts := TransLine.Lifts;
                 PostedTransLine.INSERT(TRUE);
 
                 ParcelDetail.RESET;

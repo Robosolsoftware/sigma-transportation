@@ -29,6 +29,7 @@ page 90256 "Posted Transportation Card"
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
@@ -78,6 +79,7 @@ page 90256 "Posted Transportation Card"
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 // field(Status; Rec.Status)
                 // {

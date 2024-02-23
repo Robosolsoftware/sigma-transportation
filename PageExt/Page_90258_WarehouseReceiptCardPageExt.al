@@ -12,6 +12,7 @@ pageextension 90258 WarehouseReceiptCardPageExt extends "Warehouse Receipt"
             {
                 ApplicationArea = all;
             }
+
         }
     }
 

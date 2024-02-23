@@ -8,10 +8,12 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
             field("Booking In Date"; Rec."Booking In Date")
             {
                 ApplicationArea = All;
+                Visible = false;
             }
             field("Booking In Time"; Rec."Booking In Time")
             {
                 ApplicationArea = All;
+                Visible = false;
             }
         }
         //ShubhamM_11042023 _US_6827++

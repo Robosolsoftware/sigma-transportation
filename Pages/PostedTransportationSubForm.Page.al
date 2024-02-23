@@ -12,6 +12,7 @@ page 90257 "Posted Transportation SubForm"
             {
                 field("Entry Type"; Rec."Entry Type")
                 {
+                    Visible = false;
                     ApplicationArea = All;
                 }
                 field("Transportation No."; rec."No.")
@@ -85,6 +86,7 @@ page 90257 "Posted Transportation SubForm"
                 {
                     Caption = 'Expected Delivery/Receipt Date';
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 // field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
                 // {
@@ -186,6 +188,7 @@ page 90257 "Posted Transportation SubForm"
                 Image = Line;
                 action("Parcel Details")
                 {
+                    Visible = false;
                     RunObject = Page "Parcel Details";
                     RunPageLink = "Transportaion No." = FIELD("No."),
                                   "Transportaion Line No." = FIELD("Line No");

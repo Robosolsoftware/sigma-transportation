@@ -115,55 +115,55 @@ page 90253 "Transportation List"
                     end;
                 }
             }
-            group(Print)
-            {
-                Caption = 'Print';
-                Image = Email;
-                action("<Action224>")
-                {
-                    Caption = '&Consignment';
-                    Image = Print;
+            //     group(Print)
+            //     {
+            //         Caption = 'Print';
+            //         Image = Email;
+            //         action("<Action224>")
+            //         {
+            //             Caption = '&Consignment';
+            //             Image = Print;
 
-                    trigger OnAction()
-                    begin
-                        CLEAR(TripDetails);
-                        GateEntryHeader.RESET;
-                        GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
-                        TripDetails.SETTABLEVIEW(GateEntryHeader);
-                        TripDetails.RUNMODAL;
-                    end;
-                }
-                action("<Action225>")
-                {
-                    Caption = '&Route Details';
-                    Image = Print;
+            //             trigger OnAction()
+            //             begin
+            //                 CLEAR(TripDetails);
+            //                 GateEntryHeader.RESET;
+            //                 GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
+            //                 TripDetails.SETTABLEVIEW(GateEntryHeader);
+            //                 TripDetails.RUNMODAL;
+            //             end;
+            //         }
+            //         action("<Action225>")
+            //         {
+            //             Caption = '&Route Details';
+            //             Image = Print;
 
-                    trigger OnAction()
-                    begin
-                        //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----start----
-                        CLEAR(TransportationRouteDetails);
-                        GateEntryHeader.RESET;
-                        GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
-                        TransportationRouteDetails.SETTABLEVIEW(GateEntryHeader);
-                        TransportationRouteDetails.RUNMODAL;
-                        //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----End------
-                    end;
-                }
-            }
-            group(Function)
-            {
-                Caption = 'Function';
-                action("&Track Package")
-                {
-                    Caption = '&Track Package';
-                    Image = ItemTracking;
+            //             trigger OnAction()
+            //             begin
+            //                 //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----start----
+            //                 CLEAR(TransportationRouteDetails);
+            //                 GateEntryHeader.RESET;
+            //                 GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
+            //                 TransportationRouteDetails.SETTABLEVIEW(GateEntryHeader);
+            //                 TransportationRouteDetails.RUNMODAL;
+            //                 //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----End------
+            //             end;
+            //         }
+            //     }
+            //     group(Function)
+            //     {
+            //         Caption = 'Function';
+            //         action("&Track Package")
+            //         {
+            //             Caption = '&Track Package';
+            //             Image = ItemTracking;
 
-                    trigger OnAction()
-                    begin
-                        HYPERLINK(Rec.GetTrackingInternetAddr);
-                    end;
-                }
-            }
+            //             trigger OnAction()
+            //             begin
+            //                 HYPERLINK(Rec.GetTrackingInternetAddr);
+            //             end;
+            //         }
+            //     }
         }
     }
 

@@ -8,6 +8,7 @@ page 90251 "Transportation Card"
     RefreshOnActivate = true;
     SourceTable = "Gate Entry Header";
 
+
     layout
     {
         area(content)
@@ -121,11 +122,13 @@ page 90251 "Transportation Card"
                 field("Total parcel Weight"; Rec."Total parcel Weight")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
                     Editable = true;
+                    Visible = false;
                 }
                 // field(Status; Rec.Status)
                 // {
@@ -228,6 +231,7 @@ page 90251 "Transportation Card"
                 //Editable = EditFalse;
                 SubPageLink = "No." = FIELD("No.");
                 ApplicationArea = All;
+                UpdatePropagation = Both;
             }
         }
 
@@ -358,138 +362,138 @@ page 90251 "Transportation Card"
             //         end;
             //     }
 
-            group("<Action1000000029>")
-            {
-                Caption = 'Print';
-                Image = Email;
-                action("<Action224>")
-                {
-                    Caption = '&Consignment';
-                    Image = Print;
-                    ApplicationArea = All;
+            // group("<Action1000000029>")
+            // {
+            //     Caption = 'Print';
+            //     Image = Email;
+            //     action("<Action224>")
+            //     {
+            //         Caption = '&Consignment';
+            //         Image = Print;
+            //         ApplicationArea = All;
 
-                    trigger OnAction()
-                    begin
-                        CLEAR(TripDetails);
-                        GateEntryHeader.RESET;
-                        GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
-                        TripDetails.SETTABLEVIEW(GateEntryHeader);
-                        TripDetails.RUNMODAL;
-                    end;
-                }
-                action("<Action225>")
-                {
-                    Caption = '&Route Details';
-                    Image = Print;
-                    ApplicationArea = All;
+            //         trigger OnAction()
+            //         begin
+            //             CLEAR(TripDetails);
+            //             GateEntryHeader.RESET;
+            //             GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
+            //             TripDetails.SETTABLEVIEW(GateEntryHeader);
+            //             TripDetails.RUNMODAL;
+            //         end;
+            //     }
+            //     action("<Action225>")
+            //     {
+            //         Caption = '&Route Details';
+            //         Image = Print;
+            //         ApplicationArea = All;
 
-                    trigger OnAction()
-                    begin
-                        //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----start----
-                        CLEAR(TransportationRouteDetails);
-                        GateEntryHeader.RESET;
-                        GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
-                        TransportationRouteDetails.SETTABLEVIEW(GateEntryHeader);
-                        TransportationRouteDetails.RUNMODAL;
-                        //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----End------
-                    end;
-                }
-                // action("&Email")
-                // {
-                //     Caption = '&Email';
-                //     Image = Email;
-                //     ApplicationArea = All;
-                //     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
-                //     //PromotedCategory = Process;
+            //         trigger OnAction()
+            //         begin
+            //             //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----start----
+            //             CLEAR(TransportationRouteDetails);
+            //             GateEntryHeader.RESET;
+            //             GateEntryHeader.SETFILTER(GateEntryHeader."No.", '%1', Rec."No.");
+            //             TransportationRouteDetails.SETTABLEVIEW(GateEntryHeader);
+            //             TransportationRouteDetails.RUNMODAL;
+            //             //-----CAS-03084-M6R2S5---31/08/2016----pravin.d-----End------
+            //         end;
+            //     }
+            //     action("&Email")
+            //     {
+            //         Caption = '&Email';
+            //         Image = Email;
+            //         ApplicationArea = All;
+            //         //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
+            //         //PromotedCategory = Process;
 
-                //     // trigger OnAction()
-                //     // var
-                //     //     SalesInvHeader: Record 112;
-                //     // begin
-                //     //     //--CAS-02345-N3M7X5----Pravin.D.--------------facility to send a email to customer/supplier for booking and collection.
-                //     //     IF Rec.Status = Rec.Status::Released THEN
-                //     //         GateEntryHeader.SendMail(Rec)
-                //     //     ELSE
-                //     //         ERROR('Status must be released.')
-                //     // end;
-                // }
-            }
-            group("<Action1000000032>")
-            {
-                Caption = 'Function';
-                action("<Action1000000028>")
-                {
-                    Caption = '&Track Package';
-                    Image = ItemTracking;
-                    ApplicationArea = All;
+            //         // trigger OnAction()
+            //         // var
+            //         //     SalesInvHeader: Record 112;
+            //         // begin
+            //         //     //--CAS-02345-N3M7X5----Pravin.D.--------------facility to send a email to customer/supplier for booking and collection.
+            //         //     IF Rec.Status = Rec.Status::Released THEN
+            //         //         GateEntryHeader.SendMail(Rec)
+            //         //     ELSE
+            //         //         ERROR('Status must be released.')
+            //         // end;
+            //     }
+            // }
+            // group("<Action1000000032>")
+            // {
+            //     Caption = 'Function';
+            //     action("<Action1000000028>")
+            //     {
+            //         Caption = '&Track Package';
+            //         Image = ItemTracking;
+            //         ApplicationArea = All;
 
-                    trigger OnAction()
-                    begin
-                        HYPERLINK(Rec.GetTrackingInternetAddr);
-                    end;
-                }
-                // action("Select Slot")
-                // {
-                //     Image = Allocate;
-                //     Promoted = true;
-                //     PromotedCategory = Process;
-                //     PromotedIsBig = true;
-                //     PromotedOnly = true;
-                //     ApplicationArea = All;
+            //         trigger OnAction()
+            //         begin
+            //             HYPERLINK(Rec.GetTrackingInternetAddr);
+            //         end;
+            //     }
+            // action("Select Slot")
+            // {
+            //     Image = Allocate;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     PromotedOnly = true;
+            //     ApplicationArea = All;
 
-                //     trigger OnAction()
-                //     var
-                //         Slots: Record "Slot Master";
-                //         PageSlotlist: Page "Slot List";
-                //     begin
-                //         //Rec.TESTFIELD(Status, Rec.Status::Open);
-                //         Rec.TESTFIELD("Location Code");
-                //         IF Rec."Slot No." <> 0 THEN
-                //             ERROR(SlotRegisteredError);
-                //         Slots.RESET;
-                //         Slots.SETRANGE("Location Code", Rec."Location Code");
-                //         Slots.SETFILTER(Date, '>=%1', WORKDATE);
-                //         IF NOT Slots.FINDSET THEN
-                //             MESSAGE('Slots not created for Location %1, Please create slots', Rec."Location Code")
-                //         ELSE BEGIN
-                //             CLEAR(PageSlotlist);
-                //             PageSlotlist.LOOKUPMODE(TRUE);
-                //             PageSlotlist.SETTABLEVIEW(Slots);
-                //             IF PAGE.RUNMODAL(Page::"Slot List", Slots) = ACTION::LookupOK THEN BEGIN
-                //                 IF Slots.Booked THEN
-                //                     ERROR('Slot already booked, please select another slot')
-                //                 ELSE BEGIN
-                //                     //CheckDeliveryDate(Rec."No.",Slots.Date);blocked by alok on 16052018
-                //                     Rec.VALIDATE("Expected Delivery/Receipt Date", Slots.Date);
-                //                     Rec.VALIDATE("Expected Delivery/Receipt Time", Slots."Start Time");
-                //                     Rec.VALIDATE("Slot No.", Slots."Entry No");
-                //                     CurrPage.UPDATE;
-                //                 END;
-                //             END;
-                //         END;
-                //     end;
-                // }
-                // action("Cancel Slot")
-                // {
-                //     Image = Cancel;
-                //     Promoted = true;
-                //     PromotedCategory = Process;
-                //     PromotedIsBig = true;
-                //     ApplicationArea = All;
+            //     trigger OnAction()
+            //     var
+            //         Slots: Record "Slot Master";
+            //         PageSlotlist: Page "Slot List";
+            //     begin
+            //         //Rec.TESTFIELD(Status, Rec.Status::Open);
+            //         Rec.TESTFIELD("Location Code");
+            //         IF Rec."Slot No." <> 0 THEN
+            //             ERROR(SlotRegisteredError);
+            //         Slots.RESET;
+            //         Slots.SETRANGE("Location Code", Rec."Location Code");
+            //         Slots.SETFILTER(Date, '>=%1', WORKDATE);
+            //         IF NOT Slots.FINDSET THEN
+            //             MESSAGE('Slots not created for Location %1, Please create slots', Rec."Location Code")
+            //         ELSE BEGIN
+            //             CLEAR(PageSlotlist);
+            //             PageSlotlist.LOOKUPMODE(TRUE);
+            //             PageSlotlist.SETTABLEVIEW(Slots);
+            //             IF PAGE.RUNMODAL(Page::"Slot List", Slots) = ACTION::LookupOK THEN BEGIN
+            //                 IF Slots.Booked THEN
+            //                     ERROR('Slot already booked, please select another slot')
+            //                 ELSE BEGIN
+            //                     //CheckDeliveryDate(Rec."No.",Slots.Date);blocked by alok on 16052018
+            //                     Rec.VALIDATE("Expected Delivery/Receipt Date", Slots.Date);
+            //                     Rec.VALIDATE("Expected Delivery/Receipt Time", Slots."Start Time");
+            //                     Rec.VALIDATE("Slot No.", Slots."Entry No");
+            //                     CurrPage.UPDATE;
+            //                 END;
+            //             END;
+            //         END;
+            //     end;
+            // }
+            // action("Cancel Slot")
+            // {
+            //     Image = Cancel;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     ApplicationArea = All;
 
-                //     trigger OnAction()
-                //     begin
-                //         IF Rec."Slot No." <> 0 THEN
-                //             IF CONFIRM('Are you sure you want to cancel slot for this Job?') THEN BEGIN
-                //                 CLEAR(Rec."Slot No.");
-                //                 CLEAR(Rec."Expected Delivery/Receipt Date");
-                //                 CLEAR(Rec."Expected Delivery/Receipt Time");
-                //                 CurrPage.UPDATE;
-                //                 MESSAGE('Slot Cancelled');
-                //             END;
-                //     end;
-                // }
-            }
+            //     trigger OnAction()
+            //     begin
+            //         IF Rec."Slot No." <> 0 THEN
+            //             IF CONFIRM('Are you sure you want to cancel slot for this Job?') THEN BEGIN
+            //                 CLEAR(Rec."Slot No.");
+            //                 CLEAR(Rec."Expected Delivery/Receipt Date");
+            //                 CLEAR(Rec."Expected Delivery/Receipt Time");
+            //                 CurrPage.UPDATE;
+            //                 MESSAGE('Slot Cancelled');
+            //             END;
+            //     end;
+            // }
+            //}
         }
     }
 
