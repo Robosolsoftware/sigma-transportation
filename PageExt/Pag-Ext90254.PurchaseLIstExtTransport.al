@@ -28,6 +28,15 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
                 ApplicationArea = All;
                 Visible = false;
             }
+            field("Transportation No."; rec."Transportation No.")
+            {
+                ApplicationArea = All;
+
+            }
+            field("Receipt Status"; rec."Receipt Status")
+            {
+                ApplicationArea = All;
+            }
 
         }
 

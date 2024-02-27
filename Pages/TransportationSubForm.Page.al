@@ -72,7 +72,7 @@ page 90252 "Transportation SubForm"
                 field("Document no"; Rec."Document no")
                 {
                     ApplicationArea = All;
-                    Visible = false;
+                    Visible = true;
                 }
                 field("Source Name"; Rec."Source Name")
                 {
@@ -241,15 +241,15 @@ page 90252 "Transportation SubForm"
                             if L_TransportLine.FindSet() then begin
                                 repeat
                                     if L_TransportLine."Line No." = Rec."Line No." then begin
-                                        TotalLifts += rec."Total Pallet";
+                                        TotalLifts += rec.Lifts;
                                     end
                                     else begin
-                                        TotalLifts += L_TransportLine."Total Pallet";
+                                        TotalLifts += L_TransportLine.Lifts;
                                     end;
                                 until L_TransportLine.Next() = 0;
 
                             end;
-                            L_TransportHeader."Booked Pallets" := TotalLifts;
+                            L_TransportHeader.Lifts := TotalLifts;
                             L_TransportHeader.Modify()
                         end;
                         CurrPage.Update();
@@ -273,15 +273,15 @@ page 90252 "Transportation SubForm"
                             if L_TransportLine.FindSet() then begin
                                 repeat
                                     if L_TransportLine."Line No." = Rec."Line No." then begin
-                                        TotalLooseBoxes += rec."Total Pallet";
+                                        TotalLooseBoxes += rec."Loose Boxes";
                                     end
                                     else begin
-                                        TotalLooseBoxes += L_TransportLine."Total Pallet";
+                                        TotalLooseBoxes += L_TransportLine."Loose Boxes";
                                     end;
                                 until L_TransportLine.Next() = 0;
 
                             end;
-                            L_TransportHeader."Booked Pallets" := TotalLooseBoxes;
+                            L_TransportHeader."Loose Boxes" := TotalLooseBoxes;
                             L_TransportHeader.Modify()
                         end;
                         CurrPage.Update();
@@ -462,11 +462,14 @@ page 90252 "Transportation SubForm"
         end;
 
         purchaseCard.Reset();
-        purchaseCard.SetRange("No.", Rec."Document no");
+        purchaseCard.SetRange("No.", gateEntryLine."Document no");
         if Purchasecard.Findfirst() then begin
-            purchaseCard."Transportation No." := Rec."No.";
-            purchaseCard."Receipt Status" := rec."Transportation Receipt Status";
+            purchaseCard."Transportation No." := gateEntryLine."No.";
+            purchaseCard."Receipt Status" := gateEntryLine."Transportation Receipt Status";
+            purchaseCard.Modify();
         end;
+
+
         gateEntryLine.Insert();
         Commit();
     end;

@@ -15,6 +15,15 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
                 ApplicationArea = All;
                 Visible = false;
             }
+            field("Transportation No."; rec."Transportation No.")
+            {
+                ApplicationArea = All;
+
+            }
+            field("Receipt Status"; rec."Receipt Status")
+            {
+                ApplicationArea = All;
+            }
         }
         //ShubhamM_11042023 _US_6827++
         addlast("Shipping and Payment")
