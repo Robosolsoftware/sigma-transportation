@@ -51,7 +51,7 @@ page 90257 "Posted Transportation SubForm"
                 field("Document no"; Rec."Document no")
                 {
                     ApplicationArea = All;
-                    Visible = false;
+                    Visible = true;
                 }
                 field("Source Name"; Rec."Source Name")
                 {

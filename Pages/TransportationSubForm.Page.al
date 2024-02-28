@@ -26,6 +26,7 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    Visible = false;
                 }
                 field("Transportation No."; rec."No.")
                 {
@@ -73,6 +74,7 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Visible = true;
+                    Editable = false;
                 }
                 field("Source Name"; Rec."Source Name")
                 {

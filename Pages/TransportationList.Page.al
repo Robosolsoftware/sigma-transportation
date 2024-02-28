@@ -30,6 +30,7 @@ page 90253 "Transportation List"
                 field("Transport Area Code"; Rec."Transport Area Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Shipping Agent Code"; Rec."Shipping Agent Code")
                 {
@@ -48,22 +49,8 @@ page 90253 "Transportation List"
                 {
                     ApplicationArea = All;
                 }
-                field("Vehicle No."; Rec."Vehicle No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
-                {
-                    CaptionClass = CapacityText;
-                    Caption = 'Vehicle Capacity';
-                    ApplicationArea = All;
-                }
-                field("Avalaible Vehicle Capacity(KG)"; Rec."Avalaible Vehicle Capacity(KG)")
-                {
-                    CaptionClass = AvlCapacityText;
-                    Caption = 'Avalaible Vehicle Capacity';
-                    ApplicationArea = All;
-                }
+
+
                 // field(Status; Rec.Status)
                 // {
                 //     ApplicationArea = All;
@@ -76,14 +63,7 @@ page 90253 "Transportation List"
                 {
                     ApplicationArea = All;
                 }
-                field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
-                {
-                    ApplicationArea = All;
-                }
-                field("Expected Delivery/Receipt Time"; Rec."Expected Delivery/Receipt Time")
-                {
-                    ApplicationArea = All;
-                }
+
                 field("Total parcel Weight"; Rec."Total parcel Weight")
                 {
                     ApplicationArea = All;

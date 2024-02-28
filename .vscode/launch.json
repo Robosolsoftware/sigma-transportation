@@ -8,7 +8,7 @@
             "environmentType": "Sandbox",
            //"environmentName": "Sandbox_25032022",
            // "environmentName": "Millennium_Sandbox",
-           "environmentName": "Sigma_UAT",
+           "environmentName": "Sigma_MAIN",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "schemaUpdateMode":"Synchronize",
