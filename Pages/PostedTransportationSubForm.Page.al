@@ -37,11 +37,7 @@ page 90257 "Posted Transportation SubForm"
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Source No."; Rec."Source No.")
-                {
-                    ApplicationArea = All;
-                    //Visible = false;
-                }
+
 
                 field("Document Type"; Rec."Document Type")
                 {
@@ -53,9 +49,16 @@ page 90257 "Posted Transportation SubForm"
                     ApplicationArea = All;
                     Visible = true;
                 }
+                field("Source No."; Rec."Source No.")
+                {
+                    ApplicationArea = All;
+                    //Visible = false;
+                    Caption = 'Vendor No.';
+                }
                 field("Source Name"; Rec."Source Name")
                 {
                     ApplicationArea = All;
+                    Caption = 'Vendor Name';
                     //Visible = false;
                 }
                 field(Address; Rec.Address)

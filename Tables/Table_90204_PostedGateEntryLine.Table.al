@@ -16,6 +16,13 @@ table 90254 "Posted Gate Entry Line"
         field(3; "Line No"; Integer)
         {
         }
+        field(4; "Transportation Booked By"; Code[20])
+        {
+            CalcFormula = Lookup("Gate Entry Header"."Transportation Organized By" WHERE("No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+
         field(5; "Source No."; Code[20])
         {
             Caption = 'Source No.';

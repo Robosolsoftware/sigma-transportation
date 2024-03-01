@@ -18,6 +18,10 @@ page 90255 "Posted Transportation List"
         {
             repeater(Group)
             {
+                field("Location Code"; Rec."Location Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -26,6 +30,11 @@ page 90255 "Posted Transportation List"
                 {
                     ApplicationArea = All;
                 }
+                // field("Transport Area Code"; Rec."Transport Area Code")
+                // {
+                //     ApplicationArea = All;
+                //     Visible = false;
+                // }
                 field("Shipping Agent Code"; Rec."Shipping Agent Code")
                 {
                     ApplicationArea = All;
@@ -34,40 +43,41 @@ page 90255 "Posted Transportation List"
                 {
                     ApplicationArea = All;
                 }
-                // field("Shipment Method Code"; Rec."Shipment Method Code")
-                // {
-                //     ApplicationArea = All;
-                // }
+                field("Shipment Method Code"; Rec."Shipment Method Code")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
                 field("Booking Reference No."; Rec."Booking Reference No.")
                 {
                     ApplicationArea = All;
                 }
-                // field("LR/RR No."; Rec."LR/RR No.")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("LR/RR Date"; Rec."LR/RR Date")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Vehicle No."; Rec."Vehicle No.")
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field("Vehicle Capacity(KG)"; Rec."Vehicle Capacity(KG)")
-                // {
-                //     ApplicationArea = All;
-                // }
 
 
+                // field(Status; Rec.Status)
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
                     ApplicationArea = All;
                 }
-                // field("Gate Entry No."; Rec."Gate Entry No.")
-                // {
-                //     ApplicationArea = All;
-                // }
+                field(Type; Rec.Type)
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+
+                field("Total parcel Weight"; Rec."Total parcel Weight")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = all;
+
+                }
             }
         }
     }

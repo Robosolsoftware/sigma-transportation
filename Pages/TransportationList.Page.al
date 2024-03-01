@@ -62,11 +62,18 @@ page 90253 "Transportation List"
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
 
                 field("Total parcel Weight"; Rec."Total parcel Weight")
                 {
                     ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = all;
+
                 }
             }
         }

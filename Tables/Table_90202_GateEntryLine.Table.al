@@ -388,6 +388,10 @@ table 90252 "Gate Entry Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(58; "Requested Receipt Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
     }

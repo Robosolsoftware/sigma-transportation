@@ -144,6 +144,7 @@ page 90251 "Transportation Card"
                 {
                     Importance = Additional;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 // group(Collection)
                 // {

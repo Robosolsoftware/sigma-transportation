@@ -58,10 +58,16 @@ page 90252 "Transportation SubForm"
                     ApplicationArea = All;
                     Visible = false;
                 }
+                field("Document no"; Rec."Document no")
+                {
+                    ApplicationArea = All;
+                    Visible = true;
+                    Editable = false;
+                }
                 field("Source No."; Rec."Source No.")
                 {
                     ApplicationArea = All;
-                    Visible = false;
+                    Visible = true;
                     //Visible = false;
                 }
 
@@ -70,12 +76,7 @@ page 90252 "Transportation SubForm"
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Document no"; Rec."Document no")
-                {
-                    ApplicationArea = All;
-                    Visible = true;
-                    Editable = false;
-                }
+
                 field("Source Name"; Rec."Source Name")
                 {
                     ApplicationArea = All;
@@ -438,7 +439,7 @@ page 90252 "Transportation SubForm"
         gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
         gateEntryLine."Source Document" := gateEntryLine."Document Type"::"Purchase Order";
         gateEntryLine."Document no" := warehousereceiptline."Source No.";
-        //gateEntryLine."Expected Delivery/Receipt Date" := warehouseReceiptHeader."Expected Delivery Date";
+        gateEntryLine."Requested Receipt Date" := warehouseReceiptHeader."Requested Receipt Date";
         if (warehousereceiptline."Source Document" = warehousereceiptline."Source Document"::"Purchase Order") then begin
             gateEntryLine."Source Type" := gateEntryLine."Source Type"::Supplier;
         end;
