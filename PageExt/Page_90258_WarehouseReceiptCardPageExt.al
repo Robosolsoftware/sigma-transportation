@@ -7,10 +7,12 @@ pageextension 90258 WarehouseReceiptCardPageExt extends "Warehouse Receipt"
             field("Transportation No."; rec."Transportation No.")
             {
                 ApplicationArea = all;
+                Editable = false;
             }
             field("Receipt Status"; rec."Receipt Status")
             {
                 ApplicationArea = all;
+                Editable = false;
             }
 
         }

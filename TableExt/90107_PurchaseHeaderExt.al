@@ -29,11 +29,11 @@ tableextension 90257 PurchaseHeaderExtTrans extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(50208; "Receipt Status"; Option)
+        field(50208; "Receipt Status"; Text[50])
         {
-            Caption = 'Transportation Receipt Status';
-            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
-            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+            // Caption = 'Transportation Receipt Status';
+            // OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
+            // OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
         }
     }
 

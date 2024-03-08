@@ -68,6 +68,7 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Visible = true;
+                    Editable = false;
                     //Visible = false;
                 }
 
@@ -130,7 +131,10 @@ page 90252 "Transportation SubForm"
                     trigger OnValidate()
                     begin
                         IF Rec."Goods Checked" THEN
-                            Rec."Goods Checked By" := USERID;
+                            Rec."Goods Checked By" := USERID
+                        else
+                            Rec."Goods Checked By" := '';
+
                     end;
                 }
                 field("Goods Checked By"; Rec."Goods Checked By")
@@ -390,6 +394,7 @@ page 90252 "Transportation SubForm"
                             warehousereceiptheader.Reset();
                             warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
                             warehousereceiptheader.SetFilter("Location Code", gateentryheader."Location Code");
+
                             WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
                             WarehouseReceiptListPage.LookupMode(true);
                             if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
@@ -400,6 +405,7 @@ page 90252 "Transportation SubForm"
                                     repeat
                                         warehouseReceiptLine.Reset();
                                         warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
+                                        warehouseReceiptLine.SetFilter("Source Document", format(warehouseReceiptLine."Source Document"::"Purchase Order"));
                                         if warehouseReceiptLine.FindSet() then begin
                                             repeat
                                                 gateEntryLine.Reset();
@@ -468,9 +474,11 @@ page 90252 "Transportation SubForm"
         purchaseCard.SetRange("No.", gateEntryLine."Document no");
         if Purchasecard.Findfirst() then begin
             purchaseCard."Transportation No." := gateEntryLine."No.";
-            purchaseCard."Receipt Status" := gateEntryLine."Transportation Receipt Status";
+            purchaseCard."Receipt Status" := format(gateEntryLine."Transportation Receipt Status");
             purchaseCard.Modify();
         end;
+
+
 
 
         gateEntryLine.Insert();
@@ -525,6 +533,9 @@ page 90252 "Transportation SubForm"
     begin
         recGateEntryHeader.GET(Rec."No.");
     end;
+
+    var
+        test: Record 7332;
 }
 
 #pragma implicitwith restore
