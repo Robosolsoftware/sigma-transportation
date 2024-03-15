@@ -441,6 +441,7 @@ page 90252 "Transportation SubForm"
 
         gateEntryLine.Init();
         gateEntryLine."No." := gateentryheader."No.";
+        gateEntryLine."Transportation Receipt Status" := gateentryheader."Receipt Status";
         gateEntryLine."Line No." := FindLastLineNo(gateentryheader);
         gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
         gateEntryLine."Source Document" := gateEntryLine."Document Type"::"Purchase Order";

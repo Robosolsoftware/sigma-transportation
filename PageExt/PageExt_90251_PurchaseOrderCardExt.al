@@ -18,11 +18,14 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
             field("Transportation No."; rec."Transportation No.")
             {
                 ApplicationArea = All;
+                Editable = false;
 
             }
             field("Receipt Status"; rec."Receipt Status")
             {
                 ApplicationArea = All;
+                Caption = 'Transportation Receipt Status';
+                Editable = false;
             }
         }
         //ShubhamM_11042023 _US_6827++
