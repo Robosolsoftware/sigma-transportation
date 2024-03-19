@@ -465,7 +465,7 @@ page 90252 "Transportation SubForm"
             warehouseReceiptHeader.SetRange("No.", gateEntryLine."Warehouse Receipt No.");
             if warehouseReceiptHeader.FindFirst() then begin
                 warehouseReceiptHeader."Transportation No." := gateentryheader."No.";
-                warehouseReceiptHeader."Receipt Status" := gateentryheader."Receipt Status";
+                warehouseReceiptHeader."Receipt Status" := format(gateentryheader."Receipt Status");
                 warehouseReceiptHeader."Requested Receipt Date" := gateEntryHeader."Requested Receipt Date";
                 warehouseReceiptHeader.Modify(true);
             end;

@@ -268,6 +268,8 @@ table 90251 "Gate Entry Header"
             trigger OnValidate()
             var
                 gateEntryLine: Record "Gate Entry Line";
+                warehouseReceiptHeader: Record "Warehouse Receipt Header";
+                purcHeader: Record "Purchase Header";
             begin
                 gateEntryLine.Reset();
                 gateEntryLine.setrange("No.", Rec."No.");
@@ -278,6 +280,31 @@ table 90251 "Gate Entry Header"
                     until gateEntryLine.Next() = 0;
 
                 end;
+                gateEntryLine.Reset();
+                gateEntryLine.setrange("No.", Rec."No.");
+                if gateEntryLine.FindSet() then begin
+                    repeat
+                        warehouseReceiptHeader.Reset();
+                        warehouseReceiptHeader.SetRange("No.", gateEntryLine."Warehouse Receipt No.");
+                        if warehouseReceiptHeader.FindFirst() then begin
+                            warehouseReceiptHeader."Receipt Status" := format(Rec."Receipt Status");
+                            warehouseReceiptHeader.Modify();
+                        end;
+                    until gateEntryLine.Next() = 0;
+                end;
+                gateEntryLine.Reset();
+                gateEntryLine.setrange("No.", Rec."No.");
+                if gateEntryLine.FindSet() then begin
+                    repeat
+                        purcHeader.Reset();
+                        purcHeader.SetRange("No.", gateEntryLine."Document no");
+                        if purcHeader.FindFirst() then begin
+                            purcHeader."Receipt Status" := format(Rec."Receipt Status");
+                            purcHeader.Modify();
+                        end;
+                    until gateEntryLine.Next() = 0;
+                end;
+
             end;
         }
         field(45; "Requested Receipt Date"; Date)
