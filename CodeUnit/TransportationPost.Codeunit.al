@@ -3,8 +3,10 @@ codeunit 90251 "Transportation - Post"
     TableNo = "Gate Entry Header";
 
     trigger OnRun()
+    var
+        GateEntryHeader: Record "Gate Entry Header";
     begin
-
+        GateEntryHeader.TestField("Requested Delivery Date");
         TransHeader := Rec;
         //rec.TESTFIELD(Status, Rec.Status::Released);
         ValidatePosting(TransHeader);

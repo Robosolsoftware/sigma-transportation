@@ -218,6 +218,7 @@ table 90251 "Gate Entry Header"
         field(35; "Requested Delivery Date"; Date)
         {
             DataClassification = ToBeClassified;
+            NotBlank = true;
         }
         field(36; "Expected Delivery Date"; Date)
         {
@@ -263,8 +264,8 @@ table 90251 "Gate Entry Header"
         field(44; "Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
-            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
             trigger OnValidate()
             var
                 gateEntryLine: Record "Gate Entry Line";
@@ -310,6 +311,11 @@ table 90251 "Gate Entry Header"
         field(45; "Requested Receipt Date"; Date)
         {
             DataClassification = ToBeClassified;
+        }
+        field(46; "No. of Items"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Gate Entry Line" where("No." = field("No.")));
         }
 
     }

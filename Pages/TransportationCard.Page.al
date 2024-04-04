@@ -38,6 +38,7 @@ page 90251 "Transportation Card"
                 field("Shipping Agent Services Code"; Rec."Shipping Agent Services Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
@@ -168,10 +169,13 @@ page 90251 "Transportation Card"
                 field(Carrier; Rec.Carrier)
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
                 field("Requested Delivery Date"; Rec."Requested Delivery Date")
                 {
                     ApplicationArea = all;
+                    ShowMandatory = true;
+
                 }
                 field("Expected Delivery Date"; Rec."Expected Delivery Date")
                 {
@@ -193,6 +197,11 @@ page 90251 "Transportation Card"
                     Editable = false;
                 }
                 field("Loose Boxes"; Rec."Loose Boxes")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("No. of Items"; Rec."No. of Items")
                 {
                     ApplicationArea = all;
                     Editable = false;

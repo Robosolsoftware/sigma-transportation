@@ -39,6 +39,7 @@ page 90253 "Transportation List"
                 field("Shipping Agent Services Code"; Rec."Shipping Agent Services Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
@@ -49,8 +50,20 @@ page 90253 "Transportation List"
                 {
                     ApplicationArea = All;
                 }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = all;
 
+                }
 
+                field("Booked Pallets"; Rec."Booked Pallets")
+                {
+                    ApplicationArea = All;
+                }
+                field("No. of Items"; Rec."No. of Items")
+                {
+                    ApplicationArea = All;
+                }
                 // field(Status; Rec.Status)
                 // {
                 //     ApplicationArea = All;
@@ -58,6 +71,7 @@ page 90253 "Transportation List"
                 field("Transportation Organized By"; Rec."Transportation Organized By")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field(Type; Rec.Type)
                 {
@@ -70,11 +84,7 @@ page 90253 "Transportation List"
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Requested Delivery Date"; Rec."Requested Delivery Date")
-                {
-                    ApplicationArea = all;
 
-                }
             }
         }
     }

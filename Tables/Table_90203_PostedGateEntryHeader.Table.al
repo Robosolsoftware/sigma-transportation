@@ -185,8 +185,8 @@ table 90253 "Posted Gate Entry Header"
         field(44; "Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
-            OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
 
         }
     }

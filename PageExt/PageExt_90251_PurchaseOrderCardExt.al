@@ -34,10 +34,12 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
             field("Transport Job No."; Rec."Transport Job No.")
             {
                 ApplicationArea = all;
+                Visible = false;
             }
             field("Transport Job Status"; Rec."Transport Job Status")
             {
                 ApplicationArea = all;
+                Visible = false;
             }
         }
         //ShubhamM_11042023 _US_6827--
