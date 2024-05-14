@@ -130,16 +130,17 @@ page 90252 "Transportation SubForm"
                     ApplicationArea = All;
                     trigger OnValidate()
                     begin
-                        IF Rec."Goods Checked" THEN
-                            Rec."Goods Checked By" := USERID
+                        IF Rec."Goods Checked" = true THEN
+                            IsEditable := true
                         else
-                            Rec."Goods Checked By" := '';
+                            IsEditable := false;
 
                     end;
                 }
                 field("Goods Checked By"; Rec."Goods Checked By")
                 {
                     ApplicationArea = All;
+                    Editable = IsEditable;
                 }
                 // field("Sticker on Box"; Rec."Sticker on Box")
                 // {
@@ -529,6 +530,7 @@ page 90252 "Transportation SubForm"
         PlanningLines: Record "Planning Transportation Sheet";
         PagePlanningLines: Page "Transportation planning";
         TranportationLine: Record "Gate Entry Line";
+        IsEditable: Boolean;
 
     local procedure GetHeader()
     begin

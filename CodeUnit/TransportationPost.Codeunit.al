@@ -6,7 +6,8 @@ codeunit 90251 "Transportation - Post"
     var
         GateEntryHeader: Record "Gate Entry Header";
     begin
-        GateEntryHeader.TestField("Requested Delivery Date");
+
+        Rec.TestField("Requested Delivery Date");
         TransHeader := Rec;
         //rec.TESTFIELD(Status, Rec.Status::Released);
         ValidatePosting(TransHeader);
