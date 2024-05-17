@@ -365,8 +365,8 @@ table 90252 "Gate Entry Line"
         field(53; "Transportation Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO,Suspend';
         }
         field(54; "Source Document"; Option)
         {

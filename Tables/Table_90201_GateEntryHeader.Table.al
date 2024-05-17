@@ -264,8 +264,8 @@ table 90251 "Gate Entry Header"
         field(44; "Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO,Suspend';
             trigger OnValidate()
             var
                 gateEntryLine: Record "Gate Entry Line";
