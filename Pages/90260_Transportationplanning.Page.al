@@ -55,6 +55,7 @@ page 90260 "Transportation planning"
                 }
                 field("Country/Region Code"; Rec."Country/Region Code")
                 {
+                    ApplicationArea = All;
                 }
                 field("Supplier invoice No."; Rec."Supplier invoice No.")
                 {
@@ -107,6 +108,7 @@ page 90260 "Transportation planning"
             action("Shedule Selected lines")
             {
                 Visible = false;
+                ApplicationArea = All;
             }
             action("Parcel Details")
             {

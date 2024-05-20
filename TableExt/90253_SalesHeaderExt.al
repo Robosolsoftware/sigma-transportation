@@ -1,37 +1,37 @@
-tableextension 90254 SalesSHipmentExt extends "Sales Shipment Header"
+tableextension 90253 SalesHeaderExtTrans extends "Sales Header"
 {
     fields
     {
         // Add changes to table fields here
-        field(50207; "Booking Ref No."; Code[20])
+        field(90251; "Booking Ref No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(50208; Date; Date)
+        field(90252; Date; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(50209; Time; Time)
+        field(90253; Time; Time)
         {
             DataClassification = ToBeClassified;
         }
-        field(50202; "Transport Job No."; Code[20])
+        field(90254; "Transport Job No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(50203; "Transport Job Status"; Option)
+        field(90255; "Transport Status"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = ,Open,Released,"In-Progress";
             OptionCaption = ' ,Open,Released,In-Progress';
             Editable = false;
         }
-        field(50205; "Transport Area Code"; Code[10])
+        field(90256; "Transport Area Code"; Code[10])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Area";
         }
-        field(50206; "Loading Date"; Date)
+        field(90257; "Loading Date"; Date)//Pranali08012022_US7084
         {
             DataClassification = ToBeClassified;
         }

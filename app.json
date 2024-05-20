@@ -2,7 +2,7 @@
   "id": "b4b92f72-1d4d-421a-847a-af3d250d5ff8",
   "name": "Transportation",
   "publisher": "Default publisher",
-  "version": "1.0.0.0",
+  "version": "24.0.0.0",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -11,15 +11,16 @@
   "url": "",
   "logo": "",
   "dependencies": [
-   {"id": "89b2d3ff-cff9-4506-9a14-597a5b6d370f",
-  "name": "Interim WMS BC Customisation",
-  "publisher": "Robosol",
-  "version": "22.0.0.0"
+   {
+    "id": "89b2d3ff-cff9-4506-9a14-597a5b6d370f",
+    "name": "Interim WMS BC Customisation",
+    "publisher": "Robosol",
+    "version": "24.0.0.1"
   } 
   ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "20.0.0.0",
+  "application": "22.0.0.0",
   "idRanges": [
     {
       "from": 90251,
@@ -31,5 +32,5 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "9.0"
+  "runtime": "13.0"
 }

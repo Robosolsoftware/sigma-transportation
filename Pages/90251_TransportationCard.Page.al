@@ -73,10 +73,12 @@ page 90251 "Transportation Card"
                 field("LR/RR No."; Rec."LR/RR No.")
                 {
                     Visible = false;
+                    ApplicationArea = All;
                 }
                 field("LR/RR Date"; Rec."LR/RR Date")
                 {
                     Visible = false;
+                    ApplicationArea = All;
                 }
                 field("Vehicle No."; Rec."Vehicle No.")
                 {

@@ -2,11 +2,11 @@ tableextension 90260 TransferHeaderExt1 extends "Transfer Header"
 {
     fields
     {
-        field(50000; "Transport Job No."; Code[20])
+        field(90254; "Transport Job No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; "Transport Status"; Option)
+        field(90255; "Transport Status"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = ,Open,Released,"In-Progress";

@@ -3,11 +3,11 @@ tableextension 90252 ShippingAgentServicesExt extends "Shipping Agent Services"
     fields
     {
         // Add changes to table fields here
-        field(50000; Capacity; Decimal)
+        field(90251; Capacity; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; "Measurent for Capacity"; Option)
+        field(90252; "Measurent for Capacity"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = ,Pallet,KG;

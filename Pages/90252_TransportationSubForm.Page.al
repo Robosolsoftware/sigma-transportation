@@ -329,7 +329,9 @@ page 90252 "Transportation SubForm"
                 }
                 action("Get planning Lines")
                 {
+                    ApplicationArea = All;
                     Visible = false;
+
 
                     trigger OnAction()
                     begin
@@ -351,6 +353,7 @@ page 90252 "Transportation SubForm"
                     Image = Delete;
                     Promoted = true;
                     Visible = false;
+                    ApplicationArea = All;
 
                     trigger OnAction()
                     begin

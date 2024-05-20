@@ -195,6 +195,7 @@ page 90257 "Posted Transportation SubForm"
                     RunObject = Page "Parcel Details";
                     RunPageLink = "Transportaion No." = FIELD("No."),
                                   "Transportaion Line No." = FIELD("Line No");
+                    ApplicationArea = All;
                 }
             }
         }

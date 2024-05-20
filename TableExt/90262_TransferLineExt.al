@@ -1,9 +1,9 @@
-tableextension 90261 ShipToAddressExt extends "Ship-to Address"
+tableextension 90262 TransferLineExt1 extends "Transfer Line"
 {
     fields
     {
         // Add changes to table fields here
-        field(50000; "Opening Time"; Time)
+        field(90251; Pallet; Decimal)
         {
             DataClassification = ToBeClassified; //Prathamesh++
         }
