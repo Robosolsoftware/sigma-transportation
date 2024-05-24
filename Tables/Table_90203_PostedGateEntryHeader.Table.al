@@ -162,12 +162,14 @@ table 90253 "Posted Gate Entry Header"
         {
 
             Editable = false;
+            Caption = 'Booked Lifts';
 
         }
         field(40; "Loose Boxes"; Decimal)
         {
 
             Editable = false;
+            Caption = 'Booked Loose Boxes';
 
         }
         field(41; "Curtain Side"; Code[20])
@@ -185,8 +187,8 @@ table 90253 "Posted Gate Entry Header"
         field(44; "Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","No Show","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Show,Fixed slot,Surprise PO,Suspend';
 
         }
     }

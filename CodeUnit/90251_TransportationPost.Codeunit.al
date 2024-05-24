@@ -8,12 +8,12 @@ codeunit 90251 "Transportation - Post"
     begin
 
         Rec.TestField("Requested Delivery Date");
+        rec.TestField("Location Code");
         TransHeader := Rec;
         //rec.TESTFIELD(Status, Rec.Status::Released);
         ValidatePosting(TransHeader);
-        IF NOT HideConfirmationDialog THEN
-            IF NOT CONFIRM(STRSUBSTNO(Text16500, TransHeader."No."), FALSE) THEN
-                EXIT;
+        IF NOT CONFIRM(STRSUBSTNO(Text16500, TransHeader."No."), FALSE) THEN
+            EXIT;
         WhseSetup.GET;
         WhseSetup.TESTFIELD(WhseSetup."Posted Transportation Nos.");
         "Nos." := NoSeriesMgt.GetNextNo(WhseSetup."Posted Transportation Nos.", 0D, TRUE);

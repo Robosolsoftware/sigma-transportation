@@ -23,6 +23,10 @@ page 90253 "Transportation List"
                 {
                     ApplicationArea = All;
                 }
+                field("Receipt Status"; Rec."Receipt Status")
+                {
+                    ApplicationArea = All;
+                }
                 field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = All;

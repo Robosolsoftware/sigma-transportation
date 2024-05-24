@@ -166,8 +166,8 @@ table 90254 "Posted Gate Entry Line"
         field(53; "Transportation Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","No Show","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Show,Fixed slot,Surprise PO,Suspend';
         }
         field(54; "Source Document"; Option)
         {
@@ -183,11 +183,13 @@ table 90254 "Posted Gate Entry Line"
         field(56; "Lifts"; Decimal)
         {
             DataClassification = ToBeClassified;
+            Caption = 'Booked Lifts';
 
         }
         field(57; "Loose Boxes"; Decimal)
         {
             DataClassification = ToBeClassified;
+            Caption = 'Booked Loose Boxes';
         }
     }
 

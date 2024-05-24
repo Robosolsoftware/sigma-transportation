@@ -27,6 +27,12 @@ pageextension 90251 PurchaseOrderCardExt extends "Purchase Order"
                 Caption = 'Transportation Receipt Status';
                 Editable = false;
             }
+            field("Booked Delivery Date"; rec."Booked Delivery Date")
+            {
+                ApplicationArea = All;
+                Editable = false;
+            }
+
         }
         //ShubhamM_11042023 _US_6827++
         addlast("Shipping and Payment")

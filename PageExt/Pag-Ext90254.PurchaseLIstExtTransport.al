@@ -41,6 +41,11 @@ pageextension 90254 PurchaseLIstExt_Transport extends "Purchase Order List"
                 Editable = false;
 
             }
+            field("Booked Delivery Date"; rec."Booked Delivery Date")
+            {
+                ApplicationArea = All;
+                Editable = false;
+            }
 
         }
 

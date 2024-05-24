@@ -28,6 +28,7 @@ table 90251 "Gate Entry Header"
         {
             Caption = 'Location Code';
             TableRelation = Location;
+            NotBlank = true;
 
             trigger OnValidate()
             var
@@ -240,6 +241,7 @@ table 90251 "Gate Entry Header"
             DataClassification = ToBeClassified;
             //FieldClass = FlowField;
             Editable = false;
+            Caption = 'Booked Lifts';
             //CalcFormula = sum("Gate Entry Line".Lifts where("No." = field("No.")));
         }
         field(40; "Loose Boxes"; Decimal)
@@ -247,6 +249,7 @@ table 90251 "Gate Entry Header"
             DataClassification = ToBeClassified;
             //FieldClass = FlowField;
             Editable = false;
+            Caption = 'Booked Loose Boxes';
             //CalcFormula = sum("Gate Entry Line"."Loose Boxes" where("No." = field("No.")));
         }
         field(41; "Curtain Side"; Code[20])
@@ -264,8 +267,8 @@ table 90251 "Gate Entry Header"
         field(44; "Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","Goods Not Shownup","Fixed slot","Surprise PO","Suspend";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,Goods Not Shownup,Fixed slot,Surprise PO,Suspend';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","No Show","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Show,Fixed slot,Surprise PO,Suspend';
             trigger OnValidate()
             var
                 gateEntryLine: Record "Gate Entry Line";

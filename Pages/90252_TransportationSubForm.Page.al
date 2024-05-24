@@ -407,18 +407,28 @@ page 90252 "Transportation SubForm"
                                 WarehouseReceiptListPage.SetSelectionFilter(warehousereceiptheader);
                                 if warehousereceiptheader.FindSet() then begin
                                     repeat
-                                        warehouseReceiptLine.Reset();
-                                        warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
-                                        warehouseReceiptLine.SetFilter("Source Document", format(warehouseReceiptLine."Source Document"::"Purchase Order"));
-                                        if warehouseReceiptLine.FindSet() then begin
-                                            repeat
-                                                gateEntryLine.Reset();
-                                                gateEntryLine.SetRange("No.", gateentryheader."No.");
-                                                gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
-                                                if not gateEntryLine.FindFirst() then
-                                                    InsetGateEntryLine(gateentryheader, warehouseReceiptLine);
-                                            until warehouseReceiptLine.Next() = 0;
+                                        if (warehousereceiptheader."Transportation No." = '') and (warehousereceiptheader."Location Code" = gateentryheader."Location Code") then begin
+                                            warehouseReceiptLine.Reset();
+                                            warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
+                                            warehouseReceiptLine.SetFilter("Source Document", format(warehouseReceiptLine."Source Document"::"Purchase Order"));
+                                            if warehouseReceiptLine.FindSet() then begin
+                                                repeat
+                                                    gateEntryLine.Reset();
+                                                    gateEntryLine.SetRange("No.", gateentryheader."No.");
+                                                    gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
+                                                    if not gateEntryLine.FindFirst() then
+                                                        InsertGateEntryLine(gateentryheader, warehouseReceiptLine);
+                                                until warehouseReceiptLine.Next() = 0;
+                                            end;
                                         end;
+                                    // else begin
+
+                                    //         Message('You cannot clear the filter');
+                                    // end;
+
+
+
+
                                     until warehousereceiptheader.Next() = 0;
                                 end;
                             end;
@@ -433,7 +443,7 @@ page 90252 "Transportation SubForm"
             }
         }
     }
-    local procedure InsetGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line")
+    local procedure InsertGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line")
     var
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
@@ -480,6 +490,8 @@ page 90252 "Transportation SubForm"
         if Purchasecard.Findfirst() then begin
             purchaseCard."Transportation No." := gateEntryLine."No.";
             purchaseCard."Receipt Status" := format(gateEntryLine."Transportation Receipt Status");
+            purchaseCard."Booked Delivery Date" := gateentryheader."Expected Delivery Date";
+
             purchaseCard.Modify();
         end;
 

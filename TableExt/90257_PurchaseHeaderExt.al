@@ -35,6 +35,10 @@ tableextension 90257 PurchaseHeaderExtTrans extends "Purchase Header"
             // OptionMembers = " ","Transportation Booked","Goods Arrived","Goods Not Shownup","GRN In Progress",Closed;
             // OptionCaption = ' ,Transportation Booked,Goods Arrived,Goods Not Shownup,GRN In Progress,Closed';
         }
+        field(90257; "Booked Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

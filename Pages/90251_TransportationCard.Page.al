@@ -69,6 +69,7 @@ page 90251 "Transportation Card"
                 field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("LR/RR No."; Rec."LR/RR No.")
                 {
@@ -222,6 +223,16 @@ page 90251 "Transportation Card"
                     field("Receipt Status"; Rec."Receipt Status")
                     {
                         ApplicationArea = all;
+                        trigger OnValidate()
+                        var
+                            myInt: Integer;
+                        begin
+                            if (Rec."Expected Delivery Date" = 0D) and (Rec."Receipt Status" = rec."Receipt Status"::"Transportation Booked") then
+                                Error('You cannot select "Transportation Booked" if "Booked Delivery Date" is empty.');
+
+                            if (Rec."Actual Receipt Date" = 0D) and (Rec."Receipt Status" = rec."Receipt Status"::"Goods Arrived") then
+                                Error('You cannot select "Goods Arrived" if "Actual Receipt Date" is empty.');
+                        end;
                     }
                     field("Actual Receipt Date"; Rec."Actual Receipt Date")
                     {
