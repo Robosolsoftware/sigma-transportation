@@ -184,6 +184,25 @@ page 90251 "Transportation Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Booked Delivery Date';
+                    trigger OnValidate()
+                    var
+                        gateEntryLine: Record "Gate Entry Line";
+                        purchaseHeader: Record "Purchase Header";
+                    begin
+                        gateEntryLine.Reset();
+                        gateEntryLine.SetRange("No.", Rec."No.");
+                        if gateEntryLine.FindSet() then begin
+                            repeat
+                                purchaseHeader.Reset();
+                                purchaseHeader.SetRange("No.", gateEntryLine."Document no");
+                                purchaseHeader.SetRange("Document Type", purchaseHeader."Document Type"::Order);
+                                if purchaseHeader.FindFirst() then begin
+                                    purchaseHeader."Booked Delivery Date" := rec."Expected Delivery Date";
+                                    purchaseHeader.Modify();
+                                end;
+                            until gateEntryLine.Next() = 0;
+                        end;
+                    end;
                 }
                 field("Expected Delivery Time"; Rec."Expected Delivery Time")
                 {
@@ -200,6 +219,21 @@ page 90251 "Transportation Card"
                     Editable = false;
                 }
                 field("Loose Boxes"; Rec."Loose Boxes")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Received Pallets"; Rec."Received Pallets")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Received Lifts"; Rec."Received Lifts")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
+                field("Received Loose Boxes"; Rec."Received Loose Boxes")
                 {
                     ApplicationArea = all;
                     Editable = false;

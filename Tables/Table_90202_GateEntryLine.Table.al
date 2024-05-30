@@ -394,6 +394,18 @@ table 90252 "Gate Entry Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(59; "Received Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60; "Received Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(61; "Received Pallets"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
     }

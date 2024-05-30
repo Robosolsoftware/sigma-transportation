@@ -320,6 +320,18 @@ table 90251 "Gate Entry Header"
             FieldClass = FlowField;
             CalcFormula = count("Gate Entry Line" where("No." = field("No.")));
         }
+        field(47; "Received Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(48; "Received Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(49; "Received Pallets"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 

@@ -3,7 +3,7 @@ page 90252 "Transportation SubForm"
 {
     AutoSplitKey = true;
     DelayedInsert = true;
-    DeleteAllowed = false;
+    DeleteAllowed = true;
     PageType = ListPart;
     RefreshOnActivate = true;
     SourceTable = "Gate Entry Line";
@@ -300,7 +300,106 @@ page 90252 "Transportation SubForm"
                 // {
                 //     ApplicationArea = All;
                 // }
+                field("Received Pallets"; Rec."Received Pallets")
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalReceivedPallets: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalReceivedPallets);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalReceivedPallets += rec."Received Pallets";
+                                    end
+                                    else begin
+                                        TotalReceivedPallets += L_TransportLine."Received Pallets";
+                                    end;
+                                until L_TransportLine.Next() = 0;
 
+                            end;
+                            L_TransportHeader."Received Pallets" := TotalReceivedPallets;
+                            L_TransportHeader.Modify()
+
+                        end;
+                        CurrPage.Update();
+                    end;
+
+                }
+                field("Received Lifts"; Rec."Received Lifts")
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalReceivedLifts: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalReceivedLifts);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalReceivedLifts += rec."Received Lifts";
+                                    end
+                                    else begin
+                                        TotalReceivedLifts += L_TransportLine."Received Lifts";
+                                    end;
+                                until L_TransportLine.Next() = 0;
+
+                            end;
+                            L_TransportHeader."Received Lifts" := TotalReceivedLifts;
+                            L_TransportHeader.Modify()
+                        end;
+                        CurrPage.Update();
+                    end;
+
+                }
+                field("Received Loose Boxes"; Rec."Received Loose Boxes")
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        L_TransportHeader: Record "Gate Entry Header";
+                        L_TransportLine: Record "Gate Entry Line";
+                        TotalReceivedLooseBoxes: Decimal;
+                    begin
+                        L_TransportHeader.Reset();
+                        L_TransportHeader.SetFilter("No.", Rec."No.");
+                        if L_TransportHeader.FindFirst() then begin
+                            Clear(TotalReceivedLooseBoxes);
+                            L_TransportLine.Reset();
+                            L_TransportLine.SetRange("No.", L_TransportHeader."No.");
+                            if L_TransportLine.FindSet() then begin
+                                repeat
+                                    if L_TransportLine."Line No." = Rec."Line No." then begin
+                                        TotalReceivedLooseBoxes += rec."Received Loose Boxes";
+                                    end
+                                    else begin
+                                        TotalReceivedLooseBoxes += L_TransportLine."Received Loose Boxes";
+                                    end;
+                                until L_TransportLine.Next() = 0;
+
+                            end;
+                            L_TransportHeader."Received Loose Boxes" := TotalReceivedLooseBoxes;
+                            L_TransportHeader.Modify()
+                        end;
+                        CurrPage.Update();
+                    end;
+
+                }
 
             }
         }
@@ -390,10 +489,14 @@ page 90252 "Transportation SubForm"
                         test: page "Sales Order Subform";
                         ItemListPage: Page "Item List";
                         warehouseReceiptLine: Record "Warehouse Receipt Line";
+                        Isfilterremoved: Boolean;
                     begin
                         gateentryheader.Reset();
                         gateentryheader.SetRange("No.", Rec."No.");
                         if gateentryheader.FindFirst() then begin
+                            if gateentryheader."Location Code" = '' then
+                                Error('Location code is blank');
+                            Clear(Isfilterremoved);
                             Clear(WarehouseReceiptListPage);
                             warehousereceiptheader.Reset();
                             warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
@@ -421,16 +524,16 @@ page 90252 "Transportation SubForm"
                                                 until warehouseReceiptLine.Next() = 0;
                                             end;
                                         end;
-                                    // else begin
-
-                                    //         Message('You cannot clear the filter');
-                                    // end;
-
+                                        if (warehousereceiptheader."Transportation No." <> '') or (warehousereceiptheader."Location Code" <> gateentryheader."Location Code") then begin
+                                            Isfilterremoved := true;
+                                        end;
 
 
 
                                     until warehousereceiptheader.Next() = 0;
                                 end;
+                                if Isfilterremoved = true then
+                                    Message('Some Lines were not added as you have cleared the filter');
                             end;
                         end;
 

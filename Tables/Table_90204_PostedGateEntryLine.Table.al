@@ -191,6 +191,18 @@ table 90254 "Posted Gate Entry Line"
             DataClassification = ToBeClassified;
             Caption = 'Booked Loose Boxes';
         }
+        field(59; "Received Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60; "Received Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(61; "Received Pallets"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

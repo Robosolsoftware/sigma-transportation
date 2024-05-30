@@ -191,6 +191,18 @@ table 90253 "Posted Gate Entry Header"
             OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Show,Fixed slot,Surprise PO,Suspend';
 
         }
+        field(47; "Received Lifts"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(48; "Received Loose Boxes"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(49; "Received Pallets"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
