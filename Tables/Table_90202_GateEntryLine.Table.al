@@ -539,21 +539,32 @@ table 90252 "Gate Entry Line"
         SalesHeader: Record 36;
         PurchaseHeader: Record 38;
         TransferHeader: Record 5740;
+        warehouseReceipt: Record "Warehouse Receipt Header";
     begin
         //Chandan------------------Case:CAS-08450-F6Z7J7----End
-        CASE Rec."Document Type" OF
-            Rec."Document Type"::"Purchase Order":
+        CASE Rec."Source Document" OF
+            Rec."Source Document"::"Purchase Order":
                 BEGIN
                     PurchaseHeader.SETRANGE("Document Type", PurchaseHeader."Document Type"::Order);
                     PurchaseHeader.SETRANGE("No.", Rec."Document no");
                     IF PurchaseHeader.FINDSET THEN BEGIN
-                        CLEAR(PurchaseHeader."Transport Job No.");
-                        CLEAR(PurchaseHeader."Transport Job Status");
-                        PurchaseHeader.MODIFY;
+                        CLEAR(PurchaseHeader."Transportation No.");
+                        CLEAR(PurchaseHeader."Receipt Status");
+                        CLEAR(PurchaseHeader."Booked Delivery Date");
+                        PurchaseHeader.MODIFY();
                     END;
+
+                    warehouseReceipt.Reset();
+                    warehouseReceipt.SetRange("No.", Rec."Warehouse Receipt No.");
+                    if warehouseReceipt.FindFirst() then begin
+                        warehouseReceipt."Transportation No." := '';
+                        warehouseReceipt."Receipt Status" := '';
+                        warehouseReceipt."Requested Receipt Date" := 0D;
+                        warehouseReceipt.Modify();
+                    end;
                 END;
 
-            Rec."Document Type"::"Sales Order":
+            Rec."Source Document"::"Sales Order":
                 BEGIN
 
                     SalesHeader.SETRANGE("Document Type", SalesHeader."Document Type"::Order);
@@ -565,7 +576,7 @@ table 90252 "Gate Entry Line"
                     END;
                 END;
 
-            Rec."Document Type"::"Transfer Order":
+            Rec."Source Document"::"Transfer Order":
                 BEGIN
 
                     TransferHeader.SETRANGE("No.", Rec."Document no");

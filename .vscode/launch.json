@@ -7,7 +7,7 @@
             "type": "al",
             "environmentType": "Sandbox",
            //"environmentName": "Sandbox_25032022",
-            //"environmentName": "Sigma_UAT",
+           //"environmentName": "Sigma_UAT",
            "environmentName": "Sandbox_Beta",
             "startupObjectId": 22,
             "startupObjectType": "Page",

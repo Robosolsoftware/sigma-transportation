@@ -510,20 +510,20 @@ page 90252 "Transportation SubForm"
                                 WarehouseReceiptListPage.SetSelectionFilter(warehousereceiptheader);
                                 if warehousereceiptheader.FindSet() then begin
                                     repeat
-                                        if (warehousereceiptheader."Transportation No." = '') and (warehousereceiptheader."Location Code" = gateentryheader."Location Code") then begin
-                                            warehouseReceiptLine.Reset();
-                                            warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
-                                            warehouseReceiptLine.SetFilter("Source Document", format(warehouseReceiptLine."Source Document"::"Purchase Order"));
-                                            if warehouseReceiptLine.FindSet() then begin
-                                                repeat
-                                                    gateEntryLine.Reset();
-                                                    gateEntryLine.SetRange("No.", gateentryheader."No.");
-                                                    gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
-                                                    if not gateEntryLine.FindFirst() then
-                                                        InsertGateEntryLine(gateentryheader, warehouseReceiptLine);
-                                                until warehouseReceiptLine.Next() = 0;
-                                            end;
+                                        // if (warehousereceiptheader."Transportation No." = '') and (warehousereceiptheader."Location Code" = gateentryheader."Location Code") then begin
+                                        warehouseReceiptLine.Reset();
+                                        warehouseReceiptLine.SetRange("No.", warehousereceiptheader."No.");
+                                        warehouseReceiptLine.SetFilter("Source Document", format(warehouseReceiptLine."Source Document"::"Purchase Order"));
+                                        if warehouseReceiptLine.FindSet() then begin
+                                            repeat
+                                                gateEntryLine.Reset();
+                                                gateEntryLine.SetRange("No.", gateentryheader."No.");
+                                                gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
+                                                if not gateEntryLine.FindFirst() then
+                                                    InsertGateEntryLine(gateentryheader, warehouseReceiptLine);
+                                            until warehouseReceiptLine.Next() = 0;
                                         end;
+                                        //end;
                                         if (warehousereceiptheader."Transportation No." <> '') or (warehousereceiptheader."Location Code" <> gateentryheader."Location Code") then begin
                                             Isfilterremoved := true;
                                         end;
@@ -533,7 +533,7 @@ page 90252 "Transportation SubForm"
                                     until warehousereceiptheader.Next() = 0;
                                 end;
                                 if Isfilterremoved = true then
-                                    Message('Some Lines were not added as you have cleared the filter');
+                                    Message('Some Lines which were added are not according to the filter');
                             end;
                         end;
 
@@ -604,6 +604,8 @@ page 90252 "Transportation SubForm"
         gateEntryLine.Insert();
         Commit();
     end;
+
+
 
     local procedure FindLastLineNo(P_gateEntryHeader: Record "Gate Entry Header"): Integer
     //Code to find a last line no in web order
