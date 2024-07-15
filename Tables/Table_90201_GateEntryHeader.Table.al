@@ -279,7 +279,7 @@ table 90251 "Gate Entry Header"
                 gateEntryLine.setrange("No.", Rec."No.");
                 if gateEntryLine.FindSet() then begin
                     repeat
-                        gateEntryLine."Transportation Receipt Status" := Rec."Receipt Status";
+                        gateEntryLine.Validate("Transportation Receipt Status", Rec."Receipt Status");
                         gateEntryLine.Modify(true);
                     until gateEntryLine.Next() = 0;
 

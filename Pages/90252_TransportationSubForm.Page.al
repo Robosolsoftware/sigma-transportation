@@ -130,6 +130,7 @@ page 90252 "Transportation SubForm"
                     ApplicationArea = All;
                     trigger OnValidate()
                     begin
+                        Rec.CalcFields("Goods Checked");
                         IF Rec."Goods Checked" = true THEN
                             IsEditable := true
                         else
@@ -137,10 +138,16 @@ page 90252 "Transportation SubForm"
 
                     end;
                 }
-                field("Goods Checked By"; Rec."Goods Checked By")
+                // field("Goods Checked By"; Rec."Goods Checked By")
+                // {
+                //     ApplicationArea = All;
+                //     //Editable = IsEditable;
+                //     Editable = false;
+                // }
+                field("Goods Checked By"; GetUserName(Rec))
                 {
                     ApplicationArea = All;
-                    Editable = IsEditable;
+                    Editable = false;
                 }
                 // field("Sticker on Box"; Rec."Sticker on Box")
                 // {
@@ -643,6 +650,18 @@ page 90252 "Transportation SubForm"
             Rec."Entry Type" := recGateEntryHeader.Type;
             // rec."Location code" := recGateEntryHeader."Location Code";
         end;
+    end;
+
+    procedure GetUserName(_Rec: Record "Gate Entry Line"): Text[100]
+    var
+        Users: Record User;
+    begin
+        _Rec.CalcFields("Goods Checked By");
+        Users.Reset();
+        Users.SetRange("User Security ID", _Rec."Goods Checked By");
+        if Users.FindFirst() then
+            exit(Users."Full Name");
+
     end;
 
     var

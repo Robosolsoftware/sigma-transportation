@@ -94,6 +94,7 @@ report 90298 "Trip Detail"
             {
                 DataItemLink = "No." = FIELD("No.");
                 DataItemTableView = SORTING("No.", "Line No.");
+                CalcFields = "Goods Checked", "Goods Checked By";
                 column(ExternalDocNo; SH."External Document No.")
                 {
                 }

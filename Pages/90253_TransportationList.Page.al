@@ -4,8 +4,7 @@ page 90253 "Transportation List"
     CardPageID = "Transportation Card";
     PageType = List;
     SourceTable = "Gate Entry Header";
-    SourceTableView = SORTING("Document Date", "No.")
-                      ORDER(Ascending);
+    SourceTableView = SORTING("Document Date", "No.") ORDER(Ascending);
     UsageCategory = Lists;
     ApplicationArea = All;
 
@@ -49,6 +48,12 @@ page 90253 "Transportation List"
                 {
                     ApplicationArea = All;
                     Visible = false;
+                }
+                field("Expected Delivery Date"; Rec."Expected Delivery Date")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Caption = 'Booked Delivery Date';
                 }
                 field("Booking Reference No."; Rec."Booking Reference No.")
                 {

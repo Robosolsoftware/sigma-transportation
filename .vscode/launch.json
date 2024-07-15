@@ -8,7 +8,7 @@
             "environmentType": "Sandbox",
            //"environmentName": "Sandbox_25032022",
            //"environmentName": "Sigma_UAT",
-           "environmentName": "Copy_03062024",
+           "environmentName": "Copy_12072024",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "schemaUpdateMode":"ForceSync",
@@ -16,7 +16,7 @@
             "breakOnError": true,
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": true
+            "enableSqlInformationDebugger": true,
         }
     ]
 }

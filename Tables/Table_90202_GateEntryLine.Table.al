@@ -108,11 +108,16 @@ table 90252 "Gate Entry Line"
         field(10; "Goods Checked"; Boolean)
         {
             Caption = 'Goods Checked';
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = exist("Posted Whse. Receipt Header" where("Whse. Receipt No." = field("Warehouse Receipt No.")));
         }
-        field(11; "Goods Checked By"; Code[20])
+        field(11; "Goods Checked By"; Guid)
         {
             Caption = 'Goods Checked By';
             Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("Posted Whse. Receipt Header".SystemCreatedBy where("Whse. Receipt No." = field("Warehouse Receipt No.")));
         }
         field(12; "Total Fridge Parcels"; Decimal)
         {
@@ -365,8 +370,22 @@ table 90252 "Gate Entry Line"
         field(53; "Transportation Receipt Status"; Option)
         {
             Caption = 'Transportation Receipt Status';
-            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","No Shown","Fixed slot","Surprise PO","Suspend";
-            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Shown,Fixed slot,Surprise PO,Suspend';
+            OptionMembers = "Provisional","Transportation Booked","Goods Arrived","No Show","Fixed slot","Surprise PO","Suspend";
+            OptionCaption = 'Provisional,Transportation Booked,Goods Arrived,No Show,Fixed slot,Surprise PO,Suspend';
+
+            trigger OnValidate()
+            var
+                L_WarehouseRecpt: Record "Warehouse Receipt Header";
+            begin
+                if Rec."Warehouse Receipt No." <> '' then begin
+                    L_WarehouseRecpt.Reset();
+                    L_WarehouseRecpt.SetRange("No.", Rec."Warehouse Receipt No.");
+                    if L_WarehouseRecpt.FindFirst() then begin
+                        L_WarehouseRecpt."Receipt Status" := Format(Rec."Transportation Receipt Status");
+                        L_WarehouseRecpt.Modify();
+                    end;
+                end;
+            end;
         }
         field(54; "Source Document"; Option)
         {

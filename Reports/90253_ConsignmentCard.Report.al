@@ -95,6 +95,7 @@ report 90253 "Consignment Card"
                 DataItemLink = "No." = FIELD("No.");
                 DataItemTableView = SORTING("No.", "Line No.");
                 RequestFilterFields = "Source No.";
+                CalcFields = "Goods Checked By", "Goods Checked";
                 column(ExternalDocNo; SH."External Document No.")
                 {
                 }

@@ -9,6 +9,7 @@ report 90257 Trip_Vendor_cust
     {
         dataitem("Gate Entry Line"; "Gate Entry Line")
         {
+            CalcFields = "Goods Checked", "Goods Checked By";
             column(CompanyinfoPicture; CompInfo.Picture)
             {
             }
