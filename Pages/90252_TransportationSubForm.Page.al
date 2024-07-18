@@ -508,7 +508,8 @@ page 90252 "Transportation SubForm"
                             warehousereceiptheader.Reset();
                             warehousereceiptheader.SetFilter("Transportation No.", '%1', '');
                             warehousereceiptheader.SetFilter("Location Code", gateentryheader."Location Code");
-                            warehousereceiptheader.SetFilter("Purchase Order No.", '<>%1', '');
+                            //warehousereceiptheader.SetFilter("Purchase Order No.", '<>%1', '');
+                            warehousereceiptheader.SetFilter("Source Document", '%1', warehousereceiptheader."Source Document"::"Purchase Order");
                             WarehouseReceiptListPage.SetTableView(warehousereceiptheader);
                             WarehouseReceiptListPage.LookupMode(true);
                             if WarehouseReceiptListPage.RunModal() = ACTION::LookupOK then begin
