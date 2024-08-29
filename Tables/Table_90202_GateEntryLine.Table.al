@@ -90,7 +90,7 @@ table 90252 "Gate Entry Line"
                 END;
             end;
         }
-        field(6; "Source Name"; Text[50])
+        field(6; "Source Name"; Text[100])
         {
             Caption = 'Vendor  Name';
         }
@@ -425,6 +425,28 @@ table 90252 "Gate Entry Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(62; CD; Text[20])
+        {
+            Caption = 'SF';
+            DataClassification = ToBeClassified;
+            //OptionMembers = "",Yes,No;
+        }
+        field(63; "CD Qty"; Integer)
+        {
+            Caption = 'SF Qty.';
+            DataClassification = ToBeClassified;
+        }
+        field(64; Fridge; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            //OptionMembers = "",Yes,No;
+        }
+        field(65; "Fridge Qty."; Integer)
+        {
+            Caption = 'Fridge Qty.';
+            DataClassification = ToBeClassified;
+        }
+
 
 
     }

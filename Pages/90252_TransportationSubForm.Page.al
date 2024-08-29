@@ -204,6 +204,7 @@ page 90252 "Transportation SubForm"
                 // {
                 //     Visible = false;
                 // }
+
                 field("Total Pallet"; Rec."Total Pallet")
                 {
                     ApplicationArea = All;
@@ -407,6 +408,22 @@ page 90252 "Transportation SubForm"
                     end;
 
                 }
+                field(CD; Rec.CD)
+                {
+                    ApplicationArea = all;
+                }
+                field("CD Qty"; Rec."CD Qty")
+                {
+                    ApplicationArea = all;
+                }
+                field(Fridge; Rec.Fridge)
+                {
+                    ApplicationArea = all;
+                }
+                field("Fridge Qty."; Rec."Fridge Qty.")
+                {
+                    ApplicationArea = all;
+                }
 
             }
         }
@@ -528,7 +545,7 @@ page 90252 "Transportation SubForm"
                                                 gateEntryLine.SetRange("No.", gateentryheader."No.");
                                                 gateEntryLine.SetRange("Warehouse Receipt No.", warehouseReceiptLine."No.");
                                                 if not gateEntryLine.FindFirst() then
-                                                    InsertGateEntryLine(gateentryheader, warehouseReceiptLine);
+                                                    InsertGateEntryLine(gateentryheader, warehouseReceiptLine, warehousereceiptheader);
                                             until warehouseReceiptLine.Next() = 0;
                                         end;
                                         //end;
@@ -554,11 +571,10 @@ page 90252 "Transportation SubForm"
             }
         }
     }
-    local procedure InsertGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line")
+    local procedure InsertGateEntryLine(var gateentryheader: Record "Gate Entry Header"; var warehousereceiptline: Record "Warehouse Receipt Line"; var warehousereceiptheader: Record "Warehouse Receipt Header")
     var
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
-        warehouseReceiptHeader: Record "Warehouse Receipt Header";
         purchaseCard: Record "Purchase Header";
 
 
@@ -571,6 +587,10 @@ page 90252 "Transportation SubForm"
         gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
         gateEntryLine."Source Document" := gateEntryLine."Document Type"::"Purchase Order";
         gateEntryLine."Document no" := warehousereceiptline."Source No.";
+        gateEntryLine.CD := Format(warehouseReceiptHeader.CD);
+        gateEntryLine."CD Qty" := warehouseReceiptHeader."CD Qty";
+        gateEntryLine.Fridge := Format(warehouseReceiptHeader.Fridge);
+        gateEntryLine."Fridge Qty." := warehouseReceiptHeader."Fridge Qty.";
         gateEntryLine."Requested Receipt Date" := warehouseReceiptHeader."Requested Receipt Date";
         if (warehousereceiptline."Source Document" = warehousereceiptline."Source Document"::"Purchase Order") then begin
             gateEntryLine."Source Type" := gateEntryLine."Source Type"::Supplier;
