@@ -37,6 +37,7 @@ page 90259 "Transportation Line List"
                 field("Source No."; Rec."Source No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Source Name"; Rec."Source Name")
                 {
@@ -57,6 +58,7 @@ page 90259 "Transportation Line List"
                 field(City; Rec.City)
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field(County; Rec.County)
                 {
@@ -65,6 +67,7 @@ page 90259 "Transportation Line List"
                 field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Country/Region Code"; Rec."Country/Region Code")
                 {
@@ -97,18 +100,22 @@ page 90259 "Transportation Line List"
                 field("Expected Delivery/Receipt Date"; Rec."Expected Delivery/Receipt Date")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Expected Delivery/Receipt Time"; Rec."Expected Delivery/Receipt Time")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Actual Delivery/Receipt Date"; Rec."Actual Delivery/Receipt Date")
                 {
                     Visible = false;
                 }
+
                 field("Carrier Quantity"; Rec."Carrier Quantity")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Carrier UOM"; Rec."Carrier UOM")
                 {
@@ -125,6 +132,7 @@ page 90259 "Transportation Line List"
                 field("Purchaser /Sales Person"; Rec."Purchaser /Sales Person")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Qty-Pallet"; Rec."Qty-Pallet")
                 {
@@ -133,6 +141,7 @@ page 90259 "Transportation Line List"
                 field("Qty-Case"; Rec."Qty-Case")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Location code"; Rec."Location code")
                 {
@@ -147,6 +156,27 @@ page 90259 "Transportation Line List"
                     ApplicationArea = All;
                 }
                 field("Your Reference"; Rec."Your Reference")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Transportation Receipt Status"; Rec."Transportation Receipt Status")
+                {
+                    ApplicationArea = All;
+                }
+                field(CD; Rec.CD)
+                {
+                    ApplicationArea = All;
+                }
+                field("CD Qty"; Rec."CD Qty")
+                {
+                    ApplicationArea = All;
+                }
+                field(Fridge; Rec.Fridge)
+                {
+                    ApplicationArea = All;
+                }
+                field("Fridge Qty."; Rec."Fridge Qty.")
                 {
                     ApplicationArea = All;
                 }

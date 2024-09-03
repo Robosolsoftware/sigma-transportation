@@ -151,6 +151,7 @@ table 90252 "Gate Entry Line"
         field(18; "Carrier Quantity"; Decimal)
         {
             Caption = 'Carrier Quantity';
+
         }
         field(19; "Carrier UOM"; Code[10])
         {

@@ -98,6 +98,7 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    //Visible = false;
                 }
                 field(County; Rec.County)
                 {
@@ -108,6 +109,7 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    //Visible = false;
                 }
                 field("Country/Region Code"; Rec."Country/Region Code")
                 {
