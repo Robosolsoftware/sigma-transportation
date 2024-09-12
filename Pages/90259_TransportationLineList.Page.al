@@ -124,6 +124,7 @@ page 90259 "Transportation Line List"
                 field("Total Parcels (Ambient)"; Rec."Total Parcels (Ambient)")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Total Weight (Ambient)"; Rec."Total Weight (Ambient)")
                 {
@@ -134,9 +135,10 @@ page 90259 "Transportation Line List"
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Qty-Pallet"; Rec."Qty-Pallet")
+                field("Total Pallet"; Rec."Total Pallet")
                 {
                     ApplicationArea = All;
+                    Caption = 'Pallet Qty.';
                 }
                 field("Qty-Case"; Rec."Qty-Case")
                 {
@@ -150,6 +152,7 @@ page 90259 "Transportation Line List"
                 field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Document no"; Rec."Document no")
                 {
@@ -161,6 +164,18 @@ page 90259 "Transportation Line List"
                     Visible = false;
                 }
                 field("Transportation Receipt Status"; Rec."Transportation Receipt Status")
+                {
+                    ApplicationArea = All;
+                }
+                field("Requested Delivery Date"; Rec."Requested Delivery Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Shipping Agent Code"; Rec."Shipping Agent Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Booked Delivery Date"; Rec."Booked Delivery Date")
                 {
                     ApplicationArea = All;
                 }
@@ -180,6 +195,14 @@ page 90259 "Transportation Line List"
                 {
                     ApplicationArea = All;
                 }
+                field("Temperature Control Code"; Rec."Temperature Control Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Temperature Control Desc"; Rec."Temperature Control Desc")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
@@ -187,11 +210,15 @@ page 90259 "Transportation Line List"
     actions
     {
         area(processing)
+
         {
+
             action(Edit)
             {
                 Image = Edit;
                 Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
@@ -203,6 +230,8 @@ page 90259 "Transportation Line List"
             {
                 Image = View;
                 Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
@@ -215,6 +244,7 @@ page 90259 "Transportation Line List"
                 Caption = 'Show Document';
                 Image = Document;
                 Promoted = true;
+                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -319,6 +349,20 @@ page 90259 "Transportation Line List"
         ELSE
             TextVar += Separator + Comparator + Addendum;
     end;
+
+    // trigger OnAfterGetRecord()
+    // var
+    //     transHeader: Record "Gate Entry Header";
+
+    // begin
+    //     transHeader.Reset();
+    //     transHeader.SetRange("No.", Rec."No.");
+    //     if transHeader.FindFirst() then begin
+
+    //     end;
+
+
+    // end;
 }
 
 #pragma implicitwith restore

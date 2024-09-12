@@ -7,7 +7,7 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "KNAPP_DEV",
-           // "environmentName": "Sigma_Beta_UAT",
+            //"environmentName": "Sigma_Beta_UAT",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "schemaUpdateMode":"ForceSync",

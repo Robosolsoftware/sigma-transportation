@@ -578,6 +578,8 @@ page 90252 "Transportation SubForm"
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
         purchaseCard: Record "Purchase Header";
+        L_Temp: Record "Temperature Range";
+        L_Item: Record Item;
 
 
     begin
@@ -585,10 +587,14 @@ page 90252 "Transportation SubForm"
         gateEntryLine.Init();
         gateEntryLine."No." := gateentryheader."No.";
         gateEntryLine."Transportation Receipt Status" := gateentryheader."Receipt Status";
+        gateEntryLine."Shipping Agent Code" := gateentryheader."Shipping Agent Code";
+        gateEntryLine."Booked Delivery Date" := gateentryheader."Expected Delivery Date";
+        gateEntryLine."Requested Delivery Date" := gateentryheader."Requested Delivery Date";
         gateEntryLine."Line No." := FindLastLineNo(gateentryheader);
         gateEntryLine."Warehouse Receipt No." := warehousereceiptline."No.";
         gateEntryLine."Source Document" := gateEntryLine."Document Type"::"Purchase Order";
         gateEntryLine."Document no" := warehousereceiptline."Source No.";
+        gateEntryLine."Item No." := warehousereceiptline."Item No.";
         gateEntryLine.CD := Format(warehouseReceiptHeader.CD);
         gateEntryLine."CD Qty" := warehouseReceiptHeader."CD Qty";
         gateEntryLine.Fridge := Format(warehouseReceiptHeader.Fridge);
@@ -626,6 +632,17 @@ page 90252 "Transportation SubForm"
             purchaseCard."Booked Delivery Date" := gateentryheader."Expected Delivery Date";
 
             purchaseCard.Modify();
+        end;
+
+        L_Item.Reset();
+        L_Item.SetRange("No.", gateEntryLine."Item No.");
+        if L_Item.FindFirst() then begin
+            gateEntryLine."Temperature Control Code" := L_Item.Storage;
+            L_Temp.Reset();
+            L_Temp.SetRange(Code, gateEntryLine."Temperature Control Code");
+            if L_Temp.FindFirst() then begin
+                gateEntryLine."Temperature Control Desc" := L_Temp."Description";
+            end;
         end;
 
 

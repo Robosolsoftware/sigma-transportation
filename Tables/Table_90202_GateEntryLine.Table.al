@@ -447,6 +447,32 @@ table 90252 "Gate Entry Line"
             Caption = 'Fridge Qty.';
             DataClassification = ToBeClassified;
         }
+        field(66; "Requested Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(67; "Shipping Agent Code"; Code[10])
+        {
+            TableRelation = "Shipping Agent";
+        }
+        field(68; "Booked Delivery Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(69; "Temperature Control Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70; "Temperature Control Desc"; Text[50])
+        {
+            Caption = 'Temperature Control Description';
+            DataClassification = ToBeClassified;
+        }
+        field(71; "Item No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
 
