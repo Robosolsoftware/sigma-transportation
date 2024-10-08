@@ -98,7 +98,7 @@ table 90252 "Gate Entry Line"
         {
             Caption = 'Order Address code';
         }
-        field(8; Address; Text[50])
+        field(8; Address; Text[100])
         {
             Caption = 'Address';
         }
