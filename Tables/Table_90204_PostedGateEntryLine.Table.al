@@ -27,7 +27,7 @@ table 90254 "Posted Gate Entry Line"
         {
             Caption = 'Source No.';
         }
-        field(6; "Source Name"; Text[50])
+        field(6; "Source Name"; Text[100])
         {
             Caption = 'Source Name';
             Editable = false;
