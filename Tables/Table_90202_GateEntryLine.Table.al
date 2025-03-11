@@ -377,6 +377,9 @@ table 90252 "Gate Entry Line"
             trigger OnValidate()
             var
                 L_WarehouseRecpt: Record "Warehouse Receipt Header";
+                L_WarehouseRecptLine: Record "Warehouse Receipt Line";
+                purchaseCard: Record "Purchase Header";
+                purchaseLine: Record "Purchase Line";
             begin
                 if Rec."Warehouse Receipt No." <> '' then begin
                     L_WarehouseRecpt.Reset();
@@ -384,6 +387,31 @@ table 90252 "Gate Entry Line"
                     if L_WarehouseRecpt.FindFirst() then begin
                         L_WarehouseRecpt."Receipt Status" := Format(Rec."Transportation Receipt Status");
                         L_WarehouseRecpt.Modify();
+                        L_WarehouseRecptLine.Reset();
+                        L_WarehouseRecptLine.SetRange("No.", L_WarehouseRecpt."No.");
+
+                        if L_WarehouseRecptLine.FindSet() then begin
+                            repeat
+                                L_WarehouseRecptLine."Receipt Status" := L_WarehouseRecpt."Receipt Status";
+                                L_WarehouseRecptLine.Modify();
+                            until L_WarehouseRecptLine.Next() = 0;
+                        end;
+                    end;
+                end;
+
+                purchaseCard.Reset();
+                purchaseCard.SetRange("No.", Rec."Document no");
+                if Purchasecard.Findfirst() then begin
+                    purchaseCard."Receipt Status" := format(rec."Transportation Receipt Status");
+                    purchaseCard.Modify();
+                    purchaseLine.Reset();
+                    purchaseLine.SetRange("Document No.", purchaseCard."No.");
+                    purchaseLine.SetRange(Type, purchaseLine.Type::Item);
+                    if purchaseLine.FindSet() then begin
+                        repeat
+                            purchaseLine."Receipt Status" := purchaseCard."Receipt Status";
+                            purchaseLine.Modify();
+                        until purchaseLine.next() = 0;
                     end;
                 end;
             end;

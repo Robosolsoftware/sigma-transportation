@@ -578,6 +578,7 @@ page 90252 "Transportation SubForm"
         gateEntryLine: Record "Gate Entry Line";
         purchHeader: Record "Purchase Header";
         purchaseCard: Record "Purchase Header";
+        purchaseLine: Record "Purchase Line";
         L_Temp: Record "Temperature Range";
         L_Item: Record Item;
 
@@ -621,6 +622,16 @@ page 90252 "Transportation SubForm"
                 warehouseReceiptHeader."Receipt Status" := format(gateentryheader."Receipt Status");
                 warehouseReceiptHeader."Requested Receipt Date" := gateEntryHeader."Requested Receipt Date";
                 warehouseReceiptHeader.Modify(true);
+                warehousereceiptline.Reset();
+                warehousereceiptline.SetRange("No.", warehousereceiptheader."No.");
+                if warehousereceiptline.FindSet() then begin
+                    repeat
+                        warehousereceiptline."Receipt Status" := warehousereceiptheader."Receipt Status";
+                        warehousereceiptline."Transportation No." := warehousereceiptheader."Transportation No.";
+                        warehousereceiptline.Modify();
+                    until warehousereceiptline.Next() = 0;
+                end;
+
             end;
         end;
 
@@ -630,8 +641,17 @@ page 90252 "Transportation SubForm"
             purchaseCard."Transportation No." := gateEntryLine."No.";
             purchaseCard."Receipt Status" := format(gateEntryLine."Transportation Receipt Status");
             purchaseCard."Booked Delivery Date" := gateentryheader."Expected Delivery Date";
-
             purchaseCard.Modify();
+            purchaseLine.Reset();
+            purchaseLine.SetRange("Document No.", purchaseCard."No.");
+            //purchaseLine.SetRange(Type, purchaseLine.Type::Item);
+            if purchaseLine.FindSet() then begin
+                repeat
+                    purchaseLine."Receipt Status" := purchaseCard."Receipt Status";
+                    purchaseLine."Transportation No." := purchaseCard."Transportation No.";
+                    purchaseLine.Modify();
+                until purchaseLine.next() = 0;
+            end;
         end;
 
         L_Item.Reset();
@@ -645,13 +665,9 @@ page 90252 "Transportation SubForm"
             end;
         end;
 
-
-
-
         gateEntryLine.Insert();
         Commit();
     end;
-
 
 
     local procedure FindLastLineNo(P_gateEntryHeader: Record "Gate Entry Header"): Integer

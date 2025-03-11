@@ -6,7 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "Copy_16122024",
+            "environmentName": "Sigma_UAT",
             //"environmentName": "Sigma_Beta_UAT",
             "startupObjectId": 22,
             "startupObjectType": "Page",
