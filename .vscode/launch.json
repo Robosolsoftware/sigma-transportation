@@ -10,7 +10,7 @@
             //"environmentName": "Sigma_Beta_UAT",
             "startupObjectId": 22,
             "startupObjectType": "Page",
-            //"schemaUpdateMode":"ForceSync",
+            "schemaUpdateMode":"Synchronize",
             "tenant": "55614040-8b3d-41a1-bae8-2140b06bd0c3",
             "breakOnError": true,
             "launchBrowser": true,

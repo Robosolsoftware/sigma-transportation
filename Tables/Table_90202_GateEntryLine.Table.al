@@ -501,6 +501,14 @@ table 90252 "Gate Entry Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(72; "Receipted By"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(73; ReceiptedByID; Guid)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
 

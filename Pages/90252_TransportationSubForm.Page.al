@@ -426,6 +426,10 @@ page 90252 "Transportation SubForm"
                 {
                     ApplicationArea = all;
                 }
+                field("Receipted By"; Rec."Receipted By")
+                {
+                    ApplicationArea = all;
+                }
 
             }
         }
@@ -600,6 +604,7 @@ page 90252 "Transportation SubForm"
         gateEntryLine."CD Qty" := warehouseReceiptHeader."CD Qty";
         gateEntryLine.Fridge := Format(warehouseReceiptHeader.Fridge);
         gateEntryLine."Fridge Qty." := warehouseReceiptHeader."Fridge Qty.";
+        gateEntryLine.ReceiptedByID := warehousereceiptheader.SystemCreatedBy;
         gateEntryLine."Requested Receipt Date" := warehouseReceiptHeader."Requested Receipt Date";
         if (warehousereceiptline."Source Document" = warehousereceiptline."Source Document"::"Purchase Order") then begin
             gateEntryLine."Source Type" := gateEntryLine."Source Type"::Supplier;
@@ -685,12 +690,20 @@ page 90252 "Transportation SubForm"
     end;
 
     trigger OnAfterGetRecord()
+    var
+        L_User: Record User;
     begin
+        L_User.Reset();
+        L_User.SetRange("User Security ID", Rec.ReceiptedByID);
+        if L_User.FindFirst() then begin
+            Rec."Receipted By" := L_User."User Name";
+            rec.Modify();
+        end;
         /*
         IF CompanyType = CompanyType::Customer  THEN
         BEGIN
           MESSAGE(FORMAT(CompanyType));
-        
+
             IF "Source Type" = "Source Type"::"Sales Shipment" THEN
               ERROR('You have select wrong selection')
         END;
