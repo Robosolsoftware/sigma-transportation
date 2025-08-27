@@ -12,8 +12,7 @@ page 90261 "Posted Transport List (API)"
             repeater(GroupName)
             {
                 Editable = false;
-                field("Location Code";
-                Rec."Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = All;
 
@@ -76,13 +75,13 @@ page 90261 "Posted Transport List (API)"
                 field("Expected Delivery Date"; Rec."Expected Delivery Date")
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Booked Delivery Date';
 
                 }
                 field("Expected Delivery Time"; Rec."Expected Delivery Time")
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Booked Delivery Time';
 
                 }
                 field("Booked Pallets"; Rec."Booked Pallets")
@@ -94,13 +93,13 @@ page 90261 "Posted Transport List (API)"
                 field(Lifts; Rec.Lifts)
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Booked Lifts';
 
                 }
                 field("Loose Boxes"; Rec."Loose Boxes")
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Booked Loose Boxes';
 
                 }
                 field("Curtain Side"; Rec."Curtain Side")
