@@ -2,7 +2,7 @@
   "id": "b4b92f72-1d4d-421a-847a-af3d250d5ff8",
   "name": "Transportation",
   "publisher": "Default publisher",
-  "version": "24.0.0.13",
+  "version": "24.0.0.14",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -16,7 +16,13 @@
     "name": "Interim WMS BC Customisation",
     "publisher": "Robosol",
     "version": "24.1.0.52"
-  } 
+  },
+  {
+    "id": "9bcc50e9-5022-4030-bd3c-b4cdad4ff719",
+    "name": "Interim WMS Tasklet Customisation",
+    "publisher": "Robosol",
+    "version": "24.0.0.45"
+  }
   ],
   "screenshots": [],
   "platform": "1.0.0.0",

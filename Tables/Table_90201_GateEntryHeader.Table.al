@@ -332,6 +332,15 @@ table 90251 "Gate Entry Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50; "Data Logger"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51; "Curtain Side Vehicle"; Boolean)
+        {
+            Caption = 'Curtain Side Vehicle';
+            DataClassification = ToBeClassified;
+        }
 
     }
 

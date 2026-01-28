@@ -246,7 +246,9 @@ page 90251 "Transportation Card"
                 field("Curtain Side"; Rec."Curtain Side")
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
+
                 field(Comments; Rec.Comments)
                 {
                     ApplicationArea = all;
@@ -276,7 +278,14 @@ page 90251 "Transportation Card"
                     {
                         ApplicationArea = all;
                     }
-
+                    field("Data Logger"; Rec."Data Logger")
+                    {
+                        ApplicationArea = all;
+                    }
+                    field("Curtain Side Vehicle"; Rec."Curtain Side Vehicle")
+                    {
+                        ApplicationArea = all;
+                    }
                 }
             }
 

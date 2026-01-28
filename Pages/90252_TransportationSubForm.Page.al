@@ -626,6 +626,8 @@ page 90252 "Transportation SubForm"
                 warehouseReceiptHeader."Transportation No." := gateentryheader."No.";
                 warehouseReceiptHeader."Receipt Status" := format(gateentryheader."Receipt Status");
                 warehouseReceiptHeader."Requested Receipt Date" := gateEntryHeader."Requested Receipt Date";
+                warehousereceiptheader."Curtain Side Vehicle" := gateentryheader."Curtain Side Vehicle";
+                warehousereceiptheader."Data Logger Received" := gateentryheader."Data Logger";
                 warehouseReceiptHeader.Modify(true);
                 warehousereceiptline.Reset();
                 warehousereceiptline.SetRange("No.", warehousereceiptheader."No.");
