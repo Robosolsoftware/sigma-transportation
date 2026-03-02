@@ -16,7 +16,7 @@ codeunit 90251 "Transportation - Post"
             EXIT;
         WhseSetup.GET;
         WhseSetup.TESTFIELD(WhseSetup."Posted Transportation Nos.");
-        "Nos." := NoSeriesMgt.GetNextNo(WhseSetup."Posted Transportation Nos.", 0D, TRUE);
+        "Nos." := NoSeriesMgt.GetNextNo(WhseSetup."Posted Transportation Nos.", WorkDate());
         PostedTransHeader.INIT;
         PostedTransHeader.TRANSFERFIELDS(TransHeader);
         PostedTransHeader."No." := "Nos.";
@@ -70,7 +70,8 @@ codeunit 90251 "Transportation - Post"
         TransHeader: Record "Gate Entry Header";
         WhseSetup: Record 5769;
         "Nos.": Code[20];
-        NoSeriesMgt: Codeunit 396;
+        //NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         Text16500: Label 'Do you want to Post the Transportation No. %1  ?';
         PostedTransHeader: Record "Posted Gate Entry Header";
         TransLine: Record "Gate Entry Line";

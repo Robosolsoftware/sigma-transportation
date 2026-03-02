@@ -228,14 +228,16 @@ table 90253 "Posted Gate Entry Header"
         IF "No." = '' THEN BEGIN
 
             WhseSetup.TESTFIELD(WhseSetup."Transportation Nos.");
-            NoSeriesMgt.InitSeries(WhseSetup."Transportation Nos.", xRec."No.", 0D, "No.", "No. Series");
+            //NoSeriesMgt.InitSeries(WhseSetup."Transportation Nos.", xRec."No.", 0D, "No.", "No. Series");
+            Rec."No." := NoSeriesMgt.GetNextNo(WhseSetup."Transportation Nos.", WorkDate());
         END;
     end;
 
     var
         recVendor: Record 23;
         RecCust: Record 18;
-        NoSeriesMgt: Codeunit 396;
+        //NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         SalesSetup: Record 311;
         WhseSetup: Record 5769;
 }

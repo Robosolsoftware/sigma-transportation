@@ -605,7 +605,7 @@ page 90251 "Transportation Card"
         GateEntryLine: Record "Gate Entry Line";
         LineCount: Integer;
         // StandardDailog: Page 50008;
-        NoSeriesMgt: Codeunit 396;
+        //NoSeriesMgt: Codeunit 396;
         SalesSetup: Record 311;
         "Nos.": Code[20];
         Selection: Integer;

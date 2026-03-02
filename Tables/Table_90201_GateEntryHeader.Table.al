@@ -380,8 +380,10 @@ table 90251 "Gate Entry Header"
         IF "No." = '' THEN BEGIN
 
             WhseSetup.TESTFIELD(WhseSetup."Transportation Nos.");
-            NoSeriesMgt.InitSeries(WhseSetup."Transportation Nos.", xRec."No.", 0D, "No.", "No. Series");
+            //NoSeriesMgt.InitSeries(WhseSetup."Transportation Nos.", xRec."No.", 0D, "No.", "No. Series");
+            Rec."No." := NoSeriesMgt.GetNextNo(WhseSetup."Transportation Nos.", WorkDate());
         END;
+
         "Transportation Organized By" := USERID;
         "Document Date" := WORKDATE;
         "Document Time" := TIME;
@@ -391,7 +393,9 @@ table 90251 "Gate Entry Header"
     var
         recVendor: Record 23;
         RecCust: Record 18;
-        NoSeriesMgt: Codeunit 396;
+        //NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
+
         SalesSetup: Record 311;
         WhseSetup: Record 5769;
         TransportLine: Record "Gate Entry Line";
@@ -415,11 +419,16 @@ table 90251 "Gate Entry Header"
     begin
         GateEntryHeader := Rec;
         WhseSetup.GET;
-        IF NoSeriesMgt.SelectSeries(WhseSetup."Transportation Nos.", OldGateEntryHeader."No. Series", GateEntryHeader."No. Series") THEN BEGIN
-            NoSeriesMgt.SetSeries(GateEntryHeader."No.");
+        // IF NoSeriesMgt.SelectSeries(WhseSetup."Transportation Nos.", OldGateEntryHeader."No. Series", GateEntryHeader."No. Series") THEN BEGIN
+        //     NoSeriesMgt.SetSeries(GateEntryHeader."No.");
+        //     Rec := GateEntryHeader;
+        //     EXIT(TRUE);
+        // END;
+        if NoSeriesMgt.LookupRelatedNoSeries(WhseSetup."Transportation Nos.", OldGateEntryHeader."No. Series", GateEntryHeader."No. Series") then begin
+            GateEntryHeader."No." := NoSeriesMgt.GetNextNo(WhseSetup."Transportation Nos.");
             Rec := GateEntryHeader;
             EXIT(TRUE);
-        END;
+        end;
 
     end;
 
