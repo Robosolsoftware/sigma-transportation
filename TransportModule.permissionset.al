@@ -2,6 +2,7 @@ permissionset 90251 TransportModule
 {
     Assignable = true;
     Permissions = tabledata "Gate Entry Header" = RIMD,
+        tabledata "Sales Invoice Header" = RIMD,
         tabledata "Gate Entry Line" = RIMD,
         tabledata "Parcel Details" = RIMD,
         tabledata "Planning Transportation Sheet" = RIMD,
